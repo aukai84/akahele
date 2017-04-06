@@ -1,2 +1,2 @@
-# akahele
+# Akahele
 Final Project!!!
