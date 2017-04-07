@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      crime_id: {
+      state_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {
