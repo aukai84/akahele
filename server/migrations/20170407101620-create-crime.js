@@ -47,7 +47,7 @@ module.exports = {
       arson: {
         type: Sequelize.INTEGER
       },
-      county_id: {
+      city_id: {
         type: Sequelize.INTEGER
       },
       state_id: {

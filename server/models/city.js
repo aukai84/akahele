@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var County = sequelize.define('County', {
+  var City = sequelize.define('City', {
     name: DataTypes.STRING,
     state_id: DataTypes.INTEGER
   }, {
@@ -10,5 +10,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return County;
+  return City;
 };
