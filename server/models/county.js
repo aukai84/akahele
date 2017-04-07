@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var County = sequelize.define('County', {
     name: DataTypes.STRING,
-    crime_id: DataTypes.INTEGER
+    state_id: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

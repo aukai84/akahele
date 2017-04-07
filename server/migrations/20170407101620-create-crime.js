@@ -8,13 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      year: {
+        type: Sequelize.INTEGER
+      },
       population: {
         type: Sequelize.INTEGER
       },
       violent_crime: {
         type: Sequelize.INTEGER
       },
-      murder_manslaughter: {
+      murder_and_manslaughter: {
         type: Sequelize.INTEGER
       },
       rape_revised: {
@@ -42,6 +45,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       arson: {
+        type: Sequelize.INTEGER
+      },
+      county_id: {
+        type: Sequelize.INTEGER
+      },
+      state_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {

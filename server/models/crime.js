@@ -1,9 +1,10 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Crime = sequelize.define('Crime', {
+    year: DataTypes.INTEGER,
     population: DataTypes.INTEGER,
     violent_crime: DataTypes.INTEGER,
-    murder_manslaughter: DataTypes.INTEGER,
+    murder_and_manslaughter: DataTypes.INTEGER,
     rape_revised: DataTypes.INTEGER,
     rape_legacy: DataTypes.INTEGER,
     robbery: DataTypes.INTEGER,
@@ -12,7 +13,9 @@ module.exports = function(sequelize, DataTypes) {
     burglary: DataTypes.INTEGER,
     larceny_theft: DataTypes.INTEGER,
     motor_vehicle_theft: DataTypes.INTEGER,
-    arson: DataTypes.INTEGER
+    arson: DataTypes.INTEGER,
+    county_id: DataTypes.INTEGER,
+    state_id: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
