@@ -15,6 +15,8 @@
     "connect-flash": "^0.1.1",
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
+    "csv": "^1.1.1",
+    "csvtojson": "^1.1.4",
     "express": "^4.15.2",
     "express-messages": "^1.0.1",
     "express-session": "^1.15.2",
@@ -22,6 +24,7 @@
     "papaparse": "^4.2.0",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.30.4"
+    "sequelize": "^3.30.4",
+    "xmlhttprequest": "^1.8.0"
   }
 }

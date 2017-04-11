@@ -1,7 +1,12 @@
 'use strict';
+let data2015 = require('../lib/2015_CRIME.csv');
+console.log("data", data2015)
+
+console.log(parsed2015)
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
+    console.log(parsed2015)
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.

@@ -1,6 +1,5 @@
 'use strict';
 let stateNames = require('../lib/seed-data').stateNames;
-console.log(stateNames)
 
 
 module.exports = {

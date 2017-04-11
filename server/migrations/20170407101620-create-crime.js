@@ -20,10 +20,7 @@ module.exports = {
       murder_and_manslaughter: {
         type: Sequelize.INTEGER
       },
-      rape_revised: {
-        type: Sequelize.INTEGER
-      },
-      rape_legacy: {
+      rape: {
         type: Sequelize.INTEGER
       },
       robbery: {
