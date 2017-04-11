@@ -1,23 +1,29 @@
 const csv = require('csvtojson');
 const csvFilePath = './lib/2015_CRIME.csv';
+const fs = require('fs');
 
 let stateNames = ['Alabama','Alaska','Arizona','Arkansas','Californa','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho',
 'Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachussets','Michigan','Minnesota','Mississippi','Missouri',
 'Montana','Nebrasksa','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon',
 'Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisctonsin','Wyoming'];
 
-let year2015 = [];
 
 
 function firstLetterUpperCase(string) {
-    newWord = '';
-    string.split(' ').forEach(word => {
-        newWord += word.charAt(0) + word.slice(1).toLowerCase() + ' ';
-    })
+    let newWord = '';
+    let words = string.split(' ');
+    if(words.length > 1){
+        words.forEach(word => {
+            newWord += word.charAt(0) + word.slice(1).toLowerCase() + ' ';
+        })
+    } else {
+        newWord = words[0].charAt(0) + words[0].slice(1).toLowerCase();
+    }
     return newWord
 }
 
 firstLetterUpperCase('HELLO WORLD')
+let year2015 = [];
 
 csv()
     .fromFile(csvFilePath)
@@ -30,13 +36,20 @@ csv()
             year2015.push(obj)
         }
     })
-    .on('done', error => {
+    .on('end', error => {
         console.log("done")
+        fs.writeFile("./lib/year2015.json", JSON.stringify(year2015), err => {
+            if (err) {console.log(err)}
+                console.log("Saved data to json...")
+        })
+
     })
 
 
 
+
+
+
 module.exports = {
-    stateNames,
-    year2015
+    stateNames
 }
