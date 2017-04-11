@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const CONFIG = require('./config/config.json');
 const session = require('express-session');
-const year = require('./routes/year');
+const crime = require('./routes/crime');
+const cities = require('./routes/cities');
+const states = require('./routes/states');
 
 
 
@@ -15,6 +17,8 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-app.use('/year', year);
+app.use('/crime', crime);
+app.use('/cities', cities);
+app.use('/states', states);
 
 module.exports = app;
