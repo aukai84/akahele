@@ -13,8 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     larceny_theft: DataTypes.INTEGER,
     motor_vehicle_theft: DataTypes.INTEGER,
     arson: DataTypes.INTEGER,
-    city_id: DataTypes.INTEGER,
-    state_id: DataTypes.INTEGER
+    city: DataTypes.STRING,
+    state: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
