@@ -8,11 +8,22 @@ let stateNames = ['Alabama','Alaska','Arizona','Arkansas','Californa','Colorado'
 
 let year2015 = [];
 
+
+function firstLetterUpperCase(string) {
+    newWord = '';
+    string.split(' ').forEach(word => {
+        newWord += word.charAt(0) + word.slice(1).toLowerCase() + ' ';
+    })
+    return newWord
+}
+
+firstLetterUpperCase('HELLO WORLD')
+
 csv()
     .fromFile(csvFilePath)
     .on('json', (obj, index) => {
         if(obj.State !== ''){
-            obj.State.toLowerCase().
+            obj.State = firstLetterUpperCase(obj.State)
             year2015.push(obj)
         } else if(obj.State === ''){
             obj.State = year2015[index -1].State;
@@ -24,10 +35,8 @@ csv()
     })
 
 
-let rows = parsed.data;
 
 module.exports = {
     stateNames,
-    parsed2015,
-    rows
+    year2015
 }

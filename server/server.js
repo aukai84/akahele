@@ -9,6 +9,8 @@ const session = require('express-session');
 const crime = require('./routes/crime');
 const cities = require('./routes/cities');
 const states = require('./routes/states');
+let year2015 = require('./lib/seed-data').year2015;
+console.log(year2015)
 
 
 
