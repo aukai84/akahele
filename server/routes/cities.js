@@ -1,64 +1,66 @@
 const express = require('express');
 let router = express('router');
 const db = require('./../models');
-const { Crime } = db;
+const { City,Crime } = db;
 
 router.get('/', (req, res) => {
-  Crime.findAll({
-    attributes: city
-  })
+  City.findAll()
   .then(function(cities){
     console.log('cities sent')
     res.json(cities)
   })
 })
 
-router.get('/cities/:id/crime', (req, res) => {
-  let citiesId = req.params.id;
+router.get('/:city/crime', (req, res) => {
+  let city = req.params.city;
   Crime.findAll({
-    where: id = citiesId
+    where: {
+        city,
+    }
   })
   .then(function(crimes){
     console.log('crime from city retrieved')
-    res.send(crimes)
+    res.json(crimes)
   })
 })
 
-router.get('/cities/:id/crime/year/:id', (req, res) => {
-  let citiesId = req.params.id;
-  let yearId = req.params.id;
+router.get('/:city/crime/year/:year', (req, res) => {
+  let {city, year} = req.params;
   Crime.findAll({
-    where: cities = citiesId,
-    year: yearId
+    where: {
+        city,
+        year
+    }
   })
   .then(function(crimes){
     res.send(crimes)
   })
 })
 
-router.get('/cities/:id/crime/type/:id', (req, res) => {
-  let citiesId = req.params.id;
-  let typeId = req.params.id;
+router.get('/:city/crime/type/:type', (req, res) => {
+    let {city, type} = req.params;
   Crime.findAll({
-    where: cities = citiesId,
-    type: typeId
+    attributes: [type],
+    where: {
+        city
+    }
   })
   .then(function(crimes){
-    res.send(crimes)
+    res.json(crimes)
   })
 })
 
-router.get('/cities/:id/crime/year/:id/type/:id', (req, res) => {
-  let yearId = req.params.id;
-  let typeId = req.params.id;
-  let stateId = req.params.id;
-  Crime.findAll({
-    where: state = stateId,
-    year: yearId,
-    type: typeId
+router.get('/:city/crime/type/:type/year/:year', (req, res) => {
+    let {city, year, type} = req.params;
+  Crime.findOne({
+    attributes: [type],
+    where: {
+        city,
+        year
+    }
   })
   .then(function(crimes){
-    res.send(crimes)
+    res.json(crimes)
   })
 })
 
