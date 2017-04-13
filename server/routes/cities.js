@@ -1,13 +1,15 @@
 const express = require('express');
 let router = express('router');
 const db = require('./../models');
-const { City } = db;
+const { Crime } = db;
 
-router.get('/cities', (req, res) => {
-  City.findAll()
+router.get('/', (req, res) => {
+  Crime.findAll({
+    attributes: city
+  })
   .then(function(cities){
     console.log('cities sent')
-    res.send(cities)
+    res.json(cities)
   })
 })
 
