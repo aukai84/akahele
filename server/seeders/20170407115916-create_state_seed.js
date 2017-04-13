@@ -1,6 +1,5 @@
 'use strict';
-let stateNames = require('../lib/seed-data').stateNames;
-
+let stateNames = require('../lib/modules/seed-data').stateNames;
 
 module.exports = {
   up: function (queryInterface, Sequelize) {

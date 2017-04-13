@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
-const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const CONFIG = require('./config/config.json');
@@ -9,10 +8,7 @@ const session = require('express-session');
 const crime = require('./routes/crime');
 const cities = require('./routes/cities');
 const states = require('./routes/states');
-let year2015 = require('./lib/seed-data').year2015;
-console.log(year2015)
-
-
+const parsers = require('./lib/modules/parsers.js');
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
