@@ -5,8 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     population: DataTypes.INTEGER,
     violent_crime: DataTypes.INTEGER,
     murder_and_manslaughter: DataTypes.INTEGER,
-    rape_revised: DataTypes.INTEGER,
-    rape_legacy: DataTypes.INTEGER,
+    rape: DataTypes.INTEGER,
     robbery: DataTypes.INTEGER,
     aggravated_assault: DataTypes.INTEGER,
     property_crime: DataTypes.INTEGER,
@@ -14,8 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     larceny_theft: DataTypes.INTEGER,
     motor_vehicle_theft: DataTypes.INTEGER,
     arson: DataTypes.INTEGER,
-    city_id: DataTypes.INTEGER,
-    state_id: DataTypes.INTEGER
+    city: DataTypes.STRING,
+    state: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

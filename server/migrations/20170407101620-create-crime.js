@@ -20,10 +20,7 @@ module.exports = {
       murder_and_manslaughter: {
         type: Sequelize.INTEGER
       },
-      rape_revised: {
-        type: Sequelize.INTEGER
-      },
-      rape_legacy: {
+      rape: {
         type: Sequelize.INTEGER
       },
       robbery: {
@@ -47,11 +44,11 @@ module.exports = {
       arson: {
         type: Sequelize.INTEGER
       },
-      city_id: {
-        type: Sequelize.INTEGER
+      city: {
+        type: Sequelize.STRING
       },
-      state_id: {
-        type: Sequelize.INTEGER
+      state: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

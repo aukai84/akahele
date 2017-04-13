@@ -1,0 +1,61 @@
+const csv = require('csvtojson');
+const parse = require('csv-parse');
+const csvFilePath = './lib/2015_CRIME.csv';
+const fs = require('fs');
+
+function firstLetterUpperCase(string) {
+    let newWord = '';
+    let words = string.split(' ');
+    words.forEach(word => {
+        newWord += word.charAt(0) + word.slice(1).toLowerCase() + ' ';
+        })
+
+    return newWord.substring(0, newWord.length - 1);
+}
+
+
+function parseCsv(filePath, year) {
+    console.log('sanity')
+    let tempArray = [];
+    csv()
+    .fromFile(filePath)
+    .on('json', (obj, index) => {
+        if(obj.State !== ''){
+            obj.State = firstLetterUpperCase(obj.State)
+            tempArray.push(obj)
+        } else if(obj.State === ''){
+            obj.State = tempArray[index -1].State;
+        }
+        for(let key in obj){
+            if(obj[key] === ''){
+                obj[key] = '0';
+            }
+        }
+        obj.population = parseInt(obj.population.replace(/,/g,''));
+        obj.violent_crime = parseInt(obj.violent_crime.replace(/,/g,''));
+        obj.murder_and_manslaughter = parseInt(obj.murder_and_manslaughter.replace(/,/g,''));
+        obj.rape = parseInt(obj.rape.replace(/,/g,''));
+        obj.robbery = parseInt(obj.robbery.replace(/,/g,''));
+        obj.aggravated_assault = parseInt(obj.aggravated_assault.replace(/,/g,''));
+        obj.property_crime = parseInt(obj.property_crime.replace(/,/g,''));
+        obj.burglary = parseInt(obj.burglary.replace(/,/g,''));
+        obj.larceny_theft = parseInt(obj.larceny_theft.replace(/,/g,''));
+        obj.motor_vehicle_theft = parseInt(obj.motor_vehicle_theft.replace(/,/g,''));
+        obj.arson = parseInt(obj.arson.replace(/,/g,''));
+        obj.year = year;
+        tempArray.push(obj)
+    })
+    .on('end', error => {
+        console.log('done parsing...')
+
+        fs.writeFile(`./lib/data/json/YEAR_${year}.json`, JSON.stringify(tempArray), err => {
+            if (err) {console.log(err)}
+                console.log("Saved data to json...")
+        })
+
+    })
+}
+
+module.exports = {
+    parseCsv
+}

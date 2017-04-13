@@ -8,6 +8,7 @@ const session = require('express-session');
 const crime = require('./routes/crime');
 const cities = require('./routes/cities');
 const states = require('./routes/states');
+const parsers = require('./lib/modules/parsers.js');
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
