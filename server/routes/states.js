@@ -27,30 +27,44 @@ router.get('/:state/crime', (req, res) => {
 })
 
 //find crime by state by year by type
-router.get('/:state/crime/year/:year/type/:type', (req, res) => {
-    let {state, year, type} = req.params;
+router.get('/:state/crime/year/:year', (req, res) => {
+    let {state, year} = req.params;
   Crime.findOne({
     where: {
         state,
-        year,
-        type
+        year
     }
   })
   .then(function(crimes){
-    res.send(crimes)
+    res.json(crimes);
   })
 })
 
-router.get('/state/:id/crime/type/:id', (req, res) => {
-  let typeId = req.params.id;
-  let stateId = req.params.id;
+router.get('/:state/crime/type/:type', (req, res) => {
+    let {state, type} = req.params;
   Crime.findAll({
-    where: state = stateId,
-    type: typeId
+    attributes: [type],
+    where: {
+        state
+    }
   })
   .then(function(crimes){
-    res.send(crimes)
+    res.json(crimes)
   })
+})
+
+router.get('/:state/crime/type/:type/:year', (req, res) => {
+    let {state, type, year} = req.params;
+    Crime.findAll({
+        attributes: [type],
+        where: {
+            state,
+            year
+        }
+    })
+    .then(crimes => {
+        res.json(crimes);
+    })
 })
 
 module.exports = router;
