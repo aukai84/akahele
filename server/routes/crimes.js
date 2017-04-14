@@ -3,7 +3,7 @@ let router = express('router');
 const db = require('./../models');
 const { Crime } = db;
 
-router.get('/crime', (req, res) => {
+router.get('/', (req, res) => {
   Crime.findAll()
   .then(function(crimes) {
     console.log('sent' + crimes)
@@ -11,45 +11,42 @@ router.get('/crime', (req, res) => {
   })
 })
 
-router.get('/crime/year/:id', (req, res) => {
-  let crimeId = req.params.id;
+//find all crime in a specific year
+router.get('/year/:year', (req, res) => {
+    let year = req.params.year;
+    Crime.findAll({
+        where: {
+            year
+        }
+    })
+    .then(crimes => {
+        res.json(crimes);
+    })
+})
+
+//find all crime per type
+router.get('/type/:crime', (req, res) => {
+    let crime = req.params.crime;
   Crime.findAll({
-    where: {
-      id: crimeId
-    }
+    attributes: [crime]
   })
   .then(function(crimes) {
-    console.log('it worked')
-    res.send(crimes)
+    res.json(crimes)
   })
 })
 
-router.get('/crime/year/:id/type/:id', (req, res) => {
-  let crimeId = req.params.id;
-  let yearId = req.params.id;
-  Crime.findAll({
-    where: {
-      id: crimeId,
-      year: yearId
-    }
-  })
-  .then(function(crimes) {
-    console.log('crime year type sent')
-    res.send(crimes)
-  })
-})
-
-router.get('/crime/type/:id', (req, res) => {
-  let crimeId = req.params.id;
-  Crime.findAll({
-    where: {
-      id: crimeId
-    }
-  })
-  .then(function(crimes){
-    console.log('here this is the type')
-    res.send(crimes)
-  })
+//find all crime per year per type
+router.get('/type/:crime/:year', (req, res) => {
+    let {crime, year} = req.params;
+    Crime.findfall({
+        attributes: [crime],
+        where: {
+            year
+        }
+    })
+    .then(crimes => {
+        res.json(crimes);
+    })
 })
 
 module.exports = router;
