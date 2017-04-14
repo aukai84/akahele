@@ -1,5 +1,5 @@
 import React from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import DataCircles from './data-circles.js';
 
 // Returns the largest X coordinate from the data set
@@ -10,14 +10,14 @@ const yMax   = (data)  => d3.max(data, (d) => d[1]);
 
 // Returns a function that "scales" X coordinates from the data to fit the chart
 const xScale = (props) => {
-  return d3.scale.linear()
+  return d3.scaleLinear()
     .domain([0, xMax(props.data)])
     .range([props.padding, props.width - props.padding * 2]);
 };
 
 // Returns a function that "scales" Y coordinates from the data to fit the chart
 const yScale = (props) => {
-  return d3.scale.linear()
+  return d3.scaleLinear()
     .domain([0, yMax(props.data)])
     .range([props.height - props.padding, props.padding]);
 };
