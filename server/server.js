@@ -9,6 +9,7 @@ const crimes = require('./routes/crimes');
 const cities = require('./routes/cities');
 const states = require('./routes/states');
 const parsers = require('./lib/modules/parsers.js');
+Renderkid = require('renderkid');
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));

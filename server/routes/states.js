@@ -1,35 +1,40 @@
 const express = require('express');
 let router = express('router');
 const db = require('./../models');
-const { State } = db;
+const { State, Crime } = db;
 
-router.get('/state', (req, res) => {
+//find list of all states?
+router.get('/', (req, res) => {
   State.findAll()
   .then(function(states){
     console.log('states retrieved')
-    res.send(states)
+    res.json(states)
   })
 })
 
-router.get('/state/:id/crime', (req, res) => {
-  let stateId = req.params.id;
+//find all crime by state all
+router.get('/:state/crime', (req, res) => {
+    let state = req.params.state;
   Crime.findAll({
-    where: id = stateId
+    where: {
+        state
+    }
   })
   .then(function(crimes){
     console.log('crime from states retrieved')
-    res.send(crimes)
+    res.json(crimes)
   })
 })
 
-router.get('/state/:id/crime/year/:id/type/:id', (req, res) => {
-  let yearId = req.params.id;
-  let typeId = req.params.id;
-  let stateId = req.params.id;
-  Crime.findAll({
-    where: state = stateId,
-    year: yearId,
-    type: typeId
+//find crime by state by year by type
+router.get('/:state/crime/year/:year/type/:type', (req, res) => {
+    let {state, year, type} = req.params;
+  Crime.findOne({
+    where: {
+        state,
+        year,
+        type
+    }
   })
   .then(function(crimes){
     res.send(crimes)
