@@ -1,63 +1,78 @@
 const express = require('express');
 let router = express('router');
 const db = require('./../models');
-const { City } = db;
+const { City,Crime } = db;
 
-router.get('/cities', (req, res) => {
-  City.findAll()
+//find list of all cities?
+router.get('/', (req, res) => {
+    console.log(req.query)
+    let city = req.query.city;
+  Crime.findAll({
+    where: {
+        city
+    }
+  })
   .then(function(cities){
     console.log('cities sent')
-    res.send(cities)
+    res.json(cities)
   })
 })
 
-router.get('/cities/:id/crime', (req, res) => {
-  let citiesId = req.params.id;
-  Crime.findAll({
-    where: id = citiesId
-  })
-  .then(function(crimes){
-    console.log('crime from city retrieved')
-    res.send(crimes)
-  })
-})
+//find crimes by city all
+// router.get('/:city/crime', (req, res) => {
+//   let city = req.params.city;
+//   Crime.findAll({
+//     where: {
+//         city,
+//     }
+//   })
+//   .then(function(crimes){
+//     console.log('crime from city retrieved')
+//     res.json(crimes)
+//   })
+// })
 
-router.get('/cities/:id/crime/year/:id', (req, res) => {
-  let citiesId = req.params.id;
-  let yearId = req.params.id;
-  Crime.findAll({
-    where: cities = citiesId,
-    year: yearId
-  })
-  .then(function(crimes){
-    res.send(crimes)
-  })
-})
+// //find crimes by city by year all
+// router.get('/:city/crime/year/:year', (req, res) => {
+//   let {city, year} = req.params;
+//   Crime.findAll({
+//     where: {
+//         city,
+//         year
+//     }
+//   })
+//   .then(function(crimes){
+//     res.send(crimes)
+//   })
+// })
 
-router.get('/cities/:id/crime/type/:id', (req, res) => {
-  let citiesId = req.params.id;
-  let typeId = req.params.id;
-  Crime.findAll({
-    where: cities = citiesId,
-    type: typeId
-  })
-  .then(function(crimes){
-    res.send(crimes)
-  })
-})
+// //find crimes by city by type all
+// router.get('/:city/crime/type/:type', (req, res) => {
+//     let {city, type} = req.params;
+//   Crime.findAll({
+//     attributes: [type],
+//     where: {
+//         city
+//     }
+//   })
+//   .then(function(crimes){
+//     res.json(crimes)
+//   })
+// })
 
-router.get('/cities/:id/crime/year/:id/type/:id', (req, res) => {
-  let yearId = req.params.id;
-  let typeId = req.params.id;
-  let stateId = req.params.id;
-  Crime.findAll({
-    where: state = stateId,
-    year: yearId,
-    type: typeId
-  })
-  .then(function(crimes){
-    res.send(crimes)
-  })
-})
+// //find crimes by city by type by year
+// router.get('/:city/crime/type/:type/year/:year', (req, res) => {
+//     let {city, year, type} = req.params;
+//   Crime.findOne({
+//     attributes: [type],
+//     where: {
+//         city,
+//         year
+//     }
+//   })
+//   .then(function(crimes){
+//     res.json(crimes)
+//   })
+// })
 
 module.exports = router;

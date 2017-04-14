@@ -2,6 +2,8 @@ const csv = require('csvtojson');
 const parse = require('csv-parse');
 const csvFilePath = './lib/2015_CRIME.csv';
 const fs = require('fs');
+const stateNames = require('./seed-data.js').stateNames;
+
 
 function firstLetterUpperCase(string) {
     let newWord = '';
@@ -13,6 +15,33 @@ function firstLetterUpperCase(string) {
     return newWord.substring(0, newWord.length - 1);
 }
 
+function parseCsvCities() {
+    let tempArray = [];
+    csv()
+    .fromFile('./lib/data/YEAR_2015.csv')
+    .on('json', (obj, index) => {
+        if(obj.State !== ''){
+            obj.State = firstLetterUpperCase(obj.State)
+        } else if(obj.State === ''){
+            obj.State = tempArray[index -1].State;
+        }
+        let state_id = stateNames.indexOf(obj.State) + 1;
+       let cityObj = {
+            State: obj.State,
+            City: obj.City,
+            state_id
+       }
+       tempArray.push(cityObj);
+    })
+    .on('end', error => {
+        console.log('done parsing for cities...');
+        console.log(tempArray)
+        fs.writeFile('./lib/data/json/cities.json', JSON.stringify(tempArray), err => {
+            if(err){console.log(err)};
+            console.log("done writing cities json");
+        })
+    })
+}
 
 function parseCsv(filePath, year) {
     console.log('sanity')
@@ -22,7 +51,6 @@ function parseCsv(filePath, year) {
     .on('json', (obj, index) => {
         if(obj.State !== ''){
             obj.State = firstLetterUpperCase(obj.State)
-            tempArray.push(obj)
         } else if(obj.State === ''){
             obj.State = tempArray[index -1].State;
         }
@@ -57,5 +85,6 @@ function parseCsv(filePath, year) {
 }
 
 module.exports = {
-    parseCsv
+    parseCsv,
+    parseCsvCities
 }
