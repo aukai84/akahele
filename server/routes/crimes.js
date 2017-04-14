@@ -38,7 +38,7 @@ router.get('/type/:crime', (req, res) => {
 //find all crime per year per type
 router.get('/type/:crime/:year', (req, res) => {
     let {crime, year} = req.params;
-    Crime.findfall({
+    Crime.findAll({
         attributes: [crime],
         where: {
             year
