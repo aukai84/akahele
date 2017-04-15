@@ -42,10 +42,7 @@ class Charts extends Component {
                     </button>
                 </div>
                 <h1>Setting up bar graph</h1>
-                <BarGraph {...this.state} {...styles}/>
-                <button className="btn randomize" onClick={() => this.randomizeData()}>
-                        Randomizing Bar Graph
-                    </button>
+                <BarGraph />
             </div>
         )
     }

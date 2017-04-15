@@ -1,13 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import DataBars from './data-bars';
-import * as d3 from 'd3';
+import rd3 from 'react-d3';
 
+let BarChart = rd3.BarChart;
 
+let barData = [
+  {label: 'A', value: 5},
+  {label: 'B', value: 6},
+  {label: 'C', value: 10},
+  {label: 'D', value: 4},
+  {label: 'E', value: 8},
+  {label: 'F', value: 7}
+];
 
-export default (props) => {
-    const scales = {yScale: yScale(props)}
-    return <svg width={props.width} height={props.width}>
-                <DataBars {...scales} {...props}/>
-            </svg>
+class BarGraph extends Component {
+    render(){
+        return (
+            <BarChart
+              data={barData}
+              width={500}
+              height={200}
+              fill={'#3182bd'}
+              title='Bar Chart'
+            />
+        )
+    }
 }
+
+export default BarGraph;
