@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ScatterPlot from '../../components/scatter-plot.js';
+import BarGraph from '../../components/bar-graph.js';
 
 const styles = {
       width   : 500,
@@ -22,7 +23,7 @@ class Charts extends Component {
 
     constructor(props){
         super(props);
-        this.state = { data: randomDataSet() };
+        this.state = { data: randomDataSet() }
 
     }
 
@@ -33,13 +34,18 @@ class Charts extends Component {
     render(){
         return (
             <div>
-                <h1>Setting up Bar Graph</h1>
+                <h1>Setting up scatter plot</h1>
                 <ScatterPlot {...this.state} {...styles}/>
                 <div className='controls'>
                     <button className="btn randomize" onClick={() => this.randomizeData()}>
                         Randomizing Scatter Plot
                     </button>
                 </div>
+                <h1>Setting up bar graph</h1>
+                <BarGraph {...this.state} {...styles}/>
+                <button className="btn randomize" onClick={() => this.randomizeData()}>
+                        Randomizing Bar Graph
+                    </button>
             </div>
         )
     }
