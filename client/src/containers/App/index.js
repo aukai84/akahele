@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-class HomePage extends Component {
+class App extends Component {
   render() {
     return (
       <div className="homePage">
         <div className="App-header">
-        
+
           <h2>Welcome to React!!</h2>
         </div>
         <p className="App-intro">
@@ -17,4 +17,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default App;
