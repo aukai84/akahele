@@ -1,0 +1,73 @@
+mockData = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        id: 0,
+        date: '12 April, 2017',
+        name: 'Mark Ota',
+        type: 'Death',
+        cause: 'Diarrhea'
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -157.84521102905273,
+          21.29225337295981
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        id: 1,
+        date: '7 August, 2021',
+        name: 'Aukai Tirrell',
+        type: 'Arrest',
+        cause: 'Drug trafficking',
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -158.18613052368164,
+          21.448595053724944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        id: 2,
+        date: '7 August, 2021',
+        name: 'Nick Lee',
+        type: 'Death',
+        cause: 'Drug overdose',
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -158.1860339641571,
+          21.44716707427564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        id: 3,
+        date: '2 February, 2057',
+        name: 'Danika Harada',
+        type: 'Missing person report',
+        cause: 'It was actually just a cat',
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -157.77706146240234,
+          21.42270950855108
+        ]
+      }
+    }
+  ]
+};
