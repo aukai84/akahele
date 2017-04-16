@@ -1,31 +1,38 @@
 import React, {Component} from 'react';
 import rd3 from 'react-d3-library';
 import node from '../lib/js/d3file.js';
+import * as d3 from 'd3';
 const RD3Component = rd3.Component;
-const Map = require('react-d3-map').Map;
-const MarkerGroup = require('react-d3-map').MarkerGroup;
+var topojson = require('topojson');
+var MapChoropleth = require('react-d3-map-choropleth').MapChoropleth;
+console.log(MapChoropleth)
+var width = 960,
+  height = 600;
 
- var width = 700;
-  var height = 700;
-  // set your zoom scale
-  var scale = 1200 * 5;
-  // min and max of your zoom scale
-  var scaleExtent = [1 << 12, 1 << 13]
-  // set your center point
-  var center = [122, 23.5];
-  // set your popupContent
-  var popupContent = function(d) { return d.properties.text; }
+  var topodata = require('../../public//us.json');
+  let unemploy = d3.tsvParse('./unemployment.tsv');
+  console.log("topodata ", topodata);
+  console.log("unemploy ", unemploy);
 
-  var data = {
-    "type": "Feature",
-    "properties": {
-      "text": "this is a Point!!!"
-    },
-    "geometry": {
-        "type": "Point",
-        "coordinates": [122, 23.5]
-    }
-}
+  // data should be a MultiLineString
+  var dataStates = topojson.mesh(topodata, topodata.objects.states, function(a, b) { return a !== b; });
+  /// data should be polygon
+  var dataCounties = topojson.feature(topodata, topodata.objects.counties).features;
+  console.log('data counties ', dataCounties);
+
+  // domain
+  var domain = {
+    scale: 'quantize',
+    domain: [0, .15],
+    range: d3.range(9).map(function(i) { return "q" + i + "-9"; })
+  };
+  var domainValue = function(d) { return +d.rate; };
+  var domainKey = function(d) {return +d.id};
+  var mapKey = function(d) {return +d.id};
+
+  var scale = 1280;
+  var translate = [width / 2, height / 2];
+  var projection = 'albersUsa';
 
 class ReactD3Component extends Component {
     constructor(props){
@@ -45,23 +52,22 @@ class ReactD3Component extends Component {
         console.log(this.state.d3)
         return (
             <div>
-                <RD3Component data={this.state.d3}/>
                 <h1>TEST MAP</h1>
-                <Map
-                    width={width}
-                    height={height}
-                    scale={scale}
-                    scaleExtent={scaleExtent}
-                    center={center}
-                  >
-                    <MarkerGroup
-                      key={"polygon-test"}
-                      data={data}
-                      popupContent={popupContent}
-                      markerClass={"your-marker-css-class"}
-                    />
-                  </Map>
-                , document.getElementById('blank-point')
+                <MapChoropleth
+                  width= {width}
+                  height= {height}
+                  dataPolygon= {dataCounties}
+                  dataMesh= {dataStates}
+                  scale= {scale}
+                  domain= {domain}
+                  domainData= {unemploy}
+                  domainValue= {domainValue}
+                  domainKey= {domainKey}
+                  mapKey = {mapKey}
+                  translate= {translate}
+                  projection= {projection}
+                  showGraticule= {true}
+                />, document.getElementById('blank-choropleth')
             </div>
         )
     }
