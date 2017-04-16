@@ -3,6 +3,7 @@ import rd3 from 'react-d3-library';
 import node from '../lib/js/d3file.js';
 import * as d3 from 'd3';
 const RD3Component = rd3.Component;
+
 var topojson = require('topojson');
 var MapChoropleth = require('react-d3-map-choropleth').MapChoropleth;
 console.log(MapChoropleth)
@@ -42,16 +43,18 @@ class ReactD3Component extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({
             d3: node
         });
     }
 
     render(){
-        console.log(this.state.d3)
+        console.log('bar graph ', this.state)
         return (
             <div>
+                <h1>TEST BAR GRAPH</h1>
+                <RD3Component data={this.state.d3}/>
                 <h1>TEST MAP</h1>
                 <MapChoropleth
                   width= {width}
