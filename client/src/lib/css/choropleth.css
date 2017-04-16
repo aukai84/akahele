@@ -1,0 +1,10 @@
+
+.polygon {
+  fill: #333;
+}
+
+.mesh {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import rd3 from 'react-d3-library';
 import node from '../lib/js/d3file.js';
 import * as d3 from 'd3';
+import '../lib/css/choropleth.css';
+
 const RD3Component = rd3.Component;
 
 var topojson = require('topojson');
