@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
-import {retrieveData} from '../../lib/modules.js';
+import {retrieveData} from '../../lib/modules/modules.js';
+import ReactD3Component from '../../components/d3graph.js';
 
 class App extends Component {
     constructor(){
@@ -45,6 +46,10 @@ class App extends Component {
                 })
              }
          </ul>
+         <div>
+            <h2>TESTING REACT-D3-LIBRARY</h2>
+            <ReactD3Component/>
+         </div>
      </div>
     );
   }
