@@ -12,6 +12,7 @@
     "react": "^15.5.4",
     "react-d3": "^0.4.0",
     "react-d3-library": "^1.1.8",
+    "react-d3-map": "^0.8.3",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
