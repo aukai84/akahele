@@ -15,7 +15,7 @@ class App extends Component {
         .then(data => {
             console.log(data)
             this.setState({
-                honolulu: this.state.honolulu.concat([data])
+                honolulu: this.state.honolulu.concat(data)
             })
         })
     }
@@ -28,14 +28,28 @@ class App extends Component {
 
     return (
       <div className="homePage">
-        <div className="App-header">
-
-          <h2>Welcome to React!!</h2>
-        </div>
-        <p className="App-intro">
-          Hello World
-        </p>
-      </div>
+         <div className="App-header">
+              <h2>Welcome to React!!</h2>
+         </div>
+         <p className="App-intro">
+              Hello World
+         </p>
+         <h1>TEST DATA FROM HONOLULU</h1>
+         <ul>
+             {
+                this.state.honolulu.map(crime => {
+                    console.log('crimes ', crime)
+                    return (
+                            <li>
+                                <h2>id = {crime.id}</h2>
+                                <p>year = {crime.year}</p>
+                                <p>violent crime = {crime.violent_crime}</p>
+                            </li>
+                    )
+                })
+             }
+         </ul>
+     </div>
     );
   }
 }
