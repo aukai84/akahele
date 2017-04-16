@@ -1,7 +1,7 @@
-export function requestHelper(header, link) {
+export function retrieveData(link) {
     return new Promise(function(resolve, reject){
         let newReq = new XMLHttpRequest();
-        newReq.open(header, link);
+        newReq.open('GET', link);
         newReq.onload = function(){
             if(this.status >= 200 && this.status < 300){
                 resolve(JSON.parse(newReq.response));
