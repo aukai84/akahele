@@ -1,14 +1,41 @@
 import React, { Component } from 'react';
 import './index.css';
 import {requestHelper} from '../../lib/modules.js';
+// import Sidebar from 'react-sidebar';
+import { SideNav, Icon } from 'react-side-nav';
+
+ const menuItems = [
+  { id: 1,
+    label: 'Side Menu',
+    icon: 'fa-battery-half',
+    items: [
+      { id: 11,
+        label: 'Charts',
+        icon: 'fa-car',
+        link: '/item11',
+      },
+      { id: 12,
+        label: 'Maps',
+        icon: 'fa-bullhorn',
+        link: '/item12',
+      },
+    ],
+  },
+];
+const NavLink = props => (<a href={props.to} {...props}><i className={`fa ${props.icon}`} />{props.label}</a>);
 
 class App extends Component {
     constructor(){
         super();
         this.state = {
             honolulu: []
+            // sidebarOpen: true
         }
+        // this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
+  //   onSetSidebarOpen= function(open) {
+  //   this.setState({sidebarOpen: open});
+  // }
 
     displayHonoluluData(){
         requestHelper('GET', 'http://localhost:8080/cities/Honolulu/crime')
@@ -19,11 +46,15 @@ class App extends Component {
             })
         })
     }
+   
 
     componentWillMount(){
         this.displayHonoluluData();
     }
+
+
   render() {
+        // var sidebarContent = <b>Sidebar content</b>;
         console.log(this.state)
 
     return (
@@ -31,9 +62,17 @@ class App extends Component {
          <div className="App-header">
               <h2>Welcome to React!!</h2>
          </div>
+         <div className="sidebar">
+         <SideNav
+    items={menuItems}
+    linkComponent={NavLink}
+    iconComponent={Icon}
+        />
+        </div>
          <p className="App-intro">
               Hello World
          </p>
+         
          <h1>TEST DATA FROM HONOLULU</h1>
          <ul>
              {
@@ -49,6 +88,8 @@ class App extends Component {
                 })
              }
          </ul>
+    
+       
      </div>
     );
   }
