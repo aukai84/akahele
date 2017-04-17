@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import {requestHelper} from '../../lib/modules.js';
 // import Sidebar from 'react-sidebar';
-import { SideNav, Icon } from 'react-side-nav';
+import { SideNav, Chevron, Icon } from 'react-side-nav';
 
  const menuItems = [
   { id: 1,
@@ -18,6 +18,11 @@ import { SideNav, Icon } from 'react-side-nav';
         label: 'Maps',
         icon: 'fa-bullhorn',
         link: '/item12',
+      },
+      { id: 13,
+        label: 'More stuff',
+        icon: 'fa-bullhorn',
+        link: '/item13',
       },
     ],
   },
@@ -64,10 +69,12 @@ class App extends Component {
          </div>
          <div className="sidebar">
          <SideNav
-    items={menuItems}
-    linkComponent={NavLink}
-    iconComponent={Icon}
+            items={menuItems}
+            linkComponent={NavLink}
+            chevronComponent={Chevron}
+            iconComponent={Icon}
         />
+
         </div>
          <p className="App-intro">
               Hello World

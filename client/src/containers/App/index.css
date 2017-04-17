@@ -3,9 +3,15 @@
 }
 
 .side-nav.default-theme{
-	background-color: pink;
+	float: left;
+	height: 500px;
+	width: 200px;
 }
 
+.side-nav-item-title {
+	color: white !important;
+   
+  }
 
 
 .App-header {
