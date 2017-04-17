@@ -10,8 +10,10 @@
     "d3": "^4.8.0",
     "d3-dsv": "^1.0.5",
     "d3-scale-chromatic": "^1.1.1",
+    "datamaps": "^0.5.8",
     "dsv-loader": "^2.0.0",
     "object-assign": "^4.1.1",
+    "queue": "^4.2.1",
     "react": "^15.5.4",
     "react-d3": "^0.4.0",
     "react-d3-library": "^1.1.8",
@@ -23,7 +25,8 @@
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2",
-    "topojson": "^3.0.0"
+    "topojson": "^3.0.0",
+    "webpack": "^2.4.1"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
