@@ -7,6 +7,7 @@ import mapNode from './d3maps/usa/visualization.js';
 import UsMap from './d3-components/d3-us-map.js';
 import groupNode from './d3-components/d3-grouped-bar-chart.js'
 console.log('group node ', groupNode)
+//ONLY CAN HAVE ONE rd3.component at a time!!!
 let BarChart = rd3.Component;
 let GroupedBarChart = rd3.component;
 
