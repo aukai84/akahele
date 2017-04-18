@@ -33,19 +33,6 @@ class App extends Component {
               Hello World
          </p>
          <h1>TEST DATA FROM HONOLULU</h1>
-         <ul>
-             {
-                this.state.honolulu.map(crime => {
-                    return (
-                            <li>
-                                <h2>id = {crime.id}</h2>
-                                <p>year = {crime.year}</p>
-                                <p>violent crime = {crime.violent_crime}</p>
-                            </li>
-                    )
-                })
-             }
-         </ul>
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
             <ReactD3Component/>

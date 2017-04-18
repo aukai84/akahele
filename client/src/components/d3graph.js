@@ -15,7 +15,7 @@ class ReactD3Component extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({
             d3: node
         });

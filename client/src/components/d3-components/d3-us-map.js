@@ -72,7 +72,7 @@ let statePolygon = topojson.feature(topodata, topodata.objects.states).features;
 var domain = {
     scale: 'quantize',
     domain: [0, .15],
-    range: d3.range(9).map(function(i) { return "q" + i + "-9"; })
+    range: d3.range(10).map(function(i) { return "q" + i + "-9"; })
   };
   var domainValue = function(d) { return +d.rate; };
   var domainKey = function(d) {return +d.id};
@@ -90,19 +90,19 @@ var domain = {
     render(){
         return (
             <MapChoropleth
-              width= {width}
-              height= {height}
-              dataPolygon= {statePolygon}
-              dataMesh= {dataStates}
-              scale= {scale}
-              domain= {domain}
-              domainData= {unemploy}
-              domainValue= {domainValue}
-              domainKey= {domainKey}
-              mapKey = {mapKey}
-              translate= {translate}
-              projection= {projection}
-              showGraticule= {true}
+              width={width}
+              height={height}
+              dataPolygon={statePolygon}
+              dataMesh={dataStates}
+              scale={scale}
+              domain={domain}
+              domainData={unemploy}
+              domainValue={domainValue}
+              domainKey={domainKey}
+              mapKey={mapKey}
+              translate={translate}
+              projection={projection}
+              showGraticule={false}
             />
         )
     }
