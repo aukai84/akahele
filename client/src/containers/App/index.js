@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './index.css';
 import {retrieveData} from '../../lib/modules/modules.js';
 import ReactD3Component from '../../components/d3graph.js';
-console.log('rd3 component ', ReactD3Component)
+
+
 class App extends Component {
     constructor(){
         super();
