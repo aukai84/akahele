@@ -5,27 +5,34 @@ import * as d3 from 'd3';
 import '../lib/css/choropleth.css';
 import mapNode from './d3maps/usa/visualization.js';
 import UsMap from './d3-components/d3-us-map.js';
-let RD3Component = rd3.Component;
+import groupNode from './d3-components/d3-grouped-bar-chart.js'
+console.log('group node ', groupNode)
+let BarChart = rd3.Component;
+let GroupedBarChart = rd3.component;
 
 class ReactD3Component extends Component {
     constructor(props){
         super(props);
         this.state = {
-            d3: ''
+            d3: '',
+            barD3: ''
         }
     }
 
     componentWillMount() {
         this.setState({
-            d3: node
+            d3: node,
+            barD3: groupNode
         });
     }
 
     render(){
+        console.log("state ", this.state)
         return (
             <div>
                 <h1>TEST BAR GRAPH</h1>
-                <RD3Component data={this.state.d3}/>
+                <BarChart data={this.state.barD3}/>
+                <h1>TEST GROUPED BAR CHART</h1>
                 <h1>TEST MAP</h1>
                 <UsMap/>
             </div>
