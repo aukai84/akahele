@@ -11,21 +11,27 @@ const data = [
       {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
       {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
 ];
-const SimpleLineChart = React.createClass({
+class SimpleLineChart extends Component {
+    constructor(props){
+        super(props);
+    }
+
+
     render () {
+        console.log(this.props)
     return (
-        <LineChart width={600} height={300} data={data}
+        <LineChart width={600} height={300} data={this.props.honolulu}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-       <XAxis dataKey="name"/>
+       <XAxis dataKey="year"/>
        <YAxis/>
        <CartesianGrid strokeDasharray="3 3"/>
        <Tooltip/>
        <Legend />
-       <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5"/>
+       <Line type="monotone" dataKey="aggravated_assault" stroke="#8884d8" strokeDasharray="5 5"/>
        <Line type="monotone" dataKey="uv" stroke="#82ca9d" strokeDasharray="3 4 5 2"/>
       </LineChart>
     );
   }
-})
+}
 
 export default SimpleLineChart;

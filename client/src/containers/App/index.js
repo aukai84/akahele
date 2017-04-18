@@ -24,6 +24,11 @@ class App extends Component {
     componentWillMount(){
         this.displayHonoluluData();
     }
+
+    componentDidMount() {
+        this.displayHonoluluData();
+    }
+
   render() {
     return (
       <div className="homePage">
@@ -36,7 +41,7 @@ class App extends Component {
          <h1>TEST DATA FROM HONOLULU</h1>
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
-            <ReactD3Component/>
+            <ReactD3Component honolulu={this.state.honolulu}/>
          </div>
      </div>
     );

@@ -28,13 +28,12 @@ class ReactD3Component extends Component {
     }
 
     render(){
-        console.log('state of graph ', this.state.barD3)
         return (
             <div>
                 <h1>TEST BAR GRAPH</h1>
                 <BarChart data={this.state.barD3}/>
                 <h1>TEST GROUPED LINE CHART</h1>
-                <SimpleLineChart/>
+                <SimpleLineChart honolulu={this.props.honolulu}/>
                 <h1>TEST MAP</h1>
                 <UsMap/>
             </div>
