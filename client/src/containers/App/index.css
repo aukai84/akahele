@@ -17,8 +17,8 @@
       z-index: 9999;
       color: black;
       background: #fff;
-      height: 350px;
-      width: 350px;
+      height: 450px;
+      width: 550px;
 }
 
 .backdropStyle{
@@ -57,7 +57,4 @@
   width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+

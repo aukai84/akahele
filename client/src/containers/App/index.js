@@ -20,7 +20,13 @@ class App extends Component {
         
     }
 
- 
+    openModal() {
+      this.setState({ isModalOpen: true })
+    }
+
+    closeModal() {
+      this.setState({ isModalOpen: false })
+    }
 
     displayHonoluluData(){
         requestHelper('GET', 'http://localhost:8080/cities/Honolulu/crime')
@@ -50,7 +56,7 @@ class App extends Component {
          <div className="container">
             <div className="sidebar">
             <p>Sidebar YAAAS</p>
-                 <div>
+                 <div className="graphs">
           <button onClick={() => this.openModal()}>Graph</button>
           <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
             <h3>Put graph HERE</h3>
@@ -58,6 +64,14 @@ class App extends Component {
             <p><button onClick={() => this.closeModal()}>Close</button></p>
           </Modal>
         </div>
+        <p><div className="streetview">
+          <button onClick={() => this.openModal()}>Street View</button>
+          <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+            <h3>cool street stuff</h3>
+            <p>hello</p>
+            <p><button onClick={() => this.closeModal()}>Close</button></p>
+          </Modal>
+        </div></p>
 
             </div>
             <div className="main-body">
@@ -85,13 +99,7 @@ class App extends Component {
      </div>
     );
   }
-  openModal() {
-      this.setState({ isModalOpen: true })
-    }
 
-    closeModal() {
-      this.setState({ isModalOpen: false })
-    }
 }
 
 export default App;
