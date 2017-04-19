@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './index.css';
 import {requestHelper} from '../../lib/modules.js';
-// import SideMenu from '../../components/sideMenu.jsx';
-// import Popout from '../../components/Popout.jsx';
-// import ReactDOM from 'react-dom';
 import Modal from '../../components/Modal.jsx';
+import ModalGraph from '../../components/ModalGraph.jsx';
 
 
 
@@ -28,6 +26,15 @@ class App extends Component {
       this.setState({ isModalOpen: false })
     }
 
+    openModalGraph() {
+      this.setState({ isModalOpen: true })
+    }
+
+    closeModalGraph() {
+      this.setState({ isModalOpen: false })
+    }
+
+
     displayHonoluluData(){
         requestHelper('GET', 'http://localhost:8080/cities/Honolulu/crime')
         .then(data => {
@@ -50,34 +57,39 @@ class App extends Component {
 
     return (
       <div className="homePage">
-         <div className="App-header">
-              <h2>Akahele</h2>
-         </div>
+        
          <div className="container">
+
             <div className="sidebar">
-            <p>Sidebar YAAAS</p>
-                 <div className="graphs">
-          <button onClick={() => this.openModal()}>Graph</button>
-          <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
-            <h3>Put graph HERE</h3>
+            <div className="sidebarTitle"><p>Menu</p></div>
+
+        <div className="graphView">
+         <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
+          <a onClick={() => this.openModalGraph()}>Graphs</a>
+          <ModalGraph isOpen={this.state.isModalOpen} onClose={() => this.closeModalGraph()}>
+            <h3>Graphs</h3>
+            <p>work</p>
+            <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
+          </ModalGraph>
+        </div>
+
+        <div className="streetview">
+        <img src={'https://cdn3.iconfinder.com/data/icons/ballicons-reloaded-vol-1/512/icon-31-256.png'} className="streetImg" alt="street"/>
+          <a onClick={() => this.openModal()}>Street View</a>
+          <Modal className="streetBlock" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+            <h3>cool street stuff</h3>
             <p>hello</p>
+            <img src={'https://image.flaticon.com/sprites/new_packs/179116-graph.png'} className="mockImg" alt="graph"/>
             <p><button onClick={() => this.closeModal()}>Close</button></p>
           </Modal>
         </div>
-        <p><div className="streetview">
-          <button onClick={() => this.openModal()}>Street View</button>
-          <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
-            <h3>cool street stuff</h3>
-            <p>hello</p>
-            <p><button onClick={() => this.closeModal()}>Close</button></p>
-          </Modal>
-        </div></p>
+
 
             </div>
             <div className="main-body">
-                <p className="App-intro">Hello World</p>
+                <p className="App-intro">Akahele</p>
          
-                <h1>TEST DATA FROM HONOLULU</h1>
+                <h2>TEST DATA FROM HONOLULU</h2>
                  <ul>
              {
                 this.state.honolulu.map(crime => {
@@ -100,6 +112,7 @@ class App extends Component {
     );
   }
 
+    
 }
 
 export default App;
