@@ -1,46 +1,26 @@
 import React, { Component } from 'react';
 import './index.css';
 import {requestHelper} from '../../lib/modules.js';
-// import Sidebar from 'react-sidebar';
-import { SideNav, Chevron, Icon } from 'react-side-nav';
+// import SideMenu from '../../components/sideMenu.jsx';
+// import Popout from '../../components/Popout.jsx';
+// import ReactDOM from 'react-dom';
+import Modal from '../../components/Modal.jsx';
 
- const menuItems = [
-  { id: 1,
-    label: 'Side Menu',
-    icon: 'fa-battery-half',
-    items: [
-      { id: 11,
-        label: 'Charts',
-        icon: 'fa-car',
-        link: '/item11',
-      },
-      { id: 12,
-        label: 'Maps',
-        icon: 'fa-bullhorn',
-        link: '/item12',
-      },
-      { id: 13,
-        label: 'More stuff',
-        icon: 'fa-bullhorn',
-        link: '/item13',
-      },
-    ],
-  },
-];
-const NavLink = props => (<a href={props.to} {...props}><i className={`fa ${props.icon}`} />{props.label}</a>);
+
+
 
 class App extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            honolulu: []
-            // sidebarOpen: true
+            honolulu: [],
+            isModalOpen: false
+           
         }
-        // this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+        
     }
-  //   onSetSidebarOpen= function(open) {
-  //   this.setState({sidebarOpen: open});
-  // }
+
+ 
 
     displayHonoluluData(){
         requestHelper('GET', 'http://localhost:8080/cities/Honolulu/crime')
@@ -59,29 +39,32 @@ class App extends Component {
 
 
   render() {
-        // var sidebarContent = <b>Sidebar content</b>;
+       
         console.log(this.state)
 
     return (
       <div className="homePage">
          <div className="App-header">
-              <h2>Welcome to React!!</h2>
+              <h2>Akahele</h2>
          </div>
-         <div className="sidebar">
-         <SideNav
-            items={menuItems}
-            linkComponent={NavLink}
-            chevronComponent={Chevron}
-            iconComponent={Icon}
-        />
-
+         <div className="container">
+            <div className="sidebar">
+            <p>Sidebar YAAAS</p>
+                 <div>
+          <button onClick={() => this.openModal()}>Graph</button>
+          <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+            <h3>Put graph HERE</h3>
+            <p>hello</p>
+            <p><button onClick={() => this.closeModal()}>Close</button></p>
+          </Modal>
         </div>
-         <p className="App-intro">
-              Hello World
-         </p>
+
+            </div>
+            <div className="main-body">
+                <p className="App-intro">Hello World</p>
          
-         <h1>TEST DATA FROM HONOLULU</h1>
-         <ul>
+                <h1>TEST DATA FROM HONOLULU</h1>
+                 <ul>
              {
                 this.state.honolulu.map(crime => {
                     console.log('crimes ', crime)
@@ -94,12 +77,21 @@ class App extends Component {
                     )
                 })
              }
-         </ul>
+                </ul>
+            </div>
+         </div>
     
        
      </div>
     );
   }
+  openModal() {
+      this.setState({ isModalOpen: true })
+    }
+
+    closeModal() {
+      this.setState({ isModalOpen: false })
+    }
 }
 
 export default App;
