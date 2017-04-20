@@ -32,7 +32,7 @@
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2",
     "require-csv": "0.0.1",
-    "topojson": "^3.0.0"
+    "topojson": "^3.0.0",
     "react-side-bar": "^0.3.5",
     "react-side-menu": "^0.1.2",
     "react-side-nav": "0.0.3",
