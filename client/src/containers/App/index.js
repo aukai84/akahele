@@ -12,9 +12,9 @@ class App extends Component {
             honolulu: [],
             isModalOpen: false,
             isModalGraphOpen: false
-           
+
         }
-        
+
     }
 
     openModal() {
@@ -35,14 +35,19 @@ class App extends Component {
 
 
     displayHonoluluData(){
-        retrieveData('http://localhost:8080/cities/Honolulu/crime')
+        retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
         .then(data => {
+            console.log(data)
             this.setState({
-                honolulu: this.state.honolulu.concat(data)
+                honolulu: [
+                {name: "murder", amount: data.murder_and_manslaughter},
+                {name: "rape", amount: data.rape},
+                {name: "theft", amount: data.larceny_theft}
+            ]
             })
         })
     }
-   
+
 
     componentWillMount(){
         this.displayHonoluluData();
@@ -55,7 +60,7 @@ class App extends Component {
 
   render() {
 
-       
+
         console.log(this.state)
     return (
       <div className="homePage">
@@ -68,7 +73,7 @@ class App extends Component {
          </p>
          <h1>TEST DATA FROM HONOLULU</h1>
 
-        
+
          <div className="container">
 
             <div className="sidebar">
@@ -99,12 +104,12 @@ class App extends Component {
             </div>
             <div className="main-body">
                 <p className="App-intro">Akahele</p>
-         
+
                 <h2>TEST DATA FROM HONOLULU</h2>
             </div>
          </div>
-    
-      
+
+
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
             <ReactD3Component honolulu={this.state.honolulu}/>
@@ -113,7 +118,7 @@ class App extends Component {
     );
   }
 
-    
+
 }
 
 export default App;
