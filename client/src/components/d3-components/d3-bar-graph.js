@@ -17,7 +17,6 @@ var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("/data/data.csv", function(d) {
-    console.log("data", d)
   d.frequency = +d.frequency;
   return d;
 }, function(error, data) {

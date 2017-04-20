@@ -4,6 +4,7 @@ import Modal from '../../components/Modal.jsx';
 import {retrieveData} from '../../lib/modules/modules.js';
 import ReactD3Component from '../../components/d3graph.js';
 
+
 class App extends Component {
     constructor(props){
         super(props);
@@ -48,12 +49,25 @@ class App extends Component {
     }
 
 
+    componentDidMount() {
+        this.displayHonoluluData();
+    }
+
   render() {
 
        
         console.log(this.state)
     return (
       <div className="homePage">
+
+         <div className="App-header">
+              <h2>Welcome to React!!</h2>
+         </div>
+         <p className="App-intro">
+              Hello World
+         </p>
+         <h1>TEST DATA FROM HONOLULU</h1>
+
         
          <div className="container">
 
@@ -87,23 +101,13 @@ class App extends Component {
                 <p className="App-intro">Akahele</p>
          
                 <h2>TEST DATA FROM HONOLULU</h2>
-                 <ul>
-             {
-                this.state.honolulu.map(crime => {
-                    return (
-                            
-                    )
-                })
-             }
-
-                </ul>
             </div>
          </div>
     
-                </ul>
+      
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
-            <ReactD3Component/>
+            <ReactD3Component honolulu={this.state.honolulu}/>
          </div>
      </div>
     );
