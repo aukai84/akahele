@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './index.css';
 import Modal from '../../components/Modal.jsx';
 import {retrieveData} from '../../lib/modules/modules.js';
-import ReactD3Component from '../../components/d3graph.js';
+// import ReactD3Component from '../../components/d3graph.js';
+ // <ReactD3Component honolulu={this.state.honolulu}/>
 
 
 
@@ -134,7 +135,7 @@ class App extends Component {
     
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
-             <ReactD3Component honolulu={this.state.honolulu}/>
+
 
         
 
