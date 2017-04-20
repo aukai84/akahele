@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './index.css';
 import Modal from '../../components/Modal.jsx';
 import {retrieveData} from '../../lib/modules/modules.js';
-// import ReactD3Component from '../../components/d3graph.js';
+import ReactD3Component from '../../components/d3graph.js';
+
+
 
 class App extends Component {
     constructor(props){
@@ -56,12 +58,17 @@ class App extends Component {
     }
 
 
+    componentDidMount() {
+        this.displayHonoluluData();
+    }
+
   render() {
 
        
         console.log(this.state)
     return (
       <div className="homePage">
+
         
          <div className="container">
 
@@ -102,12 +109,14 @@ class App extends Component {
 
         <div className="crimes">
         <p>Crimes</p>
+
         <select>
               <option value="all">All</option>
               <option value="murders">Murders</option>
               <option value="rape">Rape</option>
               <option value="theft">Theft</option>
-            </select>
+        </select>
+
         </div>
 
 
@@ -116,6 +125,7 @@ class App extends Component {
                 <p className="App-intro">Akahele</p>
          
                 <h2>TEST DATA FROM HONOLULU</h2>
+
                 <img src={'http://synthesis.sbecker.net/wp-content/uploads/2012/07/choropleth.png'} className="mockNationImg" alt="nation"/>
                 
                  
@@ -124,8 +134,12 @@ class App extends Component {
     
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
+             <ReactD3Component honolulu={this.state.honolulu}/>
+
         
-         </div>
+
+            </div>
+            
      </div>
     );
   }
