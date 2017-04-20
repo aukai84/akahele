@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import Modal from '../../components/Modal.jsx';
 import {retrieveData} from '../../lib/modules/modules.js';
-import ReactD3Component from '../../components/d3graph.js';
+// import ReactD3Component from '../../components/d3graph.js';
 
 class App extends Component {
     constructor(props){
@@ -10,7 +10,8 @@ class App extends Component {
         this.state = {
             honolulu: [],
             isModalOpen: false,
-            isModalGraphOpen: false
+            isModalGraphOpen: false,
+            isModalStateOpen:false
            
         }
         
@@ -30,6 +31,13 @@ class App extends Component {
 
     closeModalGraph() {
       this.setState({ isModalGraphOpen: false })
+    }
+      openModalState() {
+      this.setState({ isModalStateOpen: true })
+    }
+
+    closeModalState() {
+      this.setState({ isModalStateOpen: false })
     }
 
 
@@ -81,29 +89,42 @@ class App extends Component {
           </Modal>
         </div>
 
+         <div className="stateComparison">
+        <img src={'http://www.villaasiatic.com/wp-content/uploads/2017/01/comparison.png'} className="stateImg" alt="state"/>
+          <a onClick={() => this.openModalState()}>State Comparison</a>
+          <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
+            <h3>comparing states</h3>
+            <p>not all states are equal</p>
+            <img src={'https://image.flaticon.com/sprites/new_packs/179116-graph.png'} className="mockImg" alt="graph"/>
+            <p><button onClick={() => this.closeModalState()}>Close</button></p>
+          </Modal>
+        </div>
+
+        <div className="crimes">
+        <p>Crimes</p>
+        <select>
+              <option value="all">All</option>
+              <option value="murders">Murders</option>
+              <option value="rape">Rape</option>
+              <option value="theft">Theft</option>
+            </select>
+        </div>
+
 
             </div>
             <div className="main-body">
                 <p className="App-intro">Akahele</p>
          
                 <h2>TEST DATA FROM HONOLULU</h2>
-                 <ul>
-             {
-                this.state.honolulu.map(crime => {
-                    return (
-                            
-                    )
-                })
-             }
-
-                </ul>
+                <img src={'http://synthesis.sbecker.net/wp-content/uploads/2012/07/choropleth.png'} className="mockNationImg" alt="nation"/>
+                
+                 
             </div>
          </div>
     
-                </ul>
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
-            <ReactD3Component/>
+        
          </div>
      </div>
     );

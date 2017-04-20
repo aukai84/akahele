@@ -84,6 +84,11 @@ a:hover{
   height: 30px;
 
 }
+.stateImg{
+  width: 30px;
+  height: 30px;
+
+}
   .sidebar{
   	width: 190px;
   	height: 800px;
@@ -102,6 +107,15 @@ a:hover{
   .mockImg{
     width: 250px;
     height: 250px;
+  }
+  .mockNationImg{
+    width: 650px;
+    height: 450px;
+  }
+
+  .crimes{
+    margin-top: 10px;
+    border-top: solid 1px grey;
   }
 
   .main-body{
