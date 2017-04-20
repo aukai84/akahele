@@ -84,6 +84,7 @@ function parseCsv(filePath, year) {
     })
 }
 
+
 module.exports = {
     parseCsv,
     parseCsvCities

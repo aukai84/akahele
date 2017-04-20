@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './index.css';
-import {requestHelper} from '../../lib/modules.js';
 import Modal from '../../components/Modal.jsx';
-
-
-
-
+import {retrieveData} from '../../lib/modules/modules.js';
+import ReactD3Component from '../../components/d3graph.js';
 
 class App extends Component {
     constructor(props){
@@ -37,9 +34,8 @@ class App extends Component {
 
 
     displayHonoluluData(){
-        requestHelper('GET', 'http://localhost:8080/cities/Honolulu/crime')
+        retrieveData('http://localhost:8080/cities/Honolulu/crime')
         .then(data => {
-            console.log(data)
             this.setState({
                 honolulu: this.state.honolulu.concat(data)
             })
@@ -53,9 +49,9 @@ class App extends Component {
 
 
   render() {
+
        
         console.log(this.state)
-
     return (
       <div className="homePage">
         
@@ -94,21 +90,21 @@ class App extends Component {
                  <ul>
              {
                 this.state.honolulu.map(crime => {
-                    console.log('crimes ', crime)
                     return (
-                            <li>
-                                <h2>id = {crime.id}</h2>
-                                <p>year = {crime.year}</p>
-                                <p>violent crime = {crime.violent_crime}</p>
-                            </li>
+                            
                     )
                 })
              }
+
                 </ul>
             </div>
          </div>
     
-       
+                </ul>
+         <div>
+            <h2>TESTING REACT-D3-LIBRARY</h2>
+            <ReactD3Component/>
+         </div>
      </div>
     );
   }
