@@ -112,6 +112,7 @@ a:hover{
 }
 .sidebar{
   width: 190px;
+  text-align: center;
   height: 800px;
   background-color: white;
   color: #2d9999;

@@ -9,7 +9,7 @@ console.log(MapChoropleth)
 let width = 960;
 let height = 600;
 
-let topodata = require('../d3maps/usa/us.json');
+let topodata = require('../d3-maps/usa/us.json');
 let unemploy = d3.csvParse(`id,rate
 01,.097
 02,.091
