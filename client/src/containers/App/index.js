@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import {requestHelper} from '../../lib/modules.js';
 import Modal from '../../components/Modal.jsx';
-import ModalGraph from '../../components/ModalGraph.jsx';
+
 
 
 
@@ -12,7 +12,8 @@ class App extends Component {
         super(props);
         this.state = {
             honolulu: [],
-            isModalOpen: false
+            isModalOpen: false,
+            isModalGraphOpen: false
            
         }
         
@@ -27,11 +28,11 @@ class App extends Component {
     }
 
     openModalGraph() {
-      this.setState({ isModalOpen: true })
+      this.setState({ isModalGraphOpen: true })
     }
 
     closeModalGraph() {
-      this.setState({ isModalOpen: false })
+      this.setState({ isModalGraphOpen: false })
     }
 
 
@@ -66,11 +67,11 @@ class App extends Component {
         <div className="graphView">
          <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
           <a onClick={() => this.openModalGraph()}>Graphs</a>
-          <ModalGraph isOpen={this.state.isModalOpen} onClose={() => this.closeModalGraph()}>
+          <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
             <h3>Graphs</h3>
             <p>work</p>
             <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
-          </ModalGraph>
+          </Modal>
         </div>
 
         <div className="streetview">
