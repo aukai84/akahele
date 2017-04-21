@@ -7,6 +7,8 @@ import UsMap from './d3-components/d3-us-map.js';
 import groupNode from './d3-components/d3-grouped-bar-chart.js';
 import SimpleLineChart from './d3-components/dashed-line-chart.js'
 import SimpleBarGraph from './d3-components/bar-graph.js'
+import {retrieveData} from '../lib/modules/modules.js';
+
 //ONLY CAN HAVE ONE rd3.component at a time!!!
 let BarChart = rd3.Component;
 let GroupedBarChart = rd3.component;
@@ -15,31 +17,45 @@ class ChartsContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            d3: '',
-            barD3: ''
+            barGraphData: [],
+            lineGraphData: []
         }
     }
 
+    retrieveHonoluluData(){
+        retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
+        .then(data => {
+            console.log(data)
+            this.setState({
+                barGraphData: [
+                {name: "murder", amount: data.murder_and_manslaughter},
+                {name: "rape", amount: data.rape},
+                {name: "theft", amount: data.larceny_theft}
+            ]
+            })
+        })
 
+        retrieveData('http://localhost:8080/cities/Honolulu/crime')
+        .then(data => {
+            this.setState({
+                lineGraphData: data
+            })
+        })
+    }
 
     componentWillMount() {
-        this.setState({
-            d3: node,
-            barD3: groupNode
-        });
+        this.retrieveHonoluluData();
     }
 
 
     render(){
-        console.log(this.props)
+        console.log(this.state)
         return (
             <div>
-                <h1>TEST BAR GRAPH</h1>
-                <BarChart data={this.state.barD3}/>
                 <h1>TEST GROUPED LINE CHART</h1>
-                <SimpleLineChart lineGraphData={this.props.lineGraphData}/>
+                <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
                 <h2>Test bar graph</h2>
-                <SimpleBarGraph barGraphData={this.props.barGraphData}/>
+                <SimpleBarGraph barGraphData={this.state.barGraphData}/>
             </div>
         )
     }

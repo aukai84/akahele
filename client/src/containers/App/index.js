@@ -9,8 +9,6 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            barGraphData: [],
-            lineGraphData: [],
             isModalOpen: false,
             isModalGraphOpen: false
 
@@ -34,37 +32,6 @@ class App extends Component {
       this.setState({ isModalGraphOpen: false })
     }
 
-
-    retrieveHonoluluData(){
-        retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
-        .then(data => {
-            console.log(data)
-            this.setState({
-                barGraphData: [
-                {name: "murder", amount: data.murder_and_manslaughter},
-                {name: "rape", amount: data.rape},
-                {name: "theft", amount: data.larceny_theft}
-            ]
-            })
-        })
-
-        retrieveData('http://localhost:8080/cities/Honolulu/crime')
-        .then(data => {
-            this.setState({
-                lineGraphData: data
-            })
-        })
-    }
-
-
-    componentWillMount(){
-        this.retrieveHonoluluData();
-    }
-
-
-    componentDidMount() {
-        this.retrieveHonoluluData();
-    }
 
   render() {
 
@@ -120,7 +87,7 @@ class App extends Component {
 
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
-            <ChartsContainer barGraphData={this.state.barGraphData} lineGraphData={this.state.lineGraphData}/>
+            <ChartsContainer />
          </div>
      </div>
     );
