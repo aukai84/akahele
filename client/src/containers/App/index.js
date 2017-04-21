@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
 import {retrieveData} from '../../lib/modules/modules.js';
-import ChartsContainer from '../../components/d3graph.js';
+import ChartsContainer from '../../containers/Charts';
 import Sidebar from '../../components/Sidebar.jsx';
 
 
