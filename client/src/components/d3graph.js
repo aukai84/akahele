@@ -11,7 +11,7 @@ import SimpleBarGraph from './d3-components/bar-graph.js'
 let BarChart = rd3.Component;
 let GroupedBarChart = rd3.component;
 
-class ReactD3Component extends Component {
+class ChartsContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -31,19 +31,18 @@ class ReactD3Component extends Component {
 
 
     render(){
+        console.log(this.props)
         return (
             <div>
                 <h1>TEST BAR GRAPH</h1>
                 <BarChart data={this.state.barD3}/>
                 <h1>TEST GROUPED LINE CHART</h1>
-                <SimpleLineChart honolulu={this.props.honolulu}/>
+                <SimpleLineChart lineGraphData={this.props.lineGraphData}/>
                 <h2>Test bar graph</h2>
-                <SimpleBarGraph honolulu={this.props.honolulu}/>
-                <h1>TEST MAP</h1>
-                <UsMap/>
+                <SimpleBarGraph barGraphData={this.props.barGraphData}/>
             </div>
         )
     }
 }
 
-export default ReactD3Component;
+export default ChartsContainer;

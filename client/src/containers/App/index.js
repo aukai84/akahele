@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import './index.css';
 import Modal from '../../components/Modal.jsx';
 import {retrieveData} from '../../lib/modules/modules.js';
-import ReactD3Component from '../../components/d3graph.js';
+import ChartsContainer from '../../components/d3graph.js';
 
 
 class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            honolulu: [],
+            barGraphData: [],
+            lineGraphData: [],
             isModalOpen: false,
             isModalGraphOpen: false
 
@@ -34,28 +35,35 @@ class App extends Component {
     }
 
 
-    displayHonoluluData(){
+    retrieveHonoluluData(){
         retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
         .then(data => {
             console.log(data)
             this.setState({
-                honolulu: [
+                barGraphData: [
                 {name: "murder", amount: data.murder_and_manslaughter},
                 {name: "rape", amount: data.rape},
                 {name: "theft", amount: data.larceny_theft}
             ]
             })
         })
+
+        retrieveData('http://localhost:8080/cities/Honolulu/crime')
+        .then(data => {
+            this.setState({
+                lineGraphData: data
+            })
+        })
     }
 
 
     componentWillMount(){
-        this.displayHonoluluData();
+        this.retrieveHonoluluData();
     }
 
 
     componentDidMount() {
-        this.displayHonoluluData();
+        this.retrieveHonoluluData();
     }
 
   render() {
@@ -112,7 +120,7 @@ class App extends Component {
 
          <div>
             <h2>TESTING REACT-D3-LIBRARY</h2>
-            <ReactD3Component honolulu={this.state.honolulu}/>
+            <ChartsContainer barGraphData={this.state.barGraphData} lineGraphData={this.state.lineGraphData}/>
          </div>
      </div>
     );

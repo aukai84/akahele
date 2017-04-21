@@ -13,7 +13,7 @@ class SimpleBarGraph extends Component {
     render(){
         return (
 
-            <BarChart width={600} height={300} data={this.props.honolulu} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+            <BarChart width={600} height={300} data={this.props.barGraphData} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                 <XAxis dataKey='name'/>
                <YAxis/>
                <CartesianGrid strokeDasharray="3 3"/>
