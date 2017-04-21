@@ -14,10 +14,7 @@ class App extends Component {
             isModalOpen: false,
             isModalGraphOpen: false
         }
-
     }
-
-
 
   render() {
 

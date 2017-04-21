@@ -1,18 +1,13 @@
 
 import React, {Component} from 'react';
 import rd3 from 'react-d3-library';
-import node from '../../components/d3-components/d3-bar-graph.js';
 import * as d3 from 'd3';
 import '../../lib/css/choropleth.css';
-import UsMap from '../../components//d3-components/d3-us-map.js';
-import groupNode from '../../components/d3-components/d3-grouped-bar-chart.js';
-import SimpleLineChart from '../../components/d3-components/dashed-line-chart.js';
-import SimpleBarGraph from '../../components//d3-components/bar-graph.js';
-import MultiBarGraph from '../../components//d3-components/multi-bar-graph.js';
+import UsMap from '../../components/chart-components/d3-us-map.js';
+import SimpleLineChart from '../../components/chart-components/dashed-line-chart.js';
+import SimpleBarGraph from '../../components/chart-components/bar-graph.js';
+import MultiBarGraph from '../../components/chart-components/multi-bar-graph.js';
 import {retrieveData} from '../../lib/modules/modules.js';
-
-//ONLY CAN HAVE ONE rd3.component at a time!!!
-let BarChart = rd3.Component;
 
 class ChartsContainer extends Component {
     constructor(props){
