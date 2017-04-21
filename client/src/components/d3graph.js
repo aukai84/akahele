@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import rd3 from 'react-d3-library';
 import node from './d3-components/d3-bar-graph.js';
@@ -8,7 +9,6 @@ import groupNode from './d3-components/d3-grouped-bar-chart.js';
 import SimpleLineChart from './d3-components/dashed-line-chart.js'
 //ONLY CAN HAVE ONE rd3.component at a time!!!
 let BarChart = rd3.Component;
-let GroupedBarChart = rd3.component;
 
 class ReactD3Component extends Component {
     constructor(props){
