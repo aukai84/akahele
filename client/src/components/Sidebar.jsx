@@ -65,15 +65,22 @@ class Sidebar extends React.Component {
           <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
             <h3>comparing states</h3>
             <p>not all states are equal</p>
-            <img src={'https://image.flaticon.com/sprites/new_packs/179116-graph.png'} className="mockImg" alt="graph"/>
-            <p><button onClick={() => this.closeModalState()}>Close</button></p>
+            <div className="stateOne">
+            	<h3>State One</h3>
+            <input type="text" name="search" placeholder="Search.."></input>
+            </div>
+            <div className="stateTwo">
+            <h3>State Two</h3>
+            <input type="text" name="search" placeholder="Search.."></input>
+            </div>
+            <p><button className="closeBtn" onClick={() => this.closeModalState()}>Close</button></p>
           </Modal>
         </div>
 
         <div className="crimes">
-        <p>Crimes</p>
+        <p>Filter Nation Map By Crime:</p>
 
-        <select>
+        <select onChange={this.crimeChange} value={this.props.crime}>
               <option value="all">All</option>
               <option value="murders">Murders</option>
               <option value="rape">Rape</option>

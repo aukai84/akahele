@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './index.css';
-// import Modal from '../../components/Modal.jsx';
 import {retrieveData} from '../../lib/modules/modules.js';
 import ReactD3Component from '../../components/d3graph.js';
 import Sidebar from '../../components/Sidebar.jsx';
@@ -44,7 +43,8 @@ class App extends Component {
         console.log(this.state)
     return (
 
-         <div className="container">
+         <div className="bigContainer">
+
          <Sidebar/>
 
             <div className="main-body">
