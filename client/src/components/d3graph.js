@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import rd3 from 'react-d3-library';
 import node from './d3-components/d3-bar-graph.js';
@@ -12,7 +13,6 @@ import {retrieveData} from '../lib/modules/modules.js';
 
 //ONLY CAN HAVE ONE rd3.component at a time!!!
 let BarChart = rd3.Component;
-let GroupedBarChart = rd3.component;
 
 class ChartsContainer extends Component {
     constructor(props){
