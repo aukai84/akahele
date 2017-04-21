@@ -5,8 +5,9 @@ import * as d3 from 'd3';
 import '../lib/css/choropleth.css';
 import UsMap from './d3-components/d3-us-map.js';
 import groupNode from './d3-components/d3-grouped-bar-chart.js';
-import SimpleLineChart from './d3-components/dashed-line-chart.js'
-import SimpleBarGraph from './d3-components/bar-graph.js'
+import SimpleLineChart from './d3-components/dashed-line-chart.js';
+import SimpleBarGraph from './d3-components/bar-graph.js';
+import MultiBarGraph from './d3-components/multi-bar-graph.js';
 import {retrieveData} from '../lib/modules/modules.js';
 
 //ONLY CAN HAVE ONE rd3.component at a time!!!
@@ -18,7 +19,8 @@ class ChartsContainer extends Component {
         super(props);
         this.state = {
             barGraphData: [],
-            lineGraphData: []
+            lineGraphData: [],
+            multiBarData: []
         }
     }
 
@@ -41,6 +43,13 @@ class ChartsContainer extends Component {
                 lineGraphData: data
             })
         })
+
+        retrieveData('http://localhost:8080/states/Colorado/crime/year/2010')
+        .then(data => {
+            this.setState({
+                multiBarData: data
+            })
+        })
     }
 
     componentWillMount() {
@@ -56,6 +65,8 @@ class ChartsContainer extends Component {
                 <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
                 <h2>Test bar graph</h2>
                 <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+                <h2>Multi bar graph</h2>
+                <MultiBarGraph multiBarData={this.state.multiBarData}/>
             </div>
         )
     }
