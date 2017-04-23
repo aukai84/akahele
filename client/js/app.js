@@ -1,4 +1,11 @@
-function initMap() {
+var oReq = new XMLHttpRequest();
+oReq.addEventListener('load', initMap);
+oReq.open('GET', `https://data.honolulu.gov/api/views/qg2s-mjkr/rows.json`);
+oReq.send();
+
+function initMap(){
+
+  let objParse = JSON.parse(this.responseText);
 
   // mockData in GeoJSON format
   const mockData = {
@@ -78,13 +85,15 @@ function initMap() {
   // Loads map centred on Oahu
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 21.5, lng: -158},
-    zoom: 15
+    zoom: 10,
+    mapTypeId: 'terrain'
   });
 
-  var prevInfoWindow = false;
-  let infoWindow = new google.maps.InfoWindow({
-    content: 'U R HURR'
-  });
+  // Allows for infoWindow to close previous instance
+  var prevInfoWindow;
+
+  // To be used with custom markers
+  var iconBase = 'http://maps.gstatic.com/mapfiles/markers2/';
 
   // Gets user's current geolocation
   if (navigator.geolocation){
@@ -94,23 +103,18 @@ function initMap() {
         lng: position.coords.longitude
       };
       // Adds marker over current position
-      var iconBase = 'http://maps.gstatic.com/mapfiles/markers2/';
       var marker = new google.maps.Marker({
         position: pos,
         map,
-        title: 'sup',
         icon: iconBase + 'measle_blue.png'
       });
       let infoWindow = new google.maps.InfoWindow({
         content: 'U R HURR'
       });
       infoWindow.open(map, marker);
-      var prevInfoWindow = marker;
       // Sets map view over current position
       map.setCenter(pos);
-    }, () => {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
+    }, _ => handleLocationError(true, infoWindow, map.getCenter()));
   }else{
     handleLocationError(false, infoWindow, map.getCenter());
   }
@@ -122,14 +126,61 @@ function initMap() {
       'Error: Browser does not support geolocation');
   }
 
+  // Google geocoding (address to coordinates converter)
+  let i = 0;
+  let geocodeInterval = setInterval(_ => {
+    if (i >= objParse.data.length){
+      clearInterval(geocodeInterval);
+      console.log('done geocoding');
+      return;
+    }
+    let address = objParse.data[i][11];
+    let date = objParse.data[i][8];
+    let type = objParse.data[i][10];
+    console.log('tick, tick...');
+    new google.maps.Geocoder().geocode({
+      address: address,
+      componentRestrictions: {
+        country: 'US',
+        administrativeArea: 'Honolulu'
+      }
+    }, (results, status) => {
+      if (status === 'OK'){
+        let marker = new google.maps.Marker({
+          map,
+          position: results[0].geometry.location,
+        });
+        console.log(address, ' successfully geocoded at ', 'LAT: ', results[0].geometry.location.lat(), ', ', 'LON: ', results[0].geometry.location.lng());
+        let infoWindow = new google.maps.InfoWindow({
+          content: '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + address + '<br>' + '<b>Type: </b>' + type,
+        });
+        marker.addListener('click', _ => { 
+          if (prevInfoWindow){
+            prevInfoWindow.close();
+          }
+          infoWindow.open(map, marker);
+          prevInfoWindow = infoWindow;
+        });
+        i++;
+      }else if(status === 'OVER_QUERY_LIMIT'){
+        console.log('Geocoding ', address, ' failed due to', status);
+        return geocodeInterval;
+      }else{
+        console.log('Geocoding failed due to', status);
+      }
+    });
+  // Google quota limits at "no more than 50 per second"
+  }, 300);
+
   // Loops through mockData.features array
-  for (var i = 0; i < mockData.features.length; i++){
+  for (let i = 0; i < mockData.features.length; i++){
     var coords = mockData.features[i].geometry.coordinates;
     var latLng = new google.maps.LatLng(coords[1], coords[0]);
-    // var marker will not work, keep as let
+    // 'var marker' will not work, keep as 'let marker'
     let marker = new google.maps.Marker({
       position: latLng,
-      map:map,
+      map,
+      icon: iconBase + 'icon_green.png'
     });
     // What shows up in the infoWindow
     let infoWindow = new google.maps.InfoWindow({
@@ -137,7 +188,7 @@ function initMap() {
     });
 
     // Opens new infowindows, closes old infowindows
-    marker.addListener('click', () => { 
+    marker.addListener('click', _ => { 
       if (prevInfoWindow){
         prevInfoWindow.close();
       }
@@ -145,14 +196,4 @@ function initMap() {
       prevInfoWindow = infoWindow;
     });
   }
-
-  // Chicago crimes layer
-  /*var layer2 = new google.maps.FusionTablesLayer({
-    query: {
-      select: '\'Geocodable address\'',
-      from: '1mZ53Z70NsChnBMm-qEYmSDOvLXgrreLTkQUvvg'
-    }
-  });*/
-
-  //layer2.setMap(map);
 }
