@@ -22,23 +22,6 @@ module.exports = {
         updatedAt: new Date()
     },{
         year: 2012,
-        population: 963465,
-        violent_crime: 2336,
-        murder_and_manslaughter: 11,
-        rape: 165,
-        robbery: 914,
-        aggravated_assault: 1246,
-        property_crime: 29445,
-        burglary: 4713,
-        larceny_theft: 21978,
-        motor_vehicle_theft: 2754,
-        arson: 210,
-        city: 'Honolulu',
-        state: 'Hawaii',
-        createdAt: new Date(),
-        updatedAt: new Date()
-    },{
-        year: 2012,
         population: 975875 ,
         violent_crime: 2336,
         murder_and_manslaughter: 11,

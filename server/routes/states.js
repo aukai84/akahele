@@ -26,10 +26,10 @@ router.get('/:state/crime', (req, res) => {
   })
 })
 
-//find crime by state by year by type
+
 router.get('/:state/crime/year/:year', (req, res) => {
     let {state, year} = req.params;
-  Crime.findOne({
+  Crime.findAll({
     where: {
         state,
         year
