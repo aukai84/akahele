@@ -1,11 +1,11 @@
 var oReq = new XMLHttpRequest();
 oReq.addEventListener('load', initMap);
-oReq.open('GET', `https://data.honolulu.gov/api/views/qg2s-mjkr/rows.json`);
+oReq.open('GET', `https://data.honolulu.gov/api/views/a96q-gyhq/rows.json`);
 oReq.send();
 
 function initMap(){
 
-  let objParse = JSON.parse(this.responseText);
+  let crimeParse = JSON.parse(this.responseText);
 
   // mockData in GeoJSON format
   const mockData = {
@@ -89,6 +89,9 @@ function initMap(){
     mapTypeId: 'terrain'
   });
 
+  // Marker clusterer
+  var markers = [];
+
   // Allows for infoWindow to close previous instance
   var prevInfoWindow;
 
@@ -114,7 +117,9 @@ function initMap(){
       infoWindow.open(map, marker);
       // Sets map view over current position
       map.setCenter(pos);
-    }, _ => handleLocationError(true, infoWindow, map.getCenter()));
+    }, _ => {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
   }else{
     handleLocationError(false, infoWindow, map.getCenter());
   }
@@ -129,14 +134,14 @@ function initMap(){
   // Google geocoding (address to coordinates converter)
   let i = 0;
   let geocodeInterval = setInterval(_ => {
-    if (i >= objParse.data.length){
+    if (i >= crimeParse.data.length){
       clearInterval(geocodeInterval);
       console.log('done geocoding');
       return;
     }
-    let address = objParse.data[i][11];
-    let date = objParse.data[i][8];
-    let type = objParse.data[i][10];
+    let address = crimeParse.data[i][10];
+    let date = 'null';
+    let type = crimeParse.data[i][14];
     console.log('tick, tick...');
     new google.maps.Geocoder().geocode({
       address: address,
@@ -150,6 +155,8 @@ function initMap(){
           map,
           position: results[0].geometry.location,
         });
+        // Marker clusterer
+        markers.push(marker);
         console.log(address, ' successfully geocoded at ', 'LAT: ', results[0].geometry.location.lat(), ', ', 'LON: ', results[0].geometry.location.lng());
         let infoWindow = new google.maps.InfoWindow({
           content: '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + address + '<br>' + '<b>Type: </b>' + type,
@@ -169,8 +176,13 @@ function initMap(){
         console.log('Geocoding failed due to', status);
       }
     });
+
+  // Marker clusterer  
+  var markerClusterer = new MarkerClusterer(map, markers, {imagePath: 'js/images/m'});
+  
   // Google quota limits at "no more than 50 per second"
-  }, 300);
+  }, 1000);
+
 
   // Loops through mockData.features array
   for (let i = 0; i < mockData.features.length; i++){
