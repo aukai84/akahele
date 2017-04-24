@@ -18,6 +18,11 @@ body {
   display:flex;
   flex-flow: row-wrap;
 }
+.chart-container{
+  height: 800px;
+  width:600px;
+   padding-left: 200px;
+}
 
 .modalStyle{
       position: absolute;
@@ -27,7 +32,7 @@ body {
       z-index: 9999;
       color: black;
       background: #fff;
-      height: 650px;
+      height: 550px;
       width: 1000px;
 }
 
@@ -103,7 +108,7 @@ a:hover{
 .sidebar{
   width: 290px;
   text-align: center;
-  height: 1000px;
+  height: 750;
   background-color: white;
   color: #2d9999;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -143,15 +148,16 @@ select{
 
   }
 
-/*  .closeBtn{
-    margin-top: 450px;
-  }*/
   .stateOne{
     width:250px;
     height: 500px;
     float:left;
     padding-left: 90px;
   }
+
+  .chart{
+    padding-left: 80px;
+      }
 
   .stateTwo{
     width: 250px;

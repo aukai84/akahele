@@ -22,14 +22,15 @@ class App extends Component {
   render() {
 
 
-        console.log(this.state)
+        // console.log(this.state)
+        // console.log(this.props.graphType);
     return (
 
          <div className="bigContainer">
             <Sidebar/>
             <div className="chart-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
-                <ChartsContainer />
+               
             </div>
          </div>
 
