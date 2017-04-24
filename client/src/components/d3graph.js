@@ -20,9 +20,11 @@ class ChartsContainer extends Component {
         this.state = {
             barGraphData: [],
             lineGraphData: [],
-            multiBarData: []
+            multiBarData: [],
+            graphType:this.props.graphType
         }
     }
+
 
     retrieveHonoluluData(){
         retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
@@ -54,21 +56,44 @@ class ChartsContainer extends Component {
 
     componentWillMount() {
         this.retrieveHonoluluData();
+    } 
+    
+    componentWillReceiveProps(nextProps) {
+        console.dir('hello');
+
+        this.setState({
+            graphType: nextProps.graphType
+        });
+    }
+
+    getGraphs(){
+        console.dir(this.props.graphType);
+        if(!this.props.graphType){
+            return (
+                <div>
+                    <h1>TEST GROUPED LINE CHART</h1>
+                    <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
+                    <h2>Test bar graph</h2>
+                    <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+                    <h2>Multi bar graph</h2>
+                    <MultiBarGraph multiBarData={this.state.multiBarData}/>
+                </div>
+            )
+        } else if(this.props.graphType === 'line'){
+            return(
+                <SimpleLineChart lineGraphData={this.state.lineGraphData}/> 
+            )
+        } else if(this.props.graphType === 'bar'){
+            return(
+                <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+            )
+        }
     }
 
 
     render(){
-        console.log(this.state)
-        return (
-            <div>
-                <h1>TEST GROUPED LINE CHART</h1>
-                <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
-                <h2>Test bar graph</h2>
-                <SimpleBarGraph barGraphData={this.state.barGraphData}/>
-                <h2>Multi bar graph</h2>
-                <MultiBarGraph multiBarData={this.state.multiBarData}/>
-            </div>
-        )
+        // console.log(this.state.graphType);
+        return this.getGraphs();
     }
 }
 
