@@ -53,7 +53,6 @@ class ChartsContainer extends Component {
 
 
     render(){
-        console.log(this.state)
         return (
             <div>
                 <h1>TEST GROUPED LINE CHART</h1>
