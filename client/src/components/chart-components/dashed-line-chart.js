@@ -27,4 +27,4 @@ class SimpleLineChart extends Component {
   }
 }
 
-export default SimpleLineChart;
+export default SimpleLineChart

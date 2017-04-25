@@ -61,18 +61,7 @@ class ChartsContainer extends Component {
 
 
     getGraphs(){
-        if(!this.state.graphType){
-            return (
-                <div>
-                    <h1>TEST GROUPED LINE CHART</h1>
-                    <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
-                    <h2>Test bar graph</h2>
-                    <SimpleBarGraph barGraphData={this.state.barGraphData}/>
-                    <h2>Multi bar graph</h2>
-                    <MultiBarGraph multiBarData={this.state.multiBarData}/>
-                </div>
-            )
-        } else if(this.state.graphType === 'line'){
+        if(this.state.graphType === 'line'){
             return(
                 <div>
                     <SimpleLineChart lineGraphData={this.state.lineGraphData}/>

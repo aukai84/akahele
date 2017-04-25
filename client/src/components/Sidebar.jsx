@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from './Modal.jsx';
-import RadioBtn from './radioBtn.jsx';
 import ChartsContainer from '../containers/Charts'
 
 class Sidebar extends React.Component {
@@ -43,21 +42,17 @@ class Sidebar extends React.Component {
     render(){
     return(
     	<div className="sidebar">
-    	<div className="sidebarTitle"><p>Menu</p></div>
-    	  <div className="graphView">
-         <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
-          <a onClick={() => this.openModalGraph()}>Graphs</a>
-          <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
-            <h3>Graphs</h3>
-            <p>work</p>
-            <ChartsContainer/>
+    	   <div className="sidebarTitle"><p>Menu</p></div>
 
-
-
-
-            <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
-          </Modal>
-        </div>
+           <div className="graphView">
+                <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
+                <a onClick={() => this.openModalGraph()}>Graphs</a>
+                <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
+                    <h3>Graphs</h3>
+                    <ChartsContainer/>
+                    <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
+                </Modal>
+            </div>
 
         <div className="streetview">
         <img src={'https://cdn3.iconfinder.com/data/icons/ballicons-reloaded-vol-1/512/icon-31-256.png'} className="streetImg" alt="street"/>
