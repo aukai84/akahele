@@ -16,7 +16,7 @@ class ChartsContainer extends Component {
             barGraphData: [],
             lineGraphData: [],
             multiBarData: [],
-            graphType: 'line'
+            graphType: 'bar'
         }
     }
 
@@ -57,14 +57,8 @@ class ChartsContainer extends Component {
 
     componentDidMount() {
         this.retrieveHonoluluData();
-        // this.getGraphs();
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({
-    //         graphType: nextProps.graphType
-    //     })
-    // }
 
     getGraphs(){
         if(!this.state.graphType){
@@ -93,7 +87,7 @@ class ChartsContainer extends Component {
                 <div>
                     <SimpleBarGraph barGraphData={this.state.barGraphData}/>
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
-                    <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
+                    <input type="radio" value="bar" checked='true' name="graph" onChange={this.setGraph}/> Bar
                     <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
 
                 </div>
