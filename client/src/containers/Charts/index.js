@@ -15,14 +15,14 @@ class ChartsContainer extends Component {
         this.state = {
             barGraphData: [],
             lineGraphData: [],
-            multiBarData: []
+            multiBarData: [],
+            graphType: 'line'
         }
     }
 
     retrieveHonoluluData(){
         retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
         .then(data => {
-            console.log(data)
             this.setState({
                 barGraphData: [
                 {name: "murder", amount: data.murder_and_manslaughter},
@@ -47,23 +47,76 @@ class ChartsContainer extends Component {
         })
     }
 
-    componentWillMount() {
+   setGraph = (event) => {
+        this.setState({
+            graphType: event.target.value
+        })
+
+
+  }
+
+    componentDidMount() {
         this.retrieveHonoluluData();
+        // this.getGraphs();
+    }
+
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         graphType: nextProps.graphType
+    //     })
+    // }
+
+    getGraphs(){
+        if(!this.state.graphType){
+            return (
+                <div>
+                    <h1>TEST GROUPED LINE CHART</h1>
+                    <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
+                    <h2>Test bar graph</h2>
+                    <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+                    <h2>Multi bar graph</h2>
+                    <MultiBarGraph multiBarData={this.state.multiBarData}/>
+                </div>
+            )
+        } else if(this.state.graphType === 'line'){
+            return(
+                <div>
+                    <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
+                    <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
+                    <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
+                    <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+
+                </div>
+            )
+        } else if(this.state.graphType === 'bar'){
+            return(
+                <div>
+                    <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+                    <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
+                    <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
+                    <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+
+                </div>
+            )
+        } else if(this.state.graphType === 'multiBar'){
+            return(
+                <div>
+                    <MultiBarGraph multiBarData={this.state.multiBarData}/>
+                    <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
+                    <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
+                    <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                </div>
+            )
+        }
     }
 
 
     render(){
-        return (
-            <div>
-                <h1>TEST GROUPED LINE CHART</h1>
-                <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
-                <h2>Test bar graph</h2>
-                <SimpleBarGraph barGraphData={this.state.barGraphData}/>
-                <h2>Multi bar graph</h2>
-                <MultiBarGraph multiBarData={this.state.multiBarData}/>
-            </div>
-        )
+
+        return this.getGraphs();
+
     }
+
 }
 
 export default ChartsContainer;

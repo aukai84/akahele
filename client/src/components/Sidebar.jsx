@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './Modal.jsx';
 import RadioBtn from './radioBtn.jsx';
+import ChartsContainer from '../containers/Charts'
 
 class Sidebar extends React.Component {
 	constructor(props){
@@ -9,11 +10,11 @@ class Sidebar extends React.Component {
            isModalOpen: false,
            isModalGraphOpen: false,
            isModalStateOpen:false
-           
+
         }
-    
+
 	}
-   
+
 
 	 openModal() {
       this.setState({ isModalOpen: true })
@@ -38,7 +39,7 @@ class Sidebar extends React.Component {
       this.setState({ isModalStateOpen: false })
     }
 
-    
+
     render(){
     return(
     	<div className="sidebar">
@@ -49,11 +50,11 @@ class Sidebar extends React.Component {
           <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
             <h3>Graphs</h3>
             <p>work</p>
-            <RadioBtn/>
-        
+            <ChartsContainer/>
 
 
-          
+
+
             <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
           </Modal>
         </div>

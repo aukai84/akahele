@@ -27,7 +27,7 @@ class App extends Component {
             <Sidebar/>
             <div className="chart-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
-               
+
             </div>
          </div>
 

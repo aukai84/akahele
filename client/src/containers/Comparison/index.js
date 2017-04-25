@@ -13,6 +13,9 @@ class ComparisonContainer extends Component {
 
     retrieveLineData(area){
 
+        retrieveData(`http://localhost:8080`)
+
+
     }
 
     retrieveBarData(area){
@@ -20,6 +23,11 @@ class ComparisonContainer extends Component {
     }
 
     componentWillMount() {
+        this.retrieveLineData(this.props.area);
+        this.retrieveBarData(this.props.area);
+    }
+
+    componentDidMount() {
         this.retrieveLineData(this.props.area);
         this.retrieveBarData(this.props.area);
     }
