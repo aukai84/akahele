@@ -1,7 +1,21 @@
+// Loads map centred on Oahu
+var map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: 21.5, lng: -158},
+  zoom: 10,
+  mapTypeId: 'terrain'
+});
+
+// Crime data
 var oReq = new XMLHttpRequest();
 oReq.addEventListener('load', initMap);
 oReq.open('GET', `https://data.honolulu.gov/api/views/a96q-gyhq/rows.json`);
 oReq.send();
+
+// Traffic data
+var oReq2 = new XMLHttpRequest();
+oReq2.addEventListener('load', initMap);
+oReq2.open('GET', `https://data.honolulu.gov/api/views/qg2s-mjkr/rows.json`);
+oReq2.send();
 
 function initMap(){
 
@@ -82,13 +96,6 @@ function initMap(){
     ]
   };
 
-  // Loads map centred on Oahu
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 21.5, lng: -158},
-    zoom: 10,
-    mapTypeId: 'terrain'
-  });
-
   // Marker clusterer
   var markers = [];
 
@@ -131,6 +138,16 @@ function initMap(){
       'Error: Browser does not support geolocation');
   }
 
+  function cacheData(data){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', e => {
+
+    });
+    xhr.open('POST', 'http://localhost:4000/user/cache', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+  }
+
   // Google geocoding (address to coordinates converter)
   let i = 0;
   let geocodeInterval = setInterval(_ => {
@@ -139,6 +156,7 @@ function initMap(){
       console.log('done geocoding');
       return;
     }
+    let siteId = crimeParse.data[i][9];
     let address = crimeParse.data[i][10];
     let date = 'null';
     let type = crimeParse.data[i][14];
@@ -158,6 +176,14 @@ function initMap(){
         // Marker clusterer
         markers.push(marker);
         console.log(address, ' successfully geocoded at ', 'LAT: ', results[0].geometry.location.lat(), ', ', 'LON: ', results[0].geometry.location.lng());
+        cacheData({
+          siteId,
+          address,
+          date,
+          type,
+          latitude: results[0].geometry.location.lat(),
+          longitude: results[0].geometry.location.lng()
+        });
         let infoWindow = new google.maps.InfoWindow({
           content: '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + address + '<br>' + '<b>Type: </b>' + type,
         });
@@ -169,6 +195,7 @@ function initMap(){
           prevInfoWindow = infoWindow;
         });
         i++;
+      // If OVER_QUERY_LIMIT, keep scanning until OK  
       }else if(status === 'OVER_QUERY_LIMIT'){
         console.log('Geocoding ', address, ' failed due to', status);
         return geocodeInterval;
@@ -182,7 +209,6 @@ function initMap(){
   
   // Google quota limits at "no more than 50 per second"
   }, 1000);
-
 
   // Loops through mockData.features array
   for (let i = 0; i < mockData.features.length; i++){
