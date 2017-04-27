@@ -21,7 +21,7 @@ class ChartsContainer extends Component {
     }
 
     retrieveBarGraphData(area, year){
-        retrieveData()
+        retrieveData(`htp://localhost:8080/states`)
     }
 
     retrieveHonoluluData(){
