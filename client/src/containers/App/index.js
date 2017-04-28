@@ -5,6 +5,11 @@ import ChartsContainer from '../../containers/Charts';
 import Sidebar from '../../components/Sidebar.jsx';
 import UsMap from '../../components/chart-components/d3-us-map.js';
 import StatesMap from '../../components/us-map-click.js';
+// import Sidebar from '../../components/Sidebar.jsx';
+import NewSidebar from '../../components/newSidebar.jsx';
+
+
+
 
 
 class App extends Component {
@@ -24,8 +29,8 @@ class App extends Component {
     return (
 
          <div className="bigContainer">
-            <Sidebar/>
-            <div className="chart-container">
+         <NewSidebar/>
+            <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
                 <UsMap/>
             </div>

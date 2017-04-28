@@ -13,7 +13,7 @@ class SimpleLineChart extends Component {
     render () {
         console.log(this.props)
     return (
-        <LineChart width={600} height={300} data={this.props.lineGraphData}
+        <LineChart className="line-chart" width={600} height={300} data={this.props.lineGraphData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
        <XAxis dataKey="year"/>
        <YAxis/>
