@@ -12,7 +12,9 @@ body {
   background-color: #fff;
 }
 
-
+.nav-div{
+  padding-left: 950px;
+}
 
 .bigContainer{
   display:flex;
