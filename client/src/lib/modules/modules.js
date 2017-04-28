@@ -20,15 +20,12 @@ export function retrieveData(link) {
         };
         newReq.send();
     })
-
 }
 
-export function postRequestHelper(card){
-    console.log(card)
+export function retrieveCityData(city, year) {
     return new Promise(function(resolve, reject){
         let newReq = new XMLHttpRequest();
-        newReq.open("POST", "http://localhost:9000/api/kanban/new");
-        newReq.setRequestHeader("Content-type", "application/json");
+        newReq.open('GET', `hhtp:`);
         newReq.onload = function(){
             if(this.status >= 200 && this.status < 300){
                 resolve(JSON.parse(newReq.response));
@@ -45,7 +42,30 @@ export function postRequestHelper(card){
                     statusText: newReq.statusText
                 })
         };
-        newReq.send(JSON.stringify(card));
+        newReq.send();
     })
 }
 
+export function retrieveStateData(state, year){
+    return new Promise(function(resolve, reject){
+        let newReq = new XMLHttpRequest();
+        newReq.open('GET', '');
+        newReq.onload = function(){
+            if(this.status >= 200 && this.status < 300){
+                resolve(JSON.parse(newReq.response));
+            } else {
+                reject({
+                    status: this.status,
+                    statusText: newReq.statusText
+                })
+            }
+        };
+        newReq.onerror = function(){
+            reject({
+                    status: this.status,
+                    statusText: newReq.statusText
+                })
+        };
+        newReq.send();
+    })
+}

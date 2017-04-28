@@ -24,10 +24,30 @@ body {
    padding-left: 200px;
 }
 
+.bar-chart{
+  padding-top: 25px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  margin: auto;
+}
+
+.line-chart{
+  padding-top: 25px;
+  padding-bottom: 10px;
+  margin: auto;
+}
+
+.multi-bar-graph{
+  padding-top: 25px;
+  padding-bottom: 10px;
+  margin: auto;
+}
+
+
 .modalStyle{
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: 280%;
       transform: translate(-50%, -50%);
       z-index: 9999;
       color: black;
@@ -40,7 +60,7 @@ body {
 button{
     border-radius: 5px;
     border: 2px solid #73AD21;
-    margin: 5px;
+    margin-left: 450px;
     background-color: white;
 
 }
@@ -96,39 +116,48 @@ a:hover{
 }
 .graphView{
   padding: 10px;
+  color: white;
 }
 .stateComparison{
   padding: 10px;
+  color:white;
 }
-.streetView{
+.cityComparison{
   padding: 10px;
+  color: white;
 }
 
+.radioBtn{
+  padding-top: 15px;
+  padding-left: 370px;
+}
 
-.sidebar{
-  width: 290px;
-  text-align: center;
-  height: 750;
-  background-color: white;
-  color: #2d9999;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
 
 select{
   width: 100px;
+  margin-left: 40px;
   border: #149e6d solid 1px;
   border-radius: 4px;
   background-color: #f1f1f1;
+}
+
+.mockImg{
+  padding-left: 350px;
 }
 
 
 
 
   .sidebarTitle{
-    background-color: #2d9999;
-    padding: 10px;
+    padding-left: 65px;
     color:white;
-    font-size: 20px;
+    font-size: 25px;
+  }
+
+  .graphTitle{
+    padding-left: 430px;
+    padding-top: 10px;
+
   }
 
   .mockImg{
@@ -139,7 +168,7 @@ select{
 
   .crimes{
     font-size: 16px;
-    color:#6f827b;
+    color:white;
   }
 
   .stateBlock{
@@ -150,20 +179,45 @@ select{
 
   .stateOne{
     width:250px;
-    height: 500px;
+    height: 400px;
+    float:left;
+    padding-left: 90px;
+  }
+  .stateTwo{
+    width: 250px;
+    height: 400px;
+    float:right;
+    padding-right: 90px;
+  }
+
+
+   .CityBlock{
+   display: inline-block;
+
+
+  }
+
+  .cityOne{
+    width:250px;
+    height: 400px;
     float:left;
     padding-left: 90px;
   }
 
-  .chart{
-    padding-left: 80px;
-      }
 
-  .stateTwo{
+  .cityTwo{
     width: 250px;
-    height: 500px;
+    height: 400px;
     float:right;
     padding-right: 90px;
+  }
+
+  .city-title{
+    padding-left: 380px;
+  }
+
+  .state-title{
+    padding-left: 380px;
   }
 
 
@@ -176,5 +230,46 @@ select{
   font-size: 50px;
   width: 100%;
 }
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
 
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
 
