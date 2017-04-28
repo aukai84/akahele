@@ -20,6 +20,10 @@ class ChartsContainer extends Component {
         }
     }
 
+    retrieveBarGraphData(area, year){
+        retrieveData()
+    }
+
     retrieveHonoluluData(){
         retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
         .then(data => {
