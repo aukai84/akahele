@@ -25,7 +25,7 @@ class App extends Component {
          <NewSidebar/>
             <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
-                <UsMap/>
+                <StatesMap width={960} height={600}/>
             <GoogleMaps/>
             </div>
          </div>
