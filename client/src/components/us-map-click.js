@@ -17,9 +17,6 @@ class StatesMap extends Component {
 
 
     render(){
-        return(
-
-        )
     }
 }
 

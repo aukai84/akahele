@@ -24,7 +24,6 @@
     "react-d3-library": "^1.1.8",
     "react-d3-map": "^0.8.3",
     "react-d3-map-choropleth": "^0.5.1",
-    "react-d3-map-core": "^0.13.7",
     "react-d3-map-orthographic": "^0.1.0",
     "react-dom": "^15.5.4",
     "react-popout": "^0.6.0",
