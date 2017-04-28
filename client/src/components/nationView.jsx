@@ -1,4 +1,4 @@
-import rd3 from 'react-d3-library';
+/*import rd3 from 'react-d3-library';
 import React from 'react';
 import node from '../d3/d3-nation.js';
 const RD3Component = rd3.Component;
@@ -22,5 +22,5 @@ class Nation extends React.Component {
     )
   }
 }
-export default Nation;
+export default Nation;*/
 
