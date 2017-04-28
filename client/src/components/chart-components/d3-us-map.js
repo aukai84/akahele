@@ -5,10 +5,12 @@ import css from '../d3-css/index.css';
 
 let topojson = require('topojson');
 let MapChoropleth = require('react-d3-map-choropleth').MapChoropleth;
+let PolygonGroup = require('react-d3-map').PolygonGroup;
+console.log('poly ', PolygonGroup)
 console.log(MapChoropleth)
 let width = 960;
 let height = 600;
-
+let data = require('../d3-maps/states.json');
 let topodata = require('../d3-maps/usa/us.json');
 let unemploy = d3.csvParse(`id,rate
 01,.097
@@ -69,6 +71,7 @@ console.log('unemploy ', unemploy)
 var dataStates = topojson.mesh(topodata, topodata.objects.states, function(a, b) { return a !== b; });
 
 let statePolygon = topojson.feature(topodata, topodata.objects.states).features;
+console.log(statePolygon)
 var domain = {
     scale: 'quantize',
     domain: [0, .15],
@@ -82,13 +85,41 @@ var domain = {
   var translate = [width / 2, height / 2];
   var projection = 'albersUsa';
 
+  var onPolygonMouseOut= function(dom , d, i) {
+    console.log('out')
+  }
+  var onPolygonMouseOver= function(dom, d, i) {
+    console.log('over')
+  }
+  var onPolygonClick= function(dom, d, i) {
+    console.log('click')
+  }
+  var onPolygonCloseClick= function(id) {
+    console.log('close click')
+    console.log(id)
+  }
+  var popupContent = function(d) { return 'hi, i am polygon'; }
+
+   var tooltipContent = function(d) {return d.properties}
+
   class UsMap extends Component {
     constructor(){
         super();
     }
 
+    stateclick(e){
+        console.log(e)
+    }
+
+    selectState(e){
+        console.log(e)
+    }
+
+
+
     render(){
         return (
+            <div onClick={this.stateclick}>
             <MapChoropleth
               width={width}
               height={height}
@@ -103,7 +134,12 @@ var domain = {
               translate={translate}
               projection={projection}
               showGraticule={false}
-            />
+              tooltipContent= {tooltipContent}
+              showTooltip= {true}
+              _onMouseOver={this.selectState}
+            >
+            </MapChoropleth>
+            </div>
         )
     }
   }
