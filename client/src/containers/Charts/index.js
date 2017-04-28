@@ -65,9 +65,11 @@ class ChartsContainer extends Component {
             return(
                 <div>
                     <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
+                    <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
                     <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
                     <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                    </div>
 
                 </div>
             )
@@ -75,9 +77,11 @@ class ChartsContainer extends Component {
             return(
                 <div>
                     <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+                    <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
                     <input type="radio" value="bar" checked='true' name="graph" onChange={this.setGraph}/> Bar
                     <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                    </div>
 
                 </div>
             )
@@ -85,9 +89,11 @@ class ChartsContainer extends Component {
             return(
                 <div>
                     <MultiBarGraph multiBarData={this.state.multiBarData}/>
+                    <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
                     <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
                     <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                    </div>
                 </div>
             )
         }

@@ -12,7 +12,7 @@ class MultiBarGraph extends Component {
 
     render(){
         return(
-            <BarChart className="multi-bar-graph" width={1200} height={600} data={this.props.multiBarData} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+            <BarChart className="multi-bar-graph" width={700} height={350} data={this.props.multiBarData} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                 <XAxis dataKey='city' />
                 <YAxis/>
                 <CartesianGrid strokeDasharray="3 3"/>
