@@ -32,6 +32,7 @@ class StatesMap extends Component {
         this.updateD3(newProps);
     }
 
+    //updating d3
     updateD3(props){
         this.projection.translate([this.props.width/2, this.props.height/2]);
 
