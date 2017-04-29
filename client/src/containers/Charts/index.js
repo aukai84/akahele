@@ -20,14 +20,20 @@ class ChartsContainer extends Component {
         }
     }
 
-    retrieveBarGraphData(area, year){
-        retrieveData(`htp://localhost:8080/states`)
+    retrieveStateData(area, year){
+        retrieveData(`http://localhost:8080/states/${area}/crime/year/${year}`)
+        .then(data => {
+            this.setState({
+                stateData: data
+            })
+        })
     }
 
     retrieveHonoluluData(area){
         console.log('area ', area)
         retrieveData(`http://localhost:8080/states/${area}/crime/year/2014`)
         .then(data => {
+            console.log('area data ', data)
             this.setState({
                 barGraphData: [
                 {name: "murder", amount: data.murder_and_manslaughter},
@@ -62,12 +68,14 @@ class ChartsContainer extends Component {
 
     componentWillMount = () => {
         this.retrieveHonoluluData(this.props.currentView);
+        this.retrieveStateData(this.props.currentView, 2014)
     }
 
     getGraphs(){
         if(this.state.graphType === 'line'){
             return(
                 <div>
+                    <h2>{this.props.currentView}</h2>
                     <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -80,6 +88,7 @@ class ChartsContainer extends Component {
         } else if(this.state.graphType === 'bar'){
             return(
                 <div>
+                    <h2>{this.props.currentView}</h2>
                     <SimpleBarGraph barGraphData={this.state.barGraphData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -92,6 +101,7 @@ class ChartsContainer extends Component {
         } else if(this.state.graphType === 'multiBar'){
             return(
                 <div>
+                    <h2>{this.props.currentView}</h2>
                     <MultiBarGraph multiBarData={this.state.multiBarData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -105,7 +115,7 @@ class ChartsContainer extends Component {
 
 
     render(){
-
+        console.log("state data ", this.state)
         return this.getGraphs();
 
     }
