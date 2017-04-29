@@ -5,6 +5,7 @@ let usTopoJson = require('./d3-maps/usa/us.json');
 
 let data = require('./d3-maps/states.json');
 
+
 const State = ({data, geoPath, feature, quantize}) => {
     let color = 'cornflowerblue';
 
@@ -18,15 +19,12 @@ class StatesMap extends Component {
     constructor(props){
         super(props);
         this.projection = d3.geoAlbersUsa()
-            .scale(1280);
+            .scale(1100);
         this.geoPath = d3.geoPath()
             .projection(this.projection);
         this.quantize = d3.scaleQuantize()
             .range(d3.range(9));
-        this.udpateD3(props);
-        this.state = {
-            usTopoJson
-        }
+        this.updateD3(props);
     }
 
     //udpate d3 objects when props udpate
@@ -35,32 +33,37 @@ class StatesMap extends Component {
     }
 
     updateD3(props){
-        this.projection.translate([props.width/2, props.height/2]);
+        console.log('aukai ', props)
+        this.projection.translate([this.props.width/2, this.props.height/2]);
 
-        if(props.crimeTotal){
+        if(this.props.crimeTotal){
             this.quantize.domain([10000, 75000]);
         }
     }
 
+    displayState(feature){
+        console.log('feature ', feature)
+    }
+
     render(){
-        console.log(this.state)
-        if(!this.state.usTopoJson){
+        console.log('us map ', this.props)
+        if(!this.props.usTopoJson){
             return null;
         } else {
-            const us = this.state.usTopoJson,
+            const us = this.props.usTopoJson,
                 statesMesh = topojson.mesh(us, us.objects.states, (a, b) => a !== b),
                 states = topojson.feature(us, us.objects.states).features;
 
                 return (
                     <g>
                         {
-                            states.map(feature => <State
+                            states.map(feature => (<g onClick={() => {this.displayState(feature)}}><State
                                     geoPath={this.geoPath}
                                     feature={feature}
                                     key={feature.id}
                                     quantize={this.quantize}
-                                    data={(this.props.crimeTotal, {countyId: feature.id})}
-                                />
+                                    data={(this.props.crimeTotal, {stateId: feature.id})}
+                                /></g>)
                             )
                         }
 
