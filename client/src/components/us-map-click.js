@@ -33,7 +33,6 @@ class StatesMap extends Component {
     }
 
     updateD3(props){
-        console.log('aukai ', props)
         this.projection.translate([this.props.width/2, this.props.height/2]);
 
         if(this.props.crimeTotal){
@@ -42,11 +41,10 @@ class StatesMap extends Component {
     }
 
     displayState(feature){
-        console.log('feature ', feature.properties.name)
+        this.props.setCurrentView(feature.properties.name)
     }
 
     render(){
-        console.log('us map ', this.props)
         if(!this.props.usTopoJson){
             return null;
         } else {

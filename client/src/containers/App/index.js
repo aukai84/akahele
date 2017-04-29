@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
       isModalOpen: false,
       isModalGraphOpen: false,
+      currentView: ''
     }
   }
 
@@ -22,12 +23,16 @@ class App extends Component {
       d3.queue()
         .defer(d3.json, 'usStates.json')
         .await((error, us) => {
-                console.log('json data ', us)
-
             this.setState({
                 usTopoJson: us
             })
         })
+  }
+
+  setCurrentView = (area) => {
+    this.setState({
+        currentView: area
+    })
   }
 
   render() {
@@ -35,11 +40,11 @@ class App extends Component {
   // console.log(this.props.graphType);
     return (
          <div className="bigContainer">
-         <NewSidebar/>
+         <NewSidebar currentView={this.state.currentView}/>
             <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
                 <svg width='1000' height='800'>
-                    <StatesMap usTopoJson={this.state.usTopoJson} width={800} height={600}/>
+                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
                 </svg>
             <GoogleMaps/>
             </div>

@@ -1,6 +1,5 @@
 
 import React, {Component} from 'react';
-import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import '../../lib/css/choropleth.css';
 import UsMap from '../../components/chart-components/d3-us-map.js';
@@ -16,7 +15,8 @@ class ChartsContainer extends Component {
             barGraphData: [],
             lineGraphData: [],
             multiBarData: [],
-            graphType: 'bar'
+            graphType: 'bar',
+            currentView: ''
         }
     }
 
@@ -24,8 +24,9 @@ class ChartsContainer extends Component {
         retrieveData(`htp://localhost:8080/states`)
     }
 
-    retrieveHonoluluData(){
-        retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
+    retrieveHonoluluData(area){
+        console.log('area ', area)
+        retrieveData(`http://localhost:8080/states/${area}/crime/year/2014`)
         .then(data => {
             this.setState({
                 barGraphData: [
@@ -36,14 +37,14 @@ class ChartsContainer extends Component {
             })
         })
 
-        retrieveData('http://localhost:8080/cities/Honolulu/crime')
+        retrieveData(`http://localhost:8080/states/${area}/crime`)
         .then(data => {
             this.setState({
                 lineGraphData: data
             })
         })
 
-        retrieveData('http://localhost:8080/states/Colorado/crime/year/2010')
+        retrieveData(`http://localhost:8080/states/${area}/crime/year/2010`)
         .then(data => {
             this.setState({
                 multiBarData: data
@@ -57,12 +58,11 @@ class ChartsContainer extends Component {
         })
 
 
-  }
-
-    componentDidMount() {
-        this.retrieveHonoluluData();
     }
 
+    componentWillMount = () => {
+        this.retrieveHonoluluData(this.props.currentView);
+    }
 
     getGraphs(){
         if(this.state.graphType === 'line'){
