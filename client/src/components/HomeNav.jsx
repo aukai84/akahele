@@ -1,13 +1,15 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+// import React from 'react';
+// import {Link} from 'react-router-dom';
 
-const App = () => {
-    return (
-        <ul>
-            <li ><Link to='/home'>APP</Link></li>
-            <li ><Link to='/nation'>MAP</Link></li>
-        </ul>
-    )
-}
+// const App = () => {
+//     return (
+//         <ul>
+//             <li ><Link to='/'>APP</Link></li>
+//             <li ><Link to='/nation'>MAP</Link></li>
+//             <li ><Link to='/chart'>Chart</Link></li>
 
-export default App;
+//         </ul>
+//     )
+// }
+
+// export default App;
