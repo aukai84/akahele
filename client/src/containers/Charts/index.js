@@ -1,6 +1,5 @@
 
 import React, {Component} from 'react';
-import rd3 from 'react-d3-library';
 import * as d3 from 'd3';
 import '../../lib/css/choropleth.css';
 import UsMap from '../../components/chart-components/d3-us-map.js';
@@ -16,17 +15,25 @@ class ChartsContainer extends Component {
             barGraphData: [],
             lineGraphData: [],
             multiBarData: [],
-            graphType: 'bar'
+            graphType: 'bar',
+            currentView: ''
         }
     }
 
-    retrieveBarGraphData(area, year){
-        retrieveData(`htp://localhost:8080/states`)
+    retrieveStateData(area, year){
+        retrieveData(`http://localhost:8080/states/${area}/crime/year/${year}`)
+        .then(data => {
+            this.setState({
+                stateData: data
+            })
+        })
     }
 
-    retrieveHonoluluData(){
-        retrieveData('http://localhost:8080/cities/Honolulu/crime/year/2014')
+    retrieveHonoluluData(area){
+        console.log('area ', area)
+        retrieveData(`http://localhost:8080/states/${area}/crime/year/2014`)
         .then(data => {
+            console.log('area data ', data)
             this.setState({
                 barGraphData: [
                 {name: "murder", amount: data.murder_and_manslaughter},
@@ -36,14 +43,14 @@ class ChartsContainer extends Component {
             })
         })
 
-        retrieveData('http://localhost:8080/cities/Honolulu/crime')
+        retrieveData(`http://localhost:8080/states/${area}/crime`)
         .then(data => {
             this.setState({
                 lineGraphData: data
             })
         })
 
-        retrieveData('http://localhost:8080/states/Colorado/crime/year/2010')
+        retrieveData(`http://localhost:8080/states/${area}/crime/year/2010`)
         .then(data => {
             this.setState({
                 multiBarData: data
@@ -57,17 +64,18 @@ class ChartsContainer extends Component {
         })
 
 
-  }
-
-    componentDidMount() {
-        this.retrieveHonoluluData();
     }
 
+    componentWillMount = () => {
+        this.retrieveHonoluluData(this.props.currentView);
+        this.retrieveStateData(this.props.currentView, 2014)
+    }
 
     getGraphs(){
         if(this.state.graphType === 'line'){
             return(
                 <div>
+                    <h2>{this.props.currentView}</h2>
                     <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -80,6 +88,7 @@ class ChartsContainer extends Component {
         } else if(this.state.graphType === 'bar'){
             return(
                 <div>
+                    <h2>{this.props.currentView}</h2>
                     <SimpleBarGraph barGraphData={this.state.barGraphData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -92,6 +101,7 @@ class ChartsContainer extends Component {
         } else if(this.state.graphType === 'multiBar'){
             return(
                 <div>
+                    <h2>{this.props.currentView}</h2>
                     <MultiBarGraph multiBarData={this.state.multiBarData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -105,7 +115,7 @@ class ChartsContainer extends Component {
 
 
     render(){
-
+        console.log("state data ", this.state)
         return this.getGraphs();
 
     }
