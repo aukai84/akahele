@@ -42,7 +42,7 @@ class StatesMap extends Component {
     }
 
     displayState(feature){
-        console.log('feature ', feature)
+        console.log('feature ', feature.properties.name)
     }
 
     render(){
