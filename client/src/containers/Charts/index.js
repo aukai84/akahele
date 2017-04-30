@@ -17,20 +17,12 @@ class ChartsContainer extends Component {
             multiBarData: [],
             graphType: 'bar',
             currentView: '',
-            currentYear: ''
+            currentYear: 2015
         }
     }
 
-    retrieveBarData(area, year){
-        retrieveData(`http://localhost:8080/api/states/${area}/crime/year/${year}`)
-        .then(data => {
-            this.setState({
-                stateData: data
-            })
-        })
-    }
 
-    retrieveLineData(area, year){
+    retrieveBarData(area, year){
         retrieveData(`http://localhost:8080/api/states/${area}/total-crime/year/${year}`)
         .then(totalCrime => {
             console.log('this is the total crime ', totalCrime)
@@ -50,7 +42,12 @@ class ChartsContainer extends Component {
     }
 
     retrieveMultiData(area, year){
-
+        retrieveData(`http://localhost:8080/api/states/${area}/crime/year/${year}`)
+        .then(data =>  {
+            this.setState({
+                multiBarData: data
+            })
+        })
     }
 
     // retrieveHonoluluData(area){
@@ -90,8 +87,18 @@ class ChartsContainer extends Component {
 
     }
 
+    yearChange = (event) => {
+        console.log(event.target.value)
+        this.setState({
+            currentYear: event.target.value
+        })
+        this.retrieveBarData(this.props.currentView, this.state.currentYear);
+
+    }
+
     componentWillMount = () => {
-        this.retrieveLineData(this.props.currentView, 2014)
+        this.retrieveBarData(this.props.currentView, this.state.currentYear);
+        this.retrieveMultiData(this.props.currentView, this.state.currentYear);
     }
 
     getGraphs(){
@@ -112,13 +119,19 @@ class ChartsContainer extends Component {
             return(
                 <div>
                     <h2>{this.props.currentView}</h2>
+                    <h3>{this.state.currentYear}</h3>
                     <SimpleBarGraph barGraphData={this.state.barGraphData}/>
                     <div className="radioBtn">
-                    <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
-                    <input type="radio" value="bar" checked='true' name="graph" onChange={this.setGraph}/> Bar
-                    <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                        <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
+                        <input type="radio" value="bar" checked='true' name="graph" onChange={this.setGraph}/> Bar
+                        <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
                     </div>
-
+                    <select onChange={this.yearChange} value={this.props.crime}>
+                        <option value='2015'>2015</option>
+                        <option value='2014'>2014</option>
+                        <option value='2013'>2013</option>
+                        <option value='2012'>2012</option>
+                    </select>
                 </div>
             )
         } else if(this.state.graphType === 'multiBar'){
