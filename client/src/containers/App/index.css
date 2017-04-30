@@ -1,31 +1,33 @@
 
 body {
   margin: 0;
+
 }
 #container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 10px;
-  width: 800px;
-  height: 800px;
-  background-color: #fff;
+  width: 1500px;
+  height: 1500px;
+
 }
 
 .nav-div{
 
-  padding-left: 980px;
+  padding-left: 1200px;
 
 }
 
 .bigContainer{
   display:flex;
   flex-flow: row-wrap;
+  width: 1500px;
 }
 .main-container{
-  height: 800px;
-  width:800px;
-   padding-left: 200px;
+  height: 1500px;
+  width:1500px;
+  padding-left: 200px;
 }
 
 .bar-chart{
@@ -245,7 +247,7 @@ select{
 }*/
 
 .homepage-first{
-  background-image: url("http://worldmapmusic.com/wp-content/uploads/2012/12/blue-dots_00240720.jpg");
+  background-image: url("../../../assets/map.jpg");
   height: 800px;
   background-attachment: fixed;
   background-position: center;
@@ -258,6 +260,7 @@ select{
   font-size: 80px;
   color:white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family:'Glegoo', serif;
 }
 
 .homepage-info{
@@ -299,10 +302,12 @@ select{
 
 .about-title{
   color: white;
-  /*border: 3px solid white;*/
+  border: 3px solid white;
   width: 300px;
-  padding-top: 200px;
   text-align: center;
+  position: relative;
+  top: 300px;
+  left: 600px;
 }
 
 
