@@ -15,7 +15,7 @@ class App extends Component {
       isModalOpen: false,
       isModalGraphOpen: false,
       currentView: ''
-    }
+    };
   }
 
   componentWillMount() {
@@ -24,8 +24,8 @@ class App extends Component {
         .await((error, us) => {
             this.setState({
                 usTopoJson: us
-            })
-        })
+            });
+        });
   }
 
   setCurrentView = (area) => {
