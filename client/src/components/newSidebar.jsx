@@ -48,7 +48,7 @@ class NewSideBar extends React.Component {
               <a onClick={() => this.openModalGraph()}>Graphs</a>
               <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
                     <div className="graphTitle"><h3>Graphs</h3></div>
-                    <ChartsContainer currentView={this.props.currentView}/>
+                    <ChartsContainer currentView={this.props.currentView} stateData={this.props.stateData}/>
                     <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
                 </Modal>
             </div>

@@ -29,16 +29,26 @@ class App extends Component {
         })
   }
 
+  retrieveStateData(state){
+        retrieveData(`http://localhost:8080/api/states/${state}/crime`)
+        .then(crimes => {
+            this.setState({
+                stateData: crimes
+            })
+        })
+    }
+
   setCurrentView = (area) => {
     this.setState({
         currentView: area
     })
+    this.retrieveStateData(area)
   }
 
   render() {
     return (
          <div className="bigContainer">
-         <NewSidebar currentView={this.state.currentView}/>
+         <NewSidebar currentView={this.state.currentView} stateData={this.state.stateData}/>
             <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
                 <svg width='1000' height='800'>
