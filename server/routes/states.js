@@ -67,36 +67,4 @@ router.get('/:state/crime/type/:type/:year', (req, res) => {
     })
 })
 
-router.get('/:state/total-crime/year/:year', (req, res) => {
-    let {state, year} = req.params;
-    Crime.sum('murder_and_manslaughter', {where: {state,year}})
-    .then(totalMurder => {
-        console.log(totalMurder)
-        Crime.sum('rape', {where: {state,year}})
-        .then(totalRape=>{
-            Crime.sum('robbery', {where: {state,year}})
-            .then(totalRobbery=>{
-                Crime.sum('aggravated_assault', {where: {state,year}})
-                .then(totalAggravatedAssault=>{
-                    Crime.sum('burglary', {where: {state,year}})
-                    .then(totalBurglary=>{
-                        Crime.sum('larceny_theft', {where: {state,year}})
-                        .then(totalTheft=>{
-                            Crime.sum('motor_vehicle_theft', {where: {state,year}})
-                            .then(totalMotorTheft=>{
-                                Crime.sum('arson', {where: {state,year}})
-                                    .then(totalArson=>{
-                                        res.json({murder:totalMurder,rape:totalRape,robbery:totalRobbery,aggravatedAssault:totalAggravatedAssault,burglary:totalBurglary,theft:totalTheft,motorVehicleTheft:totalMotorTheft,arson:totalArson})
-                                    })
-                            })
-                        })
-                    })
-                })
-            })
-        })
-    })
-
-
-})
-
 module.exports = router;

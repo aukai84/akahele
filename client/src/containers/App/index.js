@@ -3,7 +3,6 @@ import * as d3 from 'd3';
 import './index.css';
 import {retrieveData} from '../../lib/modules/modules.js';
 import ChartsContainer from '../../containers/Charts';
-import Sidebar from '../../components/Sidebar.jsx';
 import UsMap from '../../components/chart-components/d3-us-map.js';
 import StatesMap from '../../components/us-map-click.js';
 import NewSidebar from '../../components/newSidebar.jsx';
@@ -46,11 +45,15 @@ class App extends Component {
   }
 
   render() {
+
+  console.log('app state ', this.state)
+
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} stateData={this.state.stateData}/>
             <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
+                <h2>{this.state.currentView}</h2>
                 <svg width='1000' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
                 </svg>

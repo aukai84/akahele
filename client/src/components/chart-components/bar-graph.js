@@ -36,8 +36,6 @@ class SimpleBarGraph extends Component {
     }
 
     render(){
-        console.log('bar props ', this.state.barGraphData)
-        console.log('earlier props ', this.props)
         return (
 
             <BarChart className="bar-chart" width={600} height={300} data={this.state.barGraphData} margin={{top: 5, right: 5, left: 5, bottom: 5}}>
