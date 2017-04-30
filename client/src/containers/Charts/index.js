@@ -21,13 +21,14 @@ class ChartsContainer extends Component {
         }
     }
 
-    mapBarData = () => {
+    mapBarData = (year) => {
+        console.log('current year', year)
         this.setState({
             barGraphData: this.props.stateData
-                .filter(crime => (crime.year === this.state.currentYear))
+                .filter(crime => (crime.year === parseInt(year)))
                 .reduce((a, b) => {
                     return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
-                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: this.state.currentYear})
+                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year})
         })
     }
 
@@ -99,18 +100,23 @@ class ChartsContainer extends Component {
     yearChange = (event) => {
         console.log(event.target.value)
         this.setState({
-            currentYear: event.target.value
+            currentYear: event.target.value,
+            barGraphData: this.props.stateData
+                .filter(crime => (crime.year === parseInt(event.target.value)))
+                .reduce((a, b) => {
+                    return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
+                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: event.target.value})
         })
-        this.mapBarData();
         // this.retrieveBarData(this.props.currentView, this.state.currentYear);
 
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         // this.retrieveBarData(this.props.currentView, this.state.currentYear);
         this.retrieveMultiData(this.props.currentView, this.state.currentYear);
-        this.mapBarData();
+        this.mapBarData(this.state.currentYear);
     }
+
 
     getGraphs(){
         if(this.state.graphType === 'line'){
