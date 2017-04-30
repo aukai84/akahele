@@ -15,7 +15,7 @@ class NewSideBar extends React.Component {
 
     }
   }
- 
+
 
   openModal() {
       this.setState({ isModalOpen: true })
@@ -41,7 +41,7 @@ class NewSideBar extends React.Component {
     }
 
   render () {
-    console.log('this is the menu', Menu);
+    console.log('this is the menu', this.props.currentView);
     return (
       <Menu>
        <div className="sidebarTitle"><p>Menu</p></div>
@@ -51,7 +51,7 @@ class NewSideBar extends React.Component {
               <a onClick={() => this.openModalGraph()}>Graphs</a>
               <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
                     <div className="graphTitle"><h3>Graphs</h3></div>
-                    <ChartsContainer/>
+                    <ChartsContainer currentView={this.props.currentView}/>
                     <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
                 </Modal>
             </div>

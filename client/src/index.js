@@ -19,7 +19,7 @@ ReactDOM.render(
   <div className="nav-div">
       <ul>
             <li ><Link to="/">Home</Link></li>
-            <li ><Link to="/nation">Map</Link></li>
+            <li ><Link to="/nation">Map </Link></li>
             <li ><Link to="/chart">Chart</Link></li>
 
         </ul>
