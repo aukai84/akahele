@@ -12,7 +12,11 @@ body {
   background-color: #fff;
 }
 
+.nav-div{
 
+  padding-left: 980px;
+
+}
 
 .bigContainer{
   display:flex;
@@ -20,7 +24,7 @@ body {
 }
 .main-container{
   height: 800px;
-  width:600px;
+  width:800px;
    padding-left: 200px;
 }
 
@@ -75,6 +79,16 @@ a:hover{
 
 }
 
+.backdropGraph{
+    position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 9998;
+      background: rgba(0, 0, 0, 0.3);
+
+}
 
 .backdropStyle{
     position: absolute;
@@ -88,41 +102,17 @@ a:hover{
 
 }
 
-.backdropGraph{
-    position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0px;
-      left: 0px;
-      z-index: 9998;
-      background: rgba(0, 0, 0, 0.3);
-
-
+.cityComparison{
+  padding: 10px;
+  color: white;
 }
+
 .graphImg{
   width: 30px;
   height: 30px;
 }
 
-.streetImg{
-  width: 30px;
-  height: 30px;
-
-}
-.stateImg{
-  width: 30px;
-  height: 30px;
-
-}
 .graphView{
-  padding: 10px;
-  color: white;
-}
-.stateComparison{
-  padding: 10px;
-  color:white;
-}
-.cityComparison{
   padding: 10px;
   color: white;
 }
@@ -131,6 +121,22 @@ a:hover{
   padding-top: 15px;
   padding-left: 370px;
 }
+.stateImg{
+  width: 30px;
+  height: 30px;
+
+}
+
+.stateComparison{
+  padding: 10px;
+  color:white;
+}
+.streetImg{
+  width: 30px;
+  height: 30px;
+
+}
+
 
 
 select{
@@ -140,11 +146,6 @@ select{
   border-radius: 4px;
   background-color: #f1f1f1;
 }
-
-.mockImg{
-  padding-left: 350px;
-}
-
 
 
 
@@ -160,10 +161,7 @@ select{
 
   }
 
-  .mockImg{
-    width: 250px;
-    height: 250px;
-  }
+
 
 
   .crimes{
@@ -230,6 +228,107 @@ select{
   font-size: 50px;
   width: 100%;
 }
+
+/* HOMEPAGE CSS */
+
+/*.homepage{
+  background-image: url("../../../assets/beach.jpg");
+  background-repeat: no-repeat;
+  width: 1400px;
+  height: 900px;
+  opacity: 0.8;
+  /*position: relative;*/
+/*  display: flex;
+  flex-flow: row wrap;
+ 
+
+}*/
+
+.homepage-first{
+  background-image: url("http://worldmapmusic.com/wp-content/uploads/2012/12/blue-dots_00240720.jpg");
+  height: 800px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.homepage-title{
+  margin-left: 560px;
+ padding-top: 300px;
+  font-size: 80px;
+  color:white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.homepage-info{
+  height: 700px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display:flex;
+  flex-flow: row wrap;
+
+}
+.info-detail{
+  padding-top: 90px;
+  padding-left: 20px; 
+  padding-right: 20px;
+  width: 49%;
+}
+
+.info-picture{
+  padding-top: 80px;
+  /*width: 48%;*/
+}
+
+.securityImg{
+  height: 400px;
+  width: 500px;
+  padding-left: 15px;
+}
+
+.homepage-about{
+  background-image: url("../../../assets/Mountains.jpg");
+  height: 800px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about-title{
+  color: white;
+  /*border: 3px solid white;*/
+  width: 300px;
+  padding-top: 200px;
+  text-align: center;
+}
+
+
+
+
+ul li{
+  list-style-type: none;
+  display: inline-block;
+  font-size: 35px;
+}
+
+a:link{
+  text-decoration: none;
+
+}
+a:visited {
+    color: black;
+}
+
+
+
+
+
+
+/* SIDEBAR CSS */
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;

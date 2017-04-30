@@ -3,6 +3,8 @@ import { slide as Menu } from 'react-burger-menu';
 import Modal from './Modal.jsx';
 import ChartsContainer from '../containers/Charts';
 
+
+
 class NewSideBar extends React.Component {
   constructor(props){
     super(props);
@@ -43,6 +45,7 @@ class NewSideBar extends React.Component {
     return (
       <Menu>
        <div className="sidebarTitle"><p>Menu</p></div>
+      
           <div className="graphView">
               <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
               <a onClick={() => this.openModalGraph()}>Graphs</a>
