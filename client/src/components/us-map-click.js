@@ -41,9 +41,6 @@ class StatesMap extends Component {
         }
     }
 
-    displayState(feature){
-        this.props.setCurrentView(feature.properties.name)
-    }
 
     render(){
         if(!this.props.usTopoJson){
@@ -56,7 +53,7 @@ class StatesMap extends Component {
                 return (
                     <g>
                         {
-                            states.map(feature => (<g onClick={() => {this.displayState(feature)}}><State
+                            states.map(feature => (<g onClick={() => {this.props.setCurrentView(feature.properties.name)}}><State
                                     geoPath={this.geoPath}
                                     feature={feature}
                                     key={feature.id}
@@ -74,3 +71,4 @@ class StatesMap extends Component {
 }
 
 export default StatesMap;
+

@@ -36,8 +36,6 @@ class App extends Component {
   }
 
   render() {
-  console.log('app state ', this.state)
-  // console.log(this.props.graphType);
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView}/>
