@@ -8,6 +8,9 @@ import SimpleBarGraph from '../../components/chart-components/bar-graph.js';
 import MultiBarGraph from '../../components/chart-components/multi-bar-graph.js';
 import {retrieveData} from '../../lib/modules/modules.js';
 import Slider, {Range} from 'rc-slider';
+
+let yearArray = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015];
+
 class ChartsContainer extends Component {
     constructor(props){
         super(props);
@@ -39,6 +42,24 @@ class ChartsContainer extends Component {
         })
     }
 
+    mapLineData = (array) => {
+        let tempArray = [];
+        for(let i = 0; i < array.length; i++){
+            console.log(array[i])
+            tempArray.push(
+                this.props.stateData
+                    .filter(crime => (crime.year === array[i]))
+                    .reduce((a, b) => {
+                        return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: array[i]}
+                    }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: array[i]})
+            )
+        }
+        console.log('temp array ', tempArray)
+        this.setState({
+            lineGraphData: tempArray
+        })
+    }
+
    setGraph = (event) => {
         this.setState({
             graphType: event.target.value
@@ -60,6 +81,7 @@ class ChartsContainer extends Component {
     componentDidMount = () => {
         this.mapBarData(this.state.currentYear);
         this.mapMultiData(this.state.currentYear);
+        this.mapLineData(yearArray);
     }
 
     getGraphs(){

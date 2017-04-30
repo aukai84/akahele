@@ -25,7 +25,6 @@ class MultiBarGraph extends Component {
     }
 
     render(){
-        console.log('chart state ', this.state)
         return(
             <div>
                  <select onChange={this.crimeChange}>
