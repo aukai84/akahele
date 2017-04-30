@@ -23,8 +23,8 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/crimes', crimes);
-app.use('/cities', cities);
-app.use('/states', states);
+app.use('/api/crimes', crimes);
+app.use('/api/cities', cities);
+app.use('/api/states', states);
 
 module.exports = app;

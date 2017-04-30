@@ -52,6 +52,7 @@ class StatesMap extends Component {
         }
     }
 
+
     displayState(feature){
 
         this.props.setCurrentView(feature.properties.name)
@@ -119,3 +120,4 @@ class StatesMap extends Component {
 }
 
 export default StatesMap;
+

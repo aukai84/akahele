@@ -16,12 +16,13 @@ class ChartsContainer extends Component {
             lineGraphData: [],
             multiBarData: [],
             graphType: 'bar',
-            currentView: ''
+            currentView: '',
+            currentYear: ''
         }
     }
 
-    retrieveStateData(area, year){
-        retrieveData(`http://localhost:8080/states/${area}/crime/year/${year}`)
+    retrieveBarData(area, year){
+        retrieveData(`http://localhost:8080/api/states/${area}/crime/year/${year}`)
         .then(data => {
             this.setState({
                 stateData: data
@@ -29,34 +30,57 @@ class ChartsContainer extends Component {
         })
     }
 
-    retrieveHonoluluData(area){
-        console.log('area ', area)
-        retrieveData(`http://localhost:8080/states/${area}/crime/year/2014`)
-        .then(data => {
-            console.log('area data ', data)
+    retrieveLineData(area, year){
+        retrieveData(`http://localhost:8080/api/states/${area}/total-crime/year/${year}`)
+        .then(totalCrime => {
+            console.log('this is the total crime ', totalCrime)
             this.setState({
                 barGraphData: [
-                {name: "murder", amount: data.murder_and_manslaughter},
-                {name: "rape", amount: data.rape},
-                {name: "theft", amount: data.larceny_theft}
-            ]
-            })
-        })
-
-        retrieveData(`http://localhost:8080/states/${area}/crime`)
-        .then(data => {
-            this.setState({
-                lineGraphData: data
-            })
-        })
-
-        retrieveData(`http://localhost:8080/states/${area}/crime/year/2010`)
-        .then(data => {
-            this.setState({
-                multiBarData: data
+                  {name: "murder", total: totalCrime.murder},
+                  {name: 'rape', total: totalCrime.rape},
+                  {name: 'robbery', total: totalCrime.robbery},
+                  {name: 'aggravated assault', total: totalCrime.aggravatedAssault},
+                  {name: 'burglary', total: totalCrime.burglary},
+                  {name: 'theft/larceny', total: totalCrime.theft},
+                  {name: 'motor vehicle theft', total: totalCrime.motorVehicleTheft},
+                  {name: 'arson', total: totalCrime.arson}
+                ]
             })
         })
     }
+
+    retrieveMultiData(area, year){
+
+    }
+
+    // retrieveHonoluluData(area){
+    //     console.log('area ', area)
+    //     retrieveData(`http://localhost:8080/states/${area}/crime/year/2014`)
+    //     .then(data => {
+    //         console.log('area data ', data)
+    //         this.setState({
+    //             barGraphData: [
+    //             {name: "murder", amount: data.murder_and_manslaughter},
+    //             {name: "rape", amount: data.rape},
+    //             {name: "theft", amount: data.larceny_theft}
+    //         ]
+    //         })
+    //     })
+
+    //     retrieveData(`http://localhost:8080/states/${area}/crime`)
+    //     .then(data => {
+    //         this.setState({
+    //             lineGraphData: data
+    //         })
+    //     })
+
+    //     retrieveData(`http://localhost:8080/states/${area}/crime/year/2010`)
+    //     .then(data => {
+    //         this.setState({
+    //             multiBarData: data
+    //         })
+    //     })
+    // }
 
    setGraph = (event) => {
         this.setState({
@@ -67,8 +91,7 @@ class ChartsContainer extends Component {
     }
 
     componentWillMount = () => {
-        this.retrieveHonoluluData(this.props.currentView);
-        this.retrieveStateData(this.props.currentView, 2014)
+        this.retrieveLineData(this.props.currentView, 2014)
     }
 
     getGraphs(){
