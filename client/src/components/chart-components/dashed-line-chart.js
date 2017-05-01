@@ -8,10 +8,7 @@ class SimpleLineChart extends Component {
         super(props);
     }
 
-
-
     render () {
-        console.log(this.props)
     return (
         <LineChart className="line-chart" width={600} height={300} data={this.props.lineGraphData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>

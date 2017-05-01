@@ -27,7 +27,7 @@ class ChartsContainer extends Component {
     mapBarData = (year) => {
         console.log('current year', year)
         this.setState({
-            barGraphData: this.props.stateData
+            barGraphData: this.props.currentData
                 .filter(crime => (crime.year === parseInt(year)))
                 .reduce((a, b) => {
                     return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
@@ -37,7 +37,7 @@ class ChartsContainer extends Component {
 
     mapMultiData = (year) => {
         this.setState({
-            multiBarData: this.props.stateData
+            multiBarData: this.props.currentData
                 .filter(crime => (crime.year === parseInt(year)))
         })
     }
@@ -47,7 +47,7 @@ class ChartsContainer extends Component {
         for(let i = 0; i < array.length; i++){
             console.log(array[i])
             tempArray.push(
-                this.props.stateData
+                this.props.currentData
                     .filter(crime => (crime.year === array[i]))
                     .reduce((a, b) => {
                         return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: array[i]}
@@ -135,7 +135,6 @@ class ChartsContainer extends Component {
 
     render(){
         return this.getGraphs();
-
     }
 
 }

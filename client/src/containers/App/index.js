@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       isModalOpen: false,
       isModalGraphOpen: false,
-      currentView: ''
+      currentView: 'Nation'
     }
   }
 
@@ -28,11 +28,26 @@ class App extends Component {
         })
   }
 
-  retrieveStateData(state){
+  componentDidMount() {
+    this.retrieveNationData();
+
+  }
+
+  retrieveNationData(){
+    retrieveData('http://localhost:8080/api/crimes')
+    .then(crimes => {
+        console.log('naation crimes...', crimes)
+        this.setState({
+            currentData: crimes
+        })
+    })
+  }
+
+  retrieveCurrentData(state){
         retrieveData(`http://localhost:8080/api/states/${state}/crime`)
         .then(crimes => {
             this.setState({
-                stateData: crimes
+                currenteData: crimes
             })
         })
     }
@@ -41,16 +56,14 @@ class App extends Component {
     this.setState({
         currentView: area
     })
-    this.retrieveStateData(area)
+    this.retrieveCurrentData(area)
   }
 
   render() {
-
-  console.log('app state ', this.state)
-
+    console.log('nation data ', this.state.currentData)
     return (
          <div className="bigContainer">
-         <NewSidebar currentView={this.state.currentView} stateData={this.state.stateData}/>
+         <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
                 <h2>{this.state.currentView}</h2>
