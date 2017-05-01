@@ -11,6 +11,7 @@ app.use(cors());
 
 app.post('/user/cache', (req, res) => {
   console.log(req.body);
+  // sequelize to POST update
   res.end();
 });
 
