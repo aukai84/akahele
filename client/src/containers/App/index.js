@@ -51,7 +51,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('data after click ', this.state.currentData)
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
