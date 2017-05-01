@@ -14,7 +14,8 @@ class App extends Component {
     this.state = {
       isModalOpen: false,
       isModalGraphOpen: false,
-      currentView: 'Nation'
+      currentView: 'Nation',
+      currentData: ''
     }
   }
 
@@ -26,17 +27,13 @@ class App extends Component {
                 usTopoJson: us
             })
         })
-  }
-
-  componentDidMount() {
     this.retrieveNationData();
 
   }
 
-  retrieveNationData(){
+  retrieveNationData = () => {
     retrieveData('http://localhost:8080/api/crimes')
     .then(crimes => {
-        console.log('naation crimes...', crimes)
         this.setState({
             currentData: crimes
         })
@@ -46,6 +43,7 @@ class App extends Component {
   retrieveCurrentData(state){
         retrieveData(`http://localhost:8080/api/states/${state}/crime`)
         .then(crimes => {
+            console.log('currdataaaaa ', crimes)
             this.setState({
                 currenteData: crimes
             })
@@ -60,7 +58,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('nation data ', this.state.currentData)
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
