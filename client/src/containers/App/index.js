@@ -15,7 +15,7 @@ class App extends Component {
       isModalOpen: false,
       isModalGraphOpen: false,
       currentView: 'Nation',
-      currentData: ''
+      currentData: []
     }
   }
 
@@ -31,7 +31,7 @@ class App extends Component {
 
   }
 
-  retrieveNationData = () => {
+  retrieveNationData(){
     retrieveData('http://localhost:8080/api/crimes')
     .then(crimes => {
         this.setState({
@@ -40,24 +40,18 @@ class App extends Component {
     })
   }
 
-  retrieveCurrentData(state){
-        retrieveData(`http://localhost:8080/api/states/${state}/crime`)
+  setCurrentView = (area) => {
+    retrieveData(`http://localhost:8080/api/states/${area}/crime`)
         .then(crimes => {
-            console.log('currdataaaaa ', crimes)
             this.setState({
-                currenteData: crimes
+                currentView: area,
+                currentData: crimes
             })
         })
-    }
-
-  setCurrentView = (area) => {
-    this.setState({
-        currentView: area
-    })
-    this.retrieveCurrentData(area)
   }
 
   render() {
+    console.log('data after click ', this.state.currentData)
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
