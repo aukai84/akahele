@@ -41,7 +41,6 @@ class NewSideBar extends React.Component {
     }
 
   render () {
-    console.log('this is the menu', this.props.currentView);
     return (
       <Menu>
        <div className="sidebarTitle"><p>Menu</p></div>
