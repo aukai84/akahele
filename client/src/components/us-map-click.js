@@ -7,11 +7,16 @@ let usTopoJson = require('./d3-maps/usa/us.json');
 
 let data = require('./d3-maps/states.json');
 
+var path = d3.geoPath;
+console.log(path)
+
 const State = ({data, geoPath, feature, quantize}) => {
     let color = 'cornflowerblue';
 
     if(data){
-        color = 'grey';
+
+        color = 'silver';
+
     }
     return (<path d={geoPath(feature)} style={{fill: color}} title={feature.id} />)
 }
@@ -28,10 +33,10 @@ class StatesMap extends Component {
         this.geoPath = d3.geoPath()
             .projection(this.projection);
         this.quantize = d3.scaleQuantize()
-            .range(d3.range(9));
+            .range(d3.range(4));
         this.updateD3(props);
         this.zoom = d3.zoom()
-            .scaleExtent([-Infinity, Infinity])
+            .scaleExtent([.5, 10])
             .on('zoom', this.onZoom.bind(this));
     }
 
@@ -78,6 +83,7 @@ class StatesMap extends Component {
       console.log('transform')
       if(this.state.transform){
         const { x, y, k } = this.state.transform;
+
         return `translate(${x}, ${y}) scale(${k})`;
       }else{
         return null;
@@ -94,6 +100,7 @@ class StatesMap extends Component {
 
         return (
             <g>
+              <svg width={this.width} height={this.height} ref="svg">
               {
                 states.map(feature => (<g transform={this.transform} onClick={() => {this.displayState(feature)}}>
                   <State
@@ -105,8 +112,9 @@ class StatesMap extends Component {
                   /></g>)
                 )
               }
-            <path d={this.geoPath(statesMesh)} style={{fill: 'none', stroke: '#fff', strokeLinejoin: 'round'}}/>
-            </g>
+            <path d={this.geoPath(statesMesh)} transform={this.transform} style={{fill: 'none', stroke: '#fff', strokeLinejoin: 'round'}}/>
+          </svg>
+          </g>
         )
       }
     }

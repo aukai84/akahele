@@ -1,3 +1,8 @@
-path:hover {
+
+path d:hover {
   color: orange;
+}
+
+ChartsContainer {
+  color: black;
 }

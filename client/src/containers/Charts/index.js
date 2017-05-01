@@ -61,6 +61,35 @@ class ChartsContainer extends Component {
         })
     }
 
+    // retrieveHonoluluData(area){
+    //     console.log('area ', area)
+    //     retrieveData(`http://localhost:8080/states/${area}/crime/year/2014`)
+    //     .then(data => {
+    //         console.log('area data ', data)
+    //         this.setState({
+    //             barGraphData: [
+    //             {name: "murder", amount: data.murder_and_manslaughter},
+    //             {name: "rape", amount: data.rape},
+    //             {name: "theft", amount: data.larceny_theft}
+    //         ]
+    //         })
+    //     })
+
+    //     retrieveData(`http://localhost:8080/states/${area}/crime`)
+    //     .then(data => {
+    //         this.setState({
+    //             lineGraphData: data
+    //         })
+    //     })
+
+    //     retrieveData(`http://localhost:8080/states/${area}/crime/year/2010`)
+    //     .then(data => {
+    //         this.setState({
+    //             multiBarData: data
+    //         })
+    //     })
+    // }
+
    setGraph = (event) => {
         this.setState({
             graphType: event.target.value
