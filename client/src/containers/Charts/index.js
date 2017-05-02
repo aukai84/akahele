@@ -26,12 +26,10 @@ class ChartsContainer extends Component {
     }
 
     mapBarData = (year) => {
-        console.log('current year', year)
         this.setState({
             barGraphData: this.state.currentData
                 .filter(crime => (crime.year === parseInt(year)))
                 .reduce((a, b) => {
-                    console.log('next item ', b.state)
                     return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
                 }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year})
         })
@@ -47,7 +45,6 @@ class ChartsContainer extends Component {
     mapLineData = (array) => {
         let tempArray = [];
         for(let i = 0; i < array.length; i++){
-            console.log(array[i])
             tempArray.push(
                 this.state.currentData
                     .filter(crime => (crime.year === array[i]))
@@ -56,7 +53,6 @@ class ChartsContainer extends Component {
                     }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: array[i]})
             )
         }
-        console.log('temp array ', tempArray)
         this.setState({
             lineGraphData: tempArray
         })
