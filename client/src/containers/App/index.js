@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   retrieveNationData(){
-    retrieveData('http://localhost:8080/api/crimes')
+    retrieveData('http://localhost:8080/api/nation/all')
     .then(crimes => {
         this.setState({
             currentData: crimes
@@ -52,6 +52,7 @@ class App extends Component {
         })
   }
   render() {
+    console.log(this.state.currentData)
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>

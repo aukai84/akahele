@@ -84,9 +84,9 @@ function parseCsv(filePath, year) {
     })
 }
 
-function reduceNationData(array) {
+function reduceNationData(array, year) {
     let tempArray = [];
-    let tempObj = {year: 2005, state: 'Alabama', population: 0, violent_crime: 0, murder_and_manslaughter: 0, rape: 0, robbery: 0, aggravated_assault: 0, property_crime: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, createdAt: new Date(), updatedAt: new Date()};
+    let tempObj = {year, state: 'Alabama', population: 0, violent_crime: 0, murder_and_manslaughter: 0, rape: 0, robbery: 0, aggravated_assault: 0, property_crime: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, createdAt: new Date(), updatedAt: new Date()};
     for(let i = 0; i < array.length; i++){    // console.log(array[i])
         if(array[i].State === tempObj.state){
             tempObj.population += array[i].population;
@@ -101,7 +101,7 @@ function reduceNationData(array) {
             tempObj.arson += array[i].arson;
         } else if(array[i].State !== tempObj.state){
             tempArray.push(tempObj);
-            tempObj = {year: 2005, state: array[i].State , population: 0, violent_crime: 0, murder_and_manslaughter: 0, rape: 0, robbery: 0, aggravated_assault: 0, property_crime: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, createdAt: new Date(), updatedAt: new Date()};
+            tempObj = {year, state: array[i].State , population: 0, violent_crime: 0, murder_and_manslaughter: 0, rape: 0, robbery: 0, aggravated_assault: 0, property_crime: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, createdAt: new Date(), updatedAt: new Date()};
         }
     }
     return tempArray;

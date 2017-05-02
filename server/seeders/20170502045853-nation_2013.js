@@ -4,10 +4,10 @@ let array = require('../lib/data/json/YEAR_2013');
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('NationCrimes', reduceNationData(array));
+    return queryInterface.bulkInsert('NationCrimes', reduceNationData(array, 2013));
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('NationCrimes', reduceNationData(array));
+    return queryInterface.bulkDelete('NationCrimes', reduceNationData(array, 2013));
   }
 };

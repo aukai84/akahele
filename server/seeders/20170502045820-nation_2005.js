@@ -5,10 +5,10 @@ console.log(reduceNationData(array))
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('NationCrimes', reduceNationData(array))
+    return queryInterface.bulkInsert('NationCrimes', reduceNationData(array, 2005))
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('NationCrimes', reduceNationData(array))
+    return queryInterface.bulkDelete('NationCrimes', reduceNationData(array, 2005))
   }
 };
