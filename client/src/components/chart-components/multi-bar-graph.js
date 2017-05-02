@@ -24,6 +24,22 @@ class MultiBarGraph extends Component {
         })
     }
 
+    setDataKey(){
+        if(this.props.currentView === 'Nation'){
+            this.setState({
+                key: 'state'
+            })
+        } else {
+            this.setState({
+                key: 'city'
+            })
+        }
+    }
+
+    componentWillMount() {
+        this.setDataKey();
+    }
+
     render(){
         return(
             <div>
@@ -38,13 +54,13 @@ class MultiBarGraph extends Component {
                         <option value='arson'>arson</option>
                 </select>
                 <BarChart className="multi-bar-graph" width={800} height={400} data={this.props.multiBarData} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                    <XAxis dataKey='city' />
+                    <XAxis dataKey={this.state.key} />
                     <YAxis/>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip/>
                     <Legend verticalAlign="top" wraperStyle={{lineHeight: '40px'}} />
                     <ReferenceLine y={0} stroke="#000" />
-                    <Brush dataKey="city" height={30} stroke="#8884d8"/>
+                    <Brush dataKey={this.state.key} height={30} stroke="#8884d8"/>
                     <Bar dataKey={this.state.dataKey} name={this.state.crimeName} fill="blue"/>
                 </BarChart>
             </div>
