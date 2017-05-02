@@ -128,14 +128,16 @@ export default class GoogleMaps extends Component {
   cacheData(data){
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', _ => {
-      console.log(xhr.responseText);
-
+      if(xhr.responseText === 'Traffic incident already exists'){
+        console.log('DO SOMETHING TO SKIP GEOCODER');
+      }else if(xhr.responseText === 'Traffic incident does not exist'){
+        console.log('RUN GEOCODER');
+      }
     });
     xhr.open('POST', 'http://localhost:4000/user/cache');
-    //xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
     // check if datapoint is already stored before caching here
     xhr.send(JSON.stringify(data));
-    console.log('Data cached');
   }
 
 /*  checkData(){
@@ -171,14 +173,6 @@ export default class GoogleMaps extends Component {
         }
       }, (results, status) => {
         if (status === 'OK'){
-          this.cacheData({
-            trafficId,
-            trafficAddress,
-            trafficDate,
-            trafficType,
-            latitude: results[0].geometry.location.lat(),
-            longitude: results[0].geometry.location.lng()
-          })
           let marker = new maps.Marker({
             map,
             position: results[0].geometry.location
@@ -195,6 +189,15 @@ export default class GoogleMaps extends Component {
             infoWindow.open(map, marker);
             prevInfoWindow = infoWindow;
           });
+          this.cacheData({
+            trafficId,
+            trafficAddress,
+            trafficDate,
+            trafficType,
+            latitude: results[0].geometry.location.lat(),
+            longitude: results[0].geometry.location.lng()
+          });
+          console.log('Data cached');
           i++;
         }else if (status === 'OVER_QUERY_LIMIT'){
           console.log('Geocoding', trafficAddress, 'failed due to', status);

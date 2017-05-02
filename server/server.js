@@ -36,16 +36,17 @@ app.use('/api/states', states);
 
 // check route to send HPD geocoded addresses to PSQL
 app.post('/user/cache', (req, res) => {
-  console.log(req.body);
   geocodedtraffic.findOne({
     where: {
       trafficId: req.body.trafficId
     }
   })
   .then(trafficIncident => {
+    console.log('DIS', trafficIncident );
     if(trafficIncident){
       res.send('Traffic incident already exists');
     }else{
+      console.log('DAT BODY: ', req.body);
       geocodedtraffic.create(req.body);
       res.send('Traffic incident does not exist');
     }
@@ -55,11 +56,19 @@ app.post('/user/cache', (req, res) => {
 app.get('/user/cache/:id', (req, res) => {
   geocodedtraffic.findOne({
     where: {
-      trafficId: req.params.id
+      trafficId: req.body.trafficId
     }
   })
-  .then(traffic => {
-    res.json(traffic);
+  .then(trafficIncident => {
+    console.log('DIS', trafficIncident );
+    if(trafficIncident){
+      res.send('Traffic incident already exists');
+      res.json(trafficIncident);
+    }else{
+      console.log('DAT BODY: ', req.body);
+      geocodedtraffic.create(req.body);
+      res.send('Traffic incident does not exist');
+    }
   });
 });
 
