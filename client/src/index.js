@@ -4,7 +4,7 @@ import App from './containers/App';
 import HomePage from './containers/HomePage';
 import Chart from './containers/Charts';
 
-import './index.css';
+// import '../scss/index.scss';
 
 import {
 	BrowserRouter as Router,

@@ -13,6 +13,7 @@ class HomePage extends Component{
 
 					<div className="homepage-first">
 						<div className="homepage-title">Akahele</div>
+						<div className="homepage-slogan">Wherever life may take you, travel there safely</div>
 					</div>
 
 					<div className="homepage-info">
