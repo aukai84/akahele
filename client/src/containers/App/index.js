@@ -27,8 +27,10 @@ class App extends Component {
                 usTopoJson: us
             })
         })
-    this.retrieveNationData();
+  }
 
+  componentDidMount() {
+    this.retrieveNationData();
   }
 
   retrieveNationData(){
@@ -56,7 +58,7 @@ class App extends Component {
             <div className="main-container">
                 <h2>TESTING REACT-D3-LIBRARY</h2>
                 <h2>{this.state.currentView}</h2>
-                <svg width='1000' height='800'>
+                <svg width='1280' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
                 </svg>
             <GoogleMaps/>

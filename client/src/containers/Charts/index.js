@@ -31,6 +31,7 @@ class ChartsContainer extends Component {
             barGraphData: this.state.currentData
                 .filter(crime => (crime.year === parseInt(year)))
                 .reduce((a, b) => {
+                    console.log('next item ', b.state)
                     return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
                 }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year})
         })
@@ -159,9 +160,10 @@ class ChartsContainer extends Component {
                     <h2>{this.props.currentView}</h2>
                     <MultiBarGraph multiBarData={this.state.multiBarData}/>
                     <div className="radioBtn">
-                    <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
-                    <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
-                    <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                    <input id="line"  type="radio" value="line" name="graph" onChange={this.setGraph}/> <label htmlFor="line">line</label>
+                    <input id="line 2"  type="radio" value="bar" name="graph" onChange={this.setGraph}/> <label htmlFor="line 2">bar</label>
+                    <input id="line 3"  type="radio" value="multiBar" name="graph" onChange={this.setGraph}/><label >multi bar</label>
+
                     </div>
                 </div>
             )
