@@ -32,19 +32,21 @@ class LocationOneSearch extends Component {
 
     renderSuggestion = suggestion => (<div>{suggestion.name}</div>);
 
-    onChange = (event, {newValue}) => {
+    onChange = (event, {newValue, }) => {
         this.setState({
             value: newValue
         })
     }
 
     requestLocationOne(){
-        console.log(this.state.value)
+        console.log("this is the state ", this.state.value)
     }
 
     onEnter = (event, data) => {
-        console.log(event.target.value)
-        this.requestLocationOne();
+        console.log(event.key)
+        if(event.key === 'Enter'){
+            this.requestLocationOne();
+        }
     }
 
     onSuggestionsFetchRequested = ({value}) => {
@@ -59,7 +61,7 @@ class LocationOneSearch extends Component {
     }
 
     componentWillMount = () => {
-        this.retrieveLocationNames("states");
+        this.retrieveLocationNames(this.props.locationType);
     }
 
     render(){
