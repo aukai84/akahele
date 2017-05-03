@@ -13,10 +13,11 @@ class HomePage extends Component{
 
 					<div className="homepage-first">
 						<div className="homepage-title">Akahele</div>
+						<div className="homepage-slogan">Wherever life may take you, travel there safely</div>
 					</div>
 
 					<div className="homepage-info">
-						<div className="info-picture"><img src="http://lerablog.org/wp-content/uploads/2013/04/travel-safe.jpg" className="securityImg" alt="security"/></div>
+						<div className="info-picture"><img src="http://swtalumnimk.com/wp-content/uploads/2014/08/top-10-destination-people-moving.jpg" className="securityImg" alt="security"/></div>
 						<div className="info-detail">
 							About Us
 								<p>To be, or not to be--that is the question:
