@@ -11,7 +11,6 @@ function firstLetterUpperCase(string) {
     words.forEach(word => {
         newWord += word.charAt(0) + word.slice(1).toLowerCase() + ' ';
         })
-
     return newWord.substring(0, newWord.length - 1);
 }
 

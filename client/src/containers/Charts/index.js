@@ -6,7 +6,6 @@ import UsMap from '../../components/chart-components/d3-us-map.js';
 import SimpleLineChart from '../../components/chart-components/dashed-line-chart.js';
 import SimpleBarGraph from '../../components/chart-components/bar-graph.js';
 import MultiBarGraph from '../../components/chart-components/multi-bar-graph.js';
-import {retrieveData} from '../../lib/modules/modules.js';
 import Slider, {Range} from 'rc-slider';
 
 let yearArray = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015];
@@ -139,7 +138,6 @@ class ChartsContainer extends Component {
 
 
     render(){
-        console.log('current view data ', this.state.currentData)
         return this.getGraphs();
     }
 
