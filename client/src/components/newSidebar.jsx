@@ -2,7 +2,7 @@ import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import Modal from './Modal.jsx';
 import ChartsContainer from '../containers/Charts';
-import LocationOneSearch from './state-comparison-search/locationOneSearch.js';
+import LocationOneSearch from './search-bars/locationOneSearch.js';
 
 
 class NewSideBar extends React.Component {

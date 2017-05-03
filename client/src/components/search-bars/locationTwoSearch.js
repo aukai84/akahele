@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
-import {requestHelper} from '../../lib/modules/modules.js';
+import {retrieveData} from '../../lib/modules/modules.js';
 
 class LocationOneSearch extends Component {
     constructor(props){
@@ -12,16 +12,17 @@ class LocationOneSearch extends Component {
         }
     }
 
-    retrieveLocationNames(locationType){
-        requestHelper(`http://localhost8080/api/${locationType}`)
-            .then(suggestions => {
+    retrieveLocationNames = (locationType) => {
+        retrieveData(`http://localhost:8080/api/${locationType}`)
+            .then(locations => {
+                console.log(locations)
                 this.setState({
-                    suggestions
+                    locations
                 })
             })
     }
 
-    getSuggestions(value){
+    getSuggestions = (value) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
         return inputLength === 0 ? [] : this.state.locations.filter(location => location.name.toLowerCase().slice(0, inputLength) === inputValue);
@@ -36,6 +37,7 @@ class LocationOneSearch extends Component {
             value: newValue
         })
     }
+
     onSuggestionsFetchRequested = ({value}) => {
         this.setState({
             suggestions: this.getSuggestions(value)
@@ -47,7 +49,7 @@ class LocationOneSearch extends Component {
         })
     }
 
-    componentWillMount() {
+    componentWillMount = () => {
         this.retrieveLocationNames("states");
     }
 
@@ -58,7 +60,7 @@ class LocationOneSearch extends Component {
             value,
             onChange: this.onChange
         }
-        console.log('serch bar state', this.state)
+        console.log('serch bar state', this.state.value)
         return (
             <Autosuggest
                 suggestions={suggestions}

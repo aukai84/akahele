@@ -16,14 +16,6 @@ class StateComparisonContainer extends Component {
         }
     }
 
-    retrieveSuggestions(){
-        retrieveData('http://localhost:8080/api/states')
-            .then(states => {
-                this.setState({
-                    suggestionStates: states
-                })
-            })
-    }
 
     retrieveLocationOne(){
 
