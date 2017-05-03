@@ -2,7 +2,7 @@ import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import Modal from './Modal.jsx';
 import ChartsContainer from '../containers/Charts';
-
+import LocationOneSearch from './state-comparison-search/locationOneSearch.js';
 
 
 class NewSideBar extends React.Component {
@@ -74,7 +74,7 @@ class NewSideBar extends React.Component {
          <div className="stateComparison">
           <a onClick={() => this.openModalState()}>State Comparison</a>
           <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
-
+            <LocationOneSearch/>
             <p><button className="closeBtn" onClick={() => this.closeModalState()}>Close</button></p>
           </Modal>
         </div>
