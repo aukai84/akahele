@@ -38,13 +38,13 @@ class SimpleBarGraph extends Component {
     render(){
         return (
 
-            <BarChart className="bar-chart" width={600} height={300} data={this.state.barGraphData} margin={{top: 5, right: 5, left: 5, bottom: 5}}>
+            <BarChart className="bar-chart" width={950} height={300} data={this.state.barGraphData} margin={{top: 5, right: 5, left: 5, bottom: 5}}>
                 <XAxis dataKey='name'/>
                <YAxis/>
                <CartesianGrid strokeDasharray="3 3"/>
                <Tooltip/>
-               <Legend />
-               <Bar dataKey="total" fill="#8884d8" />
+              <Legend/> 
+               <Bar dataKey="total" fill="#075953"/>
               </BarChart>
         )
     }

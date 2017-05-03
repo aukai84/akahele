@@ -88,16 +88,6 @@ class NewSideBar extends React.Component {
           </Modal>
         </div>
 
-        <div className="crimes">
-        <p>Filter Nation Map By Crime:</p>
-
-        <select onChange={this.crimeChange} value={this.props.crime}>
-              <option value="all">All</option>
-              <option value="murders">Murders</option>
-              <option value="rape">Rape</option>
-              <option value="theft">Theft</option>
-        </select>
-        </div>
       </Menu>
     );
   }

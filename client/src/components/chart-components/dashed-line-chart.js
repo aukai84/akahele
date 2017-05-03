@@ -10,14 +10,14 @@ class SimpleLineChart extends Component {
 
     render () {
     return (
-        <LineChart className="line-chart" width={600} height={300} data={this.props.lineGraphData}
+        <LineChart className="line-chart" width={700} height={350} data={this.props.lineGraphData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
        <XAxis dataKey="year"/>
        <YAxis/>
        <CartesianGrid strokeDasharray="3 3"/>
        <Tooltip/>
-       <Legend />
-       <Line type="monotone" dataKey="murder_and_manslaughter" name="murder" stroke="#8884d8" strokeDasharray="5 5"/>
+       <Legend/>
+       <Line type="monotone" dataKey="murder_and_manslaughter" name="murder" stroke="#8884d8" strokeDasharray="5 5" />
        <Line type="monotone" dataKey="rape" name="rape" stroke="#82ca9d" strokeDasharray="3 4 5 2"/>
        <Line type="monotone" dataKey="robbery" name="robbery" stroke="#82ca9d" strokeDasharray="3 4 5 2"/>
        <Line type="monotone" dataKey="aggravated_assault" name="aggravated assault" stroke="#82ca9d" strokeDasharray="3 4 5 2"/>

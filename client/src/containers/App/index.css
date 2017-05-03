@@ -62,10 +62,7 @@ body {
 
 a {
   padding-left: 4px;
-  font-size: 15px; }
-
-a:hover {
-  color: green; }
+  font-size: 17px; }
 
 a:visited {
   color: pink; }
@@ -86,21 +83,53 @@ a:visited {
   padding-top: 50px;
   width: 1000px; }
 
+.nation-title {
+  color: #2d726d;
+  font-size: 50px;
+  font-family: 'Glegoo', serif; }
+
+.state-clickon {
+  color: #075953;
+  font-size: 30px;
+  font-family: 'Glegoo', serif; }
+
 .bar-chart {
+  font-size: 15px;
   padding-top: 25px;
   padding-right: 20px;
   padding-bottom: 10px;
   margin: auto; }
 
+.recharts-legend-item-text {
+  font-size: 18px; }
+
+.current-state {
+  padding-left: 380px;
+  padding-top: 15px; }
+
+.current-year {
+  padding-top: 15px; }
+
 .line-chart {
+  font-size: 10px;
   padding-top: 25px;
   padding-bottom: 10px;
   margin: auto; }
+
+.linechart-state {
+  padding-left: 430px;
+  padding-top: 10px; }
 
 .multi-bar-graph {
   padding-top: 25px;
   padding-bottom: 10px;
   margin: auto; }
+
+.multibar-nav {
+  display: flex;
+  flex-flow: row-wrap;
+  padding-left: 360px;
+  padding-top: 10px; }
 
 .modalStyle {
   position: absolute;
@@ -115,9 +144,10 @@ a:visited {
 
 button {
   border-radius: 5px;
-  border: 2px solid #73AD21;
+  border: 2px solid #149e6d;
   margin-left: 450px;
-  background-color: white; }
+  background-color: white;
+  margin-top: 15px; }
 
 .backdropGraph {
   position: absolute;
@@ -151,7 +181,8 @@ button {
 
 .radioBtn {
   padding-top: 15px;
-  padding-left: 370px; }
+  padding-left: 370px;
+  font-size: 17px; }
 
 .stateImg {
   width: 30px;
@@ -179,7 +210,11 @@ select {
 
 .graphTitle {
   padding-left: 430px;
-  padding-top: 10px; }
+  height: 30px;
+  padding-top: 30px;
+  background-color: #075953;
+  color: white;
+  font-family: 'Glegoo', serif; }
 
 .crimes {
   font-size: 16px;
@@ -347,7 +382,7 @@ a:link {
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
+  background: #075953;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em; }
 

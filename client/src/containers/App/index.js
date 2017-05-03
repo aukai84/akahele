@@ -56,14 +56,17 @@ class App extends Component {
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
-                <h2>TESTING REACT-D3-LIBRARY</h2>
 
               <div className="nation-map">
+                <div className="nation-title">Click on a state!</div>
+                <div className="state-clickon">{this.state.currentView}</div>
+
                 <svg width='800' height='700'>
 
                 <h2>{this.state.currentView}</h2>
                 <svg width='1280' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
+                </svg>
                 </svg>
                 </div>
             <GoogleMaps/>
