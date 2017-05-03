@@ -45,7 +45,7 @@ class App extends Component {
                 <h2>TESTING REACT-D3-LIBRARY</h2>
 
               <div className="nation-map">
-                <svg width='800' height='800'>
+                <svg width='800' height='700'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
                 </svg>
                 </div>

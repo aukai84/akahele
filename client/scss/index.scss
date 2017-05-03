@@ -51,6 +51,7 @@ a:visited {
 
 .nation-map{
   padding-left: 130px;
+  padding-top: 50px;
   width: 1000px;
 }
 
@@ -258,20 +259,32 @@ select{
   background-size: cover;
 }
 .homepage-title{
-  margin-left: 540px;
- padding-top: 300px;
-  font-size: 100px;
   color:white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-family:'Glegoo', serif;
-}
+  font-size:80px;
+  padding-top:200px;
+  margin-left:300px;
+  @include respond-to('large'){
+    margin-left: 540px;
+    padding-top: 300px;
+    font-size: 100px;
+  }
+    
+  }
 
 .homepage-slogan{
-  margin-left: 470px;
+  font-size: 20px;
   color:white;
-  font-size: 30px;
+  margin-left: 280px;
+  padding-top:15px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-family:'Satisfy', cursive;
+  @include respond-to('large'){
+    margin-left: 470px;
+    font-size: 30px;
+    
+  }
 }
 
 .homepage-info{
@@ -297,9 +310,14 @@ select{
 }
 
 .securityImg{
-  height: 400px;
-  width: 500px;
-  padding-left: 15px;
+  height:200px;
+  width: 250px;
+  @include respond-to('large'){
+    height: 340px;
+    width: 400px;
+    padding-left: 15px;
+    
+  }
 }
 
 .homepage-about{
@@ -315,10 +333,20 @@ select{
   color: white;
   border: 3px solid white;
   width: 300px;
+  height: 150px;
   text-align: center;
+  padding-top: 60px;
   position: relative;
+  font-size: 25px;
+  margin-left:200px;
   top: 300px;
-  left: 600px;
+
+
+  @include respond-to('large'){
+    top: 400px;
+    margin-left: 600px;
+
+  }
 }
 
 
