@@ -29,7 +29,7 @@ class StatesMap extends Component {
           transform: null
         }
         this.projection = d3.geoAlbersUsa()
-            .scale(1100);
+            .scale(1280);
         this.geoPath = d3.geoPath()
             .projection(this.projection);
         this.quantize = d3.scaleQuantize()
