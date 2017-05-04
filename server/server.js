@@ -53,6 +53,27 @@ app.post('/user/cache', (req, res) => {
   });
 });
 
+app.get('/api/checkHighest', (req, res) => {
+  geocodedtraffic.max('trafficId')
+    .then(max => res.send(max.trafficId));
+});
+
+app.get('/api/checkData', (req, res) => {
+  console.log('MAHALO: ', req.body);
+  geocodedtraffic.findOne({
+    where: {
+      trafficId: req.body.trafficId
+    }
+  })
+  .then(trafficIncident => {
+    if(trafficIncident){
+      res.json({isGeocoded : true, trafficIncident});
+    }else{
+      res.json({isGeocoded : false, trafficIncident : req.body});
+    }
+  });
+});
+
 app.get('/user/cache/:id', (req, res) => {
   geocodedtraffic.findOne({
     where: {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './my_great_place.jsx';
-
+import { retrieveData } from '../../lib/modules/modules.js';
 const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
 
 const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
@@ -83,6 +83,8 @@ const mockData = {
     ]
   };
 
+console.log(retrieveData);
+
 export default class GoogleMaps extends Component {
 
   constructor(props) {
@@ -111,8 +113,15 @@ export default class GoogleMaps extends Component {
 
   trafficDataRequest(){
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", _ =>
-      this.setState({trafficData: JSON.parse(xhr.responseText)}));
+    xhr.addEventListener("load", _ => {
+      console.log(xhr.responseText);
+      JSON.parse(xhr.responseText).data.forEach(trafficIncident => {
+        retrieveData("http://localhost:8080/api/checkData")
+          .then(trafficIncident => {
+            console.log('ALOHA: ', trafficIncident);
+          })
+      })
+    });
     xhr.open('GET', `https://data.honolulu.gov/api/views/qg2s-mjkr/rows.json`);
     xhr.send();
   }
@@ -125,30 +134,23 @@ export default class GoogleMaps extends Component {
     xhr.send(); 
   }
 
+  checkHighestRequest(){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', _ => {
+
+    });
+    xhr.open('GET', 'http://localhost:8080/api/checkHighest');
+    xhr.send();
+  }
+
   cacheData(data){
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', _ => {
-      if(xhr.responseText === 'Traffic incident already exists'){
-        console.log('DO SOMETHING TO SKIP GEOCODER');
-      }else if(xhr.responseText === 'Traffic incident does not exist'){
-        console.log('RUN GEOCODER');
-      }
     });
     xhr.open('POST', 'http://localhost:4000/user/cache');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    // check if datapoint is already stored before caching here
     xhr.send(JSON.stringify(data));
   }
-
-/*  checkData(){
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', _ => {
-    });
-    xhr.open('GET', 'http://localhost:4000/user/cache/11698236');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    console.log('Data cached');
-  }*/
 
   geocoder ({map, maps}) {
     var markers = [];
@@ -165,6 +167,19 @@ export default class GoogleMaps extends Component {
       let trafficDate = this.state.trafficData.data[i][8];
       let trafficAddress = this.state.trafficData.data[i][11];
       let trafficType = this.state.trafficData.data[i][10];
+      function checkData(trafficId){
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', _ => {
+          if(xhr.responseText === 'Traffic incident already exists'){
+            console.log('DO SOMETHING TO SKIP GEOCODER');
+          }else if(xhr.responseText === 'Traffic incident does not exist'){
+            console.log('RUN GEOCODER');
+          };
+        xhr.open('GET', `http://localhost:4000/user/cache/${trafficId}`);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send();
+        });
+      };
       new maps.Geocoder().geocode({
         address: trafficAddress,
         componentRestrictions: {
@@ -213,7 +228,6 @@ export default class GoogleMaps extends Component {
     this.geolocator();
     this.trafficDataRequest();
     this.crimeDataRequest();
-    //this.checkData();
   }
 
   render() {
