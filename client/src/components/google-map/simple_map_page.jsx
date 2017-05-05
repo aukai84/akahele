@@ -115,7 +115,12 @@ export default class GoogleMaps extends Component {
     xhr.addEventListener("load", _ => {
       sendToApi('http://localhost:4000/cached')
       .then(objectidsList => {
-        console.log(objectidsList);
+        let data = JSON.parse(xhr.responseText);
+        let cache = objectidsList
+          .filter(objectid => objectid !== null)
+          .map(JSON.stringify);
+        let newData = data.filter((incident) => !cache.includes(incident.objectid));
+        console.log(newData);
       });
       /*JSON.parse(xhr.responseText).forEach(crimeIncident => {
         sendToApi("http://localhost:4000/api/checkData", crimeIncident)
