@@ -92,7 +92,8 @@ export default class GoogleMaps extends Component {
       defaultZoom: 10,
       lat: 0,
       lng: 0,
-      notGeocoded: [],
+      isGeocoded: [],
+      notGeocoded: []
     }
     this.geocoder=this.geocoder.bind(this);
   }
@@ -112,33 +113,19 @@ export default class GoogleMaps extends Component {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", _ => {
       sendToApi('http://localhost:4000/cached')
-      .then(objectidsList => {
+      .then(objects => {
         let data = JSON.parse(xhr.responseText);
-        let cache = objectidsList
-          .filter(objectid => objectid !== null)
+        console.log('HPD XHR length: ', data.length);
+        let cache = objects
+          .filter(object => object !== null)
           .map(JSON.stringify);
-        let notGeocoded = data.filter((incident) => !cache.includes(incident.objectid));
-        console.log(notGeocoded);
+        let notGeocoded = data.filter((incident) => !cache.some((object) => object.objectid !== incident.objectid));
+        this.setState({notGeocoded, isGeocoded:cache});
       });
-      /*JSON.parse(xhr.responseText).forEach(crimeIncident => {
-        sendToApi("http://localhost:4000/api/checkData", crimeIncident)
-          .then(crimeIncident => {
-            if(crimeIncident.isGeocoded){
-              isGeocoded.push(crimeIncident.incident);
-            }else{
-              notGeocoded.push(crimeIncident.incident);
-            };
-          });
-      });*/
     });
     xhr.open('GET', `https://data.honolulu.gov/resource/9kc2-xdwh.json`);
     xhr.send();
-/*    console.log('not geocoded: ', notGeocoded);
-    this.setState({
-      notGeocoded,
-      isGeocoded
-    });*/
-    this.geocoder
+    this.geocoder;
   }
 
   cacheData(data){
@@ -151,29 +138,29 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', _ => {
-      this.setState({data: JSON.parse(xhr.responseText)});
-    });
-    xhr.open('GET', `https://data.honolulu.gov/resource/9kc2-xdwh.json`);
-    xhr.send();
-
+    console.log(this.state.isGeocoded);
+    // let marker = new maps.Marker({
+    //   map,
+    //   position: this.state.isGeocoded[i]
+    // });
+    // let infoWindow = new maps.InfoWindow({
+    //   content: '<b>ID: </b>' + objectid + '<br>' + '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + blockaddress + '<br>' + '<b>Type: </b>' + type
+    // });
+    console.log('Incidents remaining: ', this.state.notGeocoded.length);
     var markers = [];
     var prevInfoWindow;
     let i = 0;
     let timer = setInterval(_ => {
-      // console.log(this.state.crimeData);
-      if (i >= this.state.data.length){
+      if (i >= this.state.notGeocoded.length){
         clearInterval(timer);
         console.log('GEOCODER FINISHED');
         return;
       }
-      let objectid = this.state.data[i].objectid;
-      let date = this.state.data[i].date;
-      let blockaddress = this.state.data[i].blockaddress;
-      let type = this.state.data[i].type;
 
-      // console.log(this.state.data[i]);
+      let objectid = this.state.notGeocoded[i].objectid;
+      let date = this.state.notGeocoded[i].date;
+      let blockaddress = this.state.notGeocoded[i].blockaddress;
+      let type = this.state.notGeocoded[i].type;
 
       new maps.Geocoder().geocode({
         address: blockaddress,
@@ -181,14 +168,14 @@ export default class GoogleMaps extends Component {
           country: 'US',
           administrativeArea: 'Honolulu'
         }
-      }, (results, status) => {
-        if (status === 'OK'){
+      }, (results, geocodeStatus) => {
+        if (geocodeStatus === 'OK'){
           let marker = new maps.Marker({
             map,
             position: results[0].geometry.location
           });
           markers.push(marker);
-          // console.log('Successfully geocoded', blockaddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
+          console.log('Successfully geocoded', blockaddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
           let infoWindow = new maps.InfoWindow({
             content: '<b>ID: </b>' + objectid + '<br>' + '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + blockaddress + '<br>' + '<b>Type: </b>' + type
           });
@@ -201,28 +188,28 @@ export default class GoogleMaps extends Component {
           });
           this.cacheData({
             blockaddress,
-            cmagency: this.state.data[i].cmagency,
-            cmid: this.state.data[i].cmid,
+            cmagency: this.state.notGeocoded[i].cmagency,
+            cmid: this.state.notGeocoded[i].cmid,
             date,
-            kilonbr: this.state.data[i].kilonbr,
+            kilonbr: this.state.notGeocoded[i].kilonbr,
             objectid,
-            score: this.state.data[i].score,
-            side: this.state.data[i].side,
-            status: this.state.data[i].status,
+            score: this.state.notGeocoded[i].score,
+            side: this.state.notGeocoded[i].side,
+            status: this.state.notGeocoded[i].status,
             type,
             longitude: results[0].geometry.location.lng(),
             latitude: results[0].geometry.location.lat()
           });
-          // console.log('Data cached');
+          console.log('Data cached');
           i++;
-        }else if (status === 'OVER_QUERY_LIMIT'){
-          // console.log('Geocoding', blockaddress, 'failed due to', status);
+        }else if (geocodeStatus === 'OVER_QUERY_LIMIT'){
+          console.log('Geocoding', blockaddress, 'failed due to', geocodeStatus);
           return timer;
         }else{
-          // console.log('Geocoding failed due to', status);
+          console.log('Geocoding failed due to', geocodeStatus);
         }
       });
-    }, 1000)
+    }, 100)
   }
 
   componentWillMount(){
@@ -231,7 +218,7 @@ export default class GoogleMaps extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.state.data;
+    this.state.notGeocoded;
   }
 
   render() {

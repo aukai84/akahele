@@ -54,8 +54,9 @@ app.post('/cached', (req, res) => {
   CrimeIncident.findAll()
     .then(list => {
       let objectidsList = list.map(item => {
-        return item.dataValues.objectid;
+        return item.dataValues;
       });
+
       res.send(objectidsList);
     });
 });
