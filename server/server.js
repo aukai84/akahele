@@ -10,7 +10,7 @@ const cities = require('./routes/cities');
 const states = require('./routes/states');
 const nation = require('./routes/nation');
 const parsers = require('./lib/modules/parsers.js');
-const {NationCrime} = require('./models');
+const {NationCrime} = require('./models'); 
 
 const seeds = require('./seeders/20170502045820-nation_2005.js');
 
