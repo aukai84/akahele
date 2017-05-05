@@ -2,31 +2,45 @@ import * as d3 from 'd3';
 import React, {Component} from 'react';
 import * as topojson from 'topojson';
 import css from './d3-css/index.css';
+import _ from 'lodash';
+import findWhere from 'lodash.findwhere';
 
 let usTopoJson = require('./d3-maps/usa/us.json');
 
 let data = require('./d3-maps/states.json');
 
 var path = d3.geoPath;
-console.log(path)
 
 const State = ({data, geoPath, feature, quantize}) => {
     let color = 'cornflowerblue';
 
     if(data){
-
-        color = 'silver';
+        console.log("data ", data)
+        color = choropleth[quantize(data.murder)];;
 
     }
-    return (<path d={geoPath(feature)} style={{fill: color}} title={feature.id} />)
+    return (<path d={geoPath(feature)} style={{fill: color}} title={feature.properties.name} />)
 }
+
+const choropleth = [
+  'rgb(245,251,255)',
+  'rgb(222,235,247)',
+  'rgb(198,219,239)',
+  'rgb(158,202,225)',
+  'rgb(107,174,214)',
+  'rgb(66,146,198)',
+  'rgb(33,113,181)',
+  'rgb(8,81,156)',
+  'rgb(8,48,107)'
+];
 
 class StatesMap extends Component {
     constructor(props){
         super(props);
         this.state={
           zoomInitted: false,
-          transform: null
+          transform: null,
+          nationData: props.nationData
         }
         this.projection = d3.geoAlbersUsa()
             .scale(1280);
@@ -43,14 +57,17 @@ class StatesMap extends Component {
         //udpate d3 objects when props udpate
     componentWillReceiveProps(newProps){
         this.updateD3(newProps);
+        this.setState({
+            nationData: newProps.nationData.filter(crime => crime.year === 2015).map(crime => {return {id: crime.id, state: crime.state, murder: crime.murder_and_manslaughter}})
+        })
     }
 
     //updating d3
     updateD3(props){
         this.projection.translate([this.props.width/2, this.props.height/2]);
 
-        if(this.props.crimeTotal){
-            this.quantize.domain([10000, 75000]);
+        if(this.state.nationData){
+            this.quantize.domain([200, 300]);
         }
     }
 
@@ -73,7 +90,6 @@ class StatesMap extends Component {
     }
 
     onZoom() {
-      console.log('onZoom')
       this.setState({
         transform: d3.event.transform
       });
@@ -91,6 +107,7 @@ class StatesMap extends Component {
     }
 
     render(){
+        console.log('state ', this.state)
         if(!this.props.usTopoJson){
             return null;
         } else {
@@ -108,7 +125,7 @@ class StatesMap extends Component {
                     feature={feature}
                     key={feature.id}
                     quantize={this.quantize}
-                    data={(this.props.crimeTotal, {stateId: feature.id})}
+                    data={findWhere(this.state.nationData, {state: feature.properties.name})}
                   /></g>)
                 )
               }

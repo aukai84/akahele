@@ -15,11 +15,14 @@ class App extends Component {
       isModalOpen: false,
       isModalGraphOpen: false,
       currentView: 'Nation',
-      currentData: []
+      currentData: [],
+      nationData: []
     }
   }
 
   componentWillMount() {
+    this.retrieveNationData();
+
       d3.queue()
         .defer(d3.json, 'usStates.json')
         .await((error, us) => {
@@ -29,15 +32,12 @@ class App extends Component {
         })
   }
 
-  componentDidMount() {
-    this.retrieveNationData();
-  }
-
   retrieveNationData(){
     retrieveData('http://localhost:8080/api/nation/all')
     .then(crimes => {
         this.setState({
-            currentData: crimes
+            currentData: crimes,
+            nationData: crimes
         })
     })
   }
@@ -61,7 +61,7 @@ class App extends Component {
               <div className="nation-map">
                 <h2>{this.state.currentView}</h2>
                 <svg width='1280' height='800'>
-                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
+                    <StatesMap nationData={this.state.nationData} setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
                 </svg>
                 </div>
             <GoogleMaps/>
