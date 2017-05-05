@@ -93,8 +93,6 @@ export default class GoogleMaps extends Component {
       lat: 0,
       lng: 0,
       notGeocoded: [],
-      isGeocoded: [],
-      data: [],
     }
     this.geocoder=this.geocoder.bind(this);
   }
@@ -119,8 +117,8 @@ export default class GoogleMaps extends Component {
         let cache = objectidsList
           .filter(objectid => objectid !== null)
           .map(JSON.stringify);
-        let newData = data.filter((incident) => !cache.includes(incident.objectid));
-        console.log(newData);
+        let notGeocoded = data.filter((incident) => !cache.includes(incident.objectid));
+        console.log(notGeocoded);
       });
       /*JSON.parse(xhr.responseText).forEach(crimeIncident => {
         sendToApi("http://localhost:4000/api/checkData", crimeIncident)
@@ -202,12 +200,18 @@ export default class GoogleMaps extends Component {
             prevInfoWindow = infoWindow;
           });
           this.cacheData({
-            objectid,
             blockaddress,
+            cmagency: this.state.data[i].cmagency,
+            cmid: this.state.data[i].cmid,
             date,
+            kilonbr: this.state.data[i].kilonbr,
+            objectid,
+            score: this.state.data[i].score,
+            side: this.state.data[i].side,
+            status: this.state.data[i].status,
             type,
-            latitude: results[0].geometry.location.lat(),
-            longitude: results[0].geometry.location.lng()
+            longitude: results[0].geometry.location.lng(),
+            latitude: results[0].geometry.location.lat()
           });
           // console.log('Data cached');
           i++;

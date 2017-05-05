@@ -10,7 +10,9 @@ module.exports = function(sequelize, DataTypes) {
     score: DataTypes.INTEGER,
     side: DataTypes.STRING,
     status: DataTypes.STRING,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    longitude: DataTypes.STRING,
+    latitude: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
