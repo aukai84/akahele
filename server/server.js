@@ -33,8 +33,8 @@ app.use('/api/cities', cities);
 app.use('/api/states', states);
 
 // check route to send HPD geocoded addresses to PSQL
-app.post('/user/cache', (req, res) => {
-  geocodedtraffic.findOne({
+app.post('/cache', (req, res) => {
+  CrimeIncident.findOne({
     where: {
       objectid: req.body.objectid
     }
@@ -43,14 +43,19 @@ app.post('/user/cache', (req, res) => {
     if(trafficIncident){
       res.send('Traffic incident already exists');
     }else{
-      geocodedtraffic.create(req.body);
+      CrimeIncident.create(req.body);
       res.send('Traffic incident does not exist');
     }
   });
 });
 
+app.get('/cache', (req, res) => {
+  CrimeIncident.findAll()
+    .then(console.log);
+});
+
 // Check data from HPD against DB
-app.post('/api/checkData', (req, res) => {
+/*app.post('/api/checkData', (req, res) => {
   CrimeIncident.findOne({
     where: {
       objectid: req.body.objectid
@@ -65,9 +70,9 @@ app.post('/api/checkData', (req, res) => {
       res.json({isGeocoded:false, incident:req.body});
     }
   });
-});
+});*/
 
-app.get('/user/cache/:id', (req, res) => {
+/*app.get('/user/cache/:id', (req, res) => {
   geocodedtraffic.findOne({
     where: {
       trafficId: req.body.trafficId
@@ -83,7 +88,7 @@ app.get('/user/cache/:id', (req, res) => {
       res.send('Traffic incident does not exist');
     }
   });
-});
+});*/
 
 app.listen(PORT, _ => {
   console.log('server servering  at server port', `${PORT}`);

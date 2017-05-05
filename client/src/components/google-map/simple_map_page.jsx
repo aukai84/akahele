@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './my_great_place.jsx';
-import { retrieveData } from '../../lib/modules/modules.js';
+ import { sendToApi } from '../../lib/modules/modules.js';
 const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
 
 const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
@@ -10,80 +10,78 @@ const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marke
 const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
 
 const mockData = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "properties": {
-          id: 0,
-          date: '12 April, 2017',
-          name: 'Mark Ota',
-          type: 'Death',
-          cause: 'Diarrhea'
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -157.84521102905273,
-            21.29225337295981
-          ]
-        }
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        id: 0,
+        date: '12 April, 2017',
+        name: 'Mark Ota',
+        type: 'Death',
+        cause: 'Diarrhea'
       },
-      {
-        "type": "Feature",
-        "properties": {
-          id: 1,
-          date: '7 August, 2021',
-          name: 'Aukai Tirrell',
-          type: 'Arrest',
-          cause: 'Drug trafficking',
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -158.18613052368164,
-            21.448595053724944
-          ]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          id: 2,
-          date: '7 August, 2021',
-          name: 'Nick Lee',
-          type: 'Death',
-          cause: 'Drug overdose',
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -158.1860339641571,
-            21.44716707427564
-          ]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": {
-          id: 3,
-          date: '2 February, 2057',
-          name: 'Danika Harada',
-          type: 'Missing person report',
-          cause: 'It was actually just a cat',
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -157.77706146240234,
-            21.42270950855108
-          ]
-        }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -157.84521102905273,
+          21.29225337295981
+        ]
       }
-    ]
-  };
-
-console.log(retrieveData);
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        id: 1,
+        date: '7 August, 2021',
+        name: 'Aukai Tirrell',
+        type: 'Arrest',
+        cause: 'Drug trafficking',
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -158.18613052368164,
+          21.448595053724944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        id: 2,
+        date: '7 August, 2021',
+        name: 'Nick Lee',
+        type: 'Death',
+        cause: 'Drug overdose',
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -158.1860339641571,
+          21.44716707427564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        id: 3,
+        date: '2 February, 2057',
+        name: 'Danika Harada',
+        type: 'Missing person report',
+        cause: 'It was actually just a cat',
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -157.77706146240234,
+          21.42270950855108
+        ]
+      }
+    }
+  ]
+};
 
 export default class GoogleMaps extends Component {
 
@@ -94,8 +92,8 @@ export default class GoogleMaps extends Component {
       defaultZoom: 10,
       lat: 0,
       lng: 0,
-      trafficData: [],
-      crimeData: []
+      notGeocoded: [],
+      isGeocoded: []
     }
     this.geocoder=this.geocoder.bind(this);
   }
@@ -111,43 +109,37 @@ export default class GoogleMaps extends Component {
     });
   }
 
-  trafficDataRequest(){
+  crimeDataRequest(){
+    // let notGeocoded = [];
+    // let isGeocoded = [];
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", _ => {
-      console.log(xhr.responseText);
-      JSON.parse(xhr.responseText).data.forEach(trafficIncident => {
-        retrieveData("http://localhost:8080/api/checkData")
-          .then(trafficIncident => {
-            console.log('ALOHA: ', trafficIncident);
-          })
-      })
+      JSON.parse(xhr.responseText).forEach(crimeIncident => {
+        sendToApi("http://localhost:4000/api/checkData", crimeIncident)
+          .then(crimeIncident => {
+            if(crimeIncident.isGeocoded){
+              isGeocoded.push(crimeIncident.incident);
+            }else{
+              notGeocoded.push(crimeIncident.incident);
+            };
+          });
+      });
     });
-    xhr.open('GET', `https://data.honolulu.gov/api/views/qg2s-mjkr/rows.json`);
+    xhr.open('GET', `https://data.honolulu.gov/resource/9kc2-xdwh.json`);
     xhr.send();
-  }
-
-  crimeDataRequest(){
-   const xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", _ =>
-      this.setState({crimeData: JSON.parse(xhr.responseText)}));
-    xhr.open('GET', `https://data.honolulu.gov/api/views/a96q-gyhq/rows.json`);
-    xhr.send(); 
-  }
-
-  checkHighestRequest(){
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', _ => {
-
+    console.log('not geocoded: ', notGeocoded);
+    this.setState({
+      notGeocoded,
+      isGeocoded
     });
-    xhr.open('GET', 'http://localhost:8080/api/checkHighest');
-    xhr.send();
+    this.geocoder
   }
 
   cacheData(data){
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', _ => {
     });
-    xhr.open('POST', 'http://localhost:4000/user/cache');
+    xhr.open('POST', 'http://localhost:4000/cache');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
   }
@@ -158,30 +150,20 @@ export default class GoogleMaps extends Component {
     let i = 0;
     let timer = setInterval(_ => {
       // console.log(this.state.crimeData);
-      if (i >= this.state.trafficData.data.length){
+      if (i >= this.state.notGeocoded.length){
         clearInterval(timer);
         console.log('GEOCODER FINISHED');
         return;
       }
-      let trafficId = this.state.trafficData.data[i][0];
-      let trafficDate = this.state.trafficData.data[i][8];
-      let trafficAddress = this.state.trafficData.data[i][11];
-      let trafficType = this.state.trafficData.data[i][10];
-      function checkData(trafficId){
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener('load', _ => {
-          if(xhr.responseText === 'Traffic incident already exists'){
-            console.log('DO SOMETHING TO SKIP GEOCODER');
-          }else if(xhr.responseText === 'Traffic incident does not exist'){
-            console.log('RUN GEOCODER');
-          };
-        xhr.open('GET', `http://localhost:4000/user/cache/${trafficId}`);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send();
-        });
-      };
+      let objectid = this.state.notGeocoded[i].objectid;
+      let date = this.state.notGeocoded[i].date;
+      let blockaddress = this.state.notGeocoded[i].blockaddress;
+      let type = this.state.notGeocoded[i].type;
+
+      console.log(objectid, date, blockaddress, type);
+
       new maps.Geocoder().geocode({
-        address: trafficAddress,
+        address: blockaddress,
         componentRestrictions: {
           country: 'US',
           administrativeArea: 'Honolulu'
@@ -193,9 +175,9 @@ export default class GoogleMaps extends Component {
             position: results[0].geometry.location
           });
           markers.push(marker);
-          console.log('Successfully geocoded', trafficAddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
+          console.log('Successfully geocoded', blockaddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
           let infoWindow = new maps.InfoWindow({
-            content: '<b>ID: </b>' + trafficId + '<br>' + '<b>Date & Time: </b>' + trafficDate + '<br>' + '<b>Address: </b>' + trafficAddress + '<br>' + '<b>Type: </b>' + trafficType
+            content: '<b>ID: </b>' + objectid + '<br>' + '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + blockaddress + '<br>' + '<b>Type: </b>' + type
           });
           marker.addListener('click', _ => {
             if (prevInfoWindow){
@@ -205,17 +187,17 @@ export default class GoogleMaps extends Component {
             prevInfoWindow = infoWindow;
           });
           this.cacheData({
-            trafficId,
-            trafficAddress,
-            trafficDate,
-            trafficType,
+            objectid,
+            blockaddress,
+            date,
+            type,
             latitude: results[0].geometry.location.lat(),
             longitude: results[0].geometry.location.lng()
           });
           console.log('Data cached');
           i++;
         }else if (status === 'OVER_QUERY_LIMIT'){
-          console.log('Geocoding', trafficAddress, 'failed due to', status);
+          console.log('Geocoding', blockaddress, 'failed due to', status);
           return timer;
         }else{
           console.log('Geocoding failed due to', status);
@@ -226,14 +208,17 @@ export default class GoogleMaps extends Component {
 
   componentWillMount(){
     this.geolocator();
-    this.trafficDataRequest();
-    this.crimeDataRequest();
+    // this.crimeDataRequest();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
   }
 
   render() {
     return (
       <GoogleMap
-        onGoogleApiLoaded={this.geocoder}
+        onGoogleApiLoaded={this.crimeDataRequest}
         bootstrapURLKeys={{key: 'AIzaSyCC7M-pvWb75Zecv7358x-Zx9Bum_LPvGI'}}
         defaultCenter={this.state.defaultCenter}
         defaultZoom={this.state.defaultZoom}>
