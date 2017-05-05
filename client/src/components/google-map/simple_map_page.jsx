@@ -93,12 +93,13 @@ export default class GoogleMaps extends Component {
       lat: 0,
       lng: 0,
       notGeocoded: [],
-      isGeocoded: []
+      isGeocoded: [],
+      data: [],
     }
     this.geocoder=this.geocoder.bind(this);
   }
 
-  geolocator(){
+  locator(){
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState(
         {
@@ -110,11 +111,13 @@ export default class GoogleMaps extends Component {
   }
 
   crimeDataRequest(){
-    // let notGeocoded = [];
-    // let isGeocoded = [];
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", _ => {
-      JSON.parse(xhr.responseText).forEach(crimeIncident => {
+      sendToApi('http://localhost:4000/cached')
+      .then(objectidsList => {
+        console.log(objectidsList);
+      });
+      /*JSON.parse(xhr.responseText).forEach(crimeIncident => {
         sendToApi("http://localhost:4000/api/checkData", crimeIncident)
           .then(crimeIncident => {
             if(crimeIncident.isGeocoded){
@@ -123,15 +126,15 @@ export default class GoogleMaps extends Component {
               notGeocoded.push(crimeIncident.incident);
             };
           });
-      });
+      });*/
     });
     xhr.open('GET', `https://data.honolulu.gov/resource/9kc2-xdwh.json`);
     xhr.send();
-    console.log('not geocoded: ', notGeocoded);
+/*    console.log('not geocoded: ', notGeocoded);
     this.setState({
       notGeocoded,
       isGeocoded
-    });
+    });*/
     this.geocoder
   }
 
@@ -145,22 +148,29 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', _ => {
+      this.setState({data: JSON.parse(xhr.responseText)});
+    });
+    xhr.open('GET', `https://data.honolulu.gov/resource/9kc2-xdwh.json`);
+    xhr.send();
+
     var markers = [];
     var prevInfoWindow;
     let i = 0;
     let timer = setInterval(_ => {
       // console.log(this.state.crimeData);
-      if (i >= this.state.notGeocoded.length){
+      if (i >= this.state.data.length){
         clearInterval(timer);
         console.log('GEOCODER FINISHED');
         return;
       }
-      let objectid = this.state.notGeocoded[i].objectid;
-      let date = this.state.notGeocoded[i].date;
-      let blockaddress = this.state.notGeocoded[i].blockaddress;
-      let type = this.state.notGeocoded[i].type;
+      let objectid = this.state.data[i].objectid;
+      let date = this.state.data[i].date;
+      let blockaddress = this.state.data[i].blockaddress;
+      let type = this.state.data[i].type;
 
-      console.log(objectid, date, blockaddress, type);
+      // console.log(this.state.data[i]);
 
       new maps.Geocoder().geocode({
         address: blockaddress,
@@ -175,7 +185,7 @@ export default class GoogleMaps extends Component {
             position: results[0].geometry.location
           });
           markers.push(marker);
-          console.log('Successfully geocoded', blockaddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
+          // console.log('Successfully geocoded', blockaddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
           let infoWindow = new maps.InfoWindow({
             content: '<b>ID: </b>' + objectid + '<br>' + '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + blockaddress + '<br>' + '<b>Type: </b>' + type
           });
@@ -194,31 +204,31 @@ export default class GoogleMaps extends Component {
             latitude: results[0].geometry.location.lat(),
             longitude: results[0].geometry.location.lng()
           });
-          console.log('Data cached');
+          // console.log('Data cached');
           i++;
         }else if (status === 'OVER_QUERY_LIMIT'){
-          console.log('Geocoding', blockaddress, 'failed due to', status);
+          // console.log('Geocoding', blockaddress, 'failed due to', status);
           return timer;
         }else{
-          console.log('Geocoding failed due to', status);
+          // console.log('Geocoding failed due to', status);
         }
       });
     }, 1000)
   }
 
   componentWillMount(){
-    this.geolocator();
-    // this.crimeDataRequest();
+    this.locator();
+    this.crimeDataRequest();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
+    this.state.data;
   }
 
   render() {
     return (
       <GoogleMap
-        onGoogleApiLoaded={this.crimeDataRequest}
+        onGoogleApiLoaded={this.geocoder}
         bootstrapURLKeys={{key: 'AIzaSyCC7M-pvWb75Zecv7358x-Zx9Bum_LPvGI'}}
         defaultCenter={this.state.defaultCenter}
         defaultZoom={this.state.defaultZoom}>
@@ -235,7 +245,6 @@ export default class GoogleMaps extends Component {
             );
           })
         }
-
       </GoogleMap>
     );
   }

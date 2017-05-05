@@ -49,9 +49,15 @@ app.post('/cache', (req, res) => {
   });
 });
 
-app.get('/cache', (req, res) => {
+// Says post, but is actually get
+app.post('/cached', (req, res) => {
   CrimeIncident.findAll()
-    .then(console.log);
+    .then(list => {
+      let objectidsList = list.map(item => {
+        return item.dataValues.objectid;
+      });
+      res.send(objectidsList);
+    });
 });
 
 // Check data from HPD against DB
