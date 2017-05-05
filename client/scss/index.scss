@@ -20,6 +20,9 @@ body {
 .nav-div{
   float:right;
   padding-right: 15px;
+  .homepage-title:a:visited{
+    color:white;
+  }
 
 }
 
@@ -29,9 +32,7 @@ a{
 }
 
 
-a:visited {
-    color:pink;  
-}
+
      
 
 /* NATION VIEW */
@@ -69,6 +70,9 @@ a:visited {
 }
 
 .bar-chart{
+  @include respond-to('small'){
+    width:100px !important;
+  }
   font-size:15px;
   padding-top: 25px;
   padding-right: 20px;
@@ -133,15 +137,21 @@ a:visited {
 
 
 .modalStyle{
-      position: absolute;
-      top: 50%;
-      left: 280%;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      color: black;
-      background: #fff;
+    position: absolute;
+    top: 50%;
+    left:180%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    color: black;
+    background: #fff;
+    width:700px;
+    height: 400px;
+  @include respond-to('large'){
+      left: 240%;
       height: 550px;
       width: 1000px;
+    
+  }
 }
 
 
@@ -326,6 +336,9 @@ select{
   font-size:80px;
   padding-top:200px;
   margin-left:300px;
+  .nav-bar:a:visited{
+    color:white !important;
+  }
   @include respond-to('large'){
     margin-left: 540px;
     padding-top: 300px;

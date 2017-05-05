@@ -59,13 +59,12 @@ body {
 .nav-div {
   float: right;
   padding-right: 15px; }
+  .nav-div .homepage-title:a:visited {
+    color: white; }
 
 a {
   padding-left: 4px;
   font-size: 17px; }
-
-a:visited {
-  color: pink; }
 
 /* NATION VIEW */
 .bigContainer {
@@ -99,6 +98,9 @@ a:visited {
   padding-right: 20px;
   padding-bottom: 10px;
   margin: auto; }
+  @media only screen and (max-device-width: 460px), only screen and (min-device-width: 1024px) and (max-width: 965px) {
+    .bar-chart {
+      width: 100px !important; } }
 
 .recharts-legend-item-text {
   font-size: 18px; }
@@ -134,13 +136,18 @@ a:visited {
 .modalStyle {
   position: absolute;
   top: 50%;
-  left: 280%;
+  left: 180%;
   transform: translate(-50%, -50%);
   z-index: 9999;
   color: black;
   background: #fff;
-  height: 550px;
-  width: 1000px; }
+  width: 700px;
+  height: 400px; }
+  @media only screen and (min-device-width: 1024px) and (min-width: 965px) {
+    .modalStyle {
+      left: 240%;
+      height: 550px;
+      width: 1000px; } }
 
 button {
   border-radius: 5px;
@@ -280,6 +287,8 @@ select {
   font-size: 80px;
   padding-top: 200px;
   margin-left: 300px; }
+  .homepage-title .nav-bar:a:visited {
+    color: white !important; }
   @media only screen and (min-device-width: 1024px) and (min-width: 965px) {
     .homepage-title {
       margin-left: 540px;

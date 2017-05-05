@@ -15,11 +15,13 @@ class App extends Component {
       isModalOpen: false,
       isModalGraphOpen: false,
       currentView: 'Nation',
-      currentData: []
+      currentData: [],
+      nationData: []
     }
   }
 
   componentWillMount() {
+    this.retrieveNationData();
       d3.queue()
         .defer(d3.json, 'usStates.json')
         .await((error, us) => {
@@ -29,15 +31,19 @@ class App extends Component {
         })
   }
 
-  componentDidMount() {
-    this.retrieveNationData();
+ 
+  
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
   }
 
-  retrieveNationData(){
+  retrieveNationData = () =>{
     retrieveData('http://localhost:8080/api/nation/all')
     .then(crimes => {
+      console.log(crimes);
         this.setState({
-            currentData: crimes
+            currentData: crimes,
+            nationData: crimes
         })
     })
   }
@@ -49,9 +55,10 @@ class App extends Component {
                 currentView: area,
                 currentData: crimes
             })
-        })
+        }) 
   }
   render() {
+    console.log(this.state);
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
@@ -65,7 +72,7 @@ class App extends Component {
 
                 <h2>{this.state.currentView}</h2>
                 <svg width='1280' height='800'>
-                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
+                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
                 </svg>
                 </svg>
                 </div>
