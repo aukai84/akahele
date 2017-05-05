@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './my_great_place.jsx';
- import { sendToApi } from '../../lib/modules/modules.js';
+import { sendToApi } from '../../lib/modules/modules.js';
+
+const redDot = require('../../../assets/dot-red.png');
+
 const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
 
 const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
@@ -120,7 +123,7 @@ export default class GoogleMaps extends Component {
           .filter(object => object !== null)
           .map(JSON.stringify);
         let notGeocoded = data.filter((incident) => !cache.some((object) => object.objectid !== incident.objectid));
-        this.setState({notGeocoded, isGeocoded:cache});
+        this.setState({notGeocoded, isGeocoded: cache});
       });
     });
     xhr.open('GET', `https://data.honolulu.gov/resource/9kc2-xdwh.json`);
@@ -138,14 +141,27 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
-    console.log(this.state.isGeocoded);
-    // let marker = new maps.Marker({
-    //   map,
-    //   position: this.state.isGeocoded[i]
-    // });
-    // let infoWindow = new maps.InfoWindow({
-    //   content: '<b>ID: </b>' + objectid + '<br>' + '<b>Date & Time: </b>' + date + '<br>' + '<b>Address: </b>' + blockaddress + '<br>' + '<b>Type: </b>' + type
-    // });
+    for (let j=0; j <= this.state.isGeocoded.length; j++){
+      let incident = JSON.parse(this.state.isGeocoded[j]);
+      let marker = new maps.Marker({
+        map,
+        position: {
+          lat: parseFloat(incident.latitude),
+          lng: parseFloat(incident.longitude)
+        },
+        icon: redDot
+      });
+      let infoWindow = new maps.InfoWindow({
+        content: '<b>ID: </b>' + incident.objectid + '<br>' + '<b>Date & Time: </b>' + incident.date + '<br>' + '<b>Address: </b>' + incident.blockaddress + '<br>' + '<b>Type: </b>' + incident.type
+      });
+      marker.addListener('click', _ => {
+        if (prevInfoWindow){
+          prevInfoWindow.close();
+        }
+        infoWindow.open(map, marker);
+        prevInfoWindow = infoWindow;
+      });
+    };
     console.log('Incidents remaining: ', this.state.notGeocoded.length);
     var markers = [];
     var prevInfoWindow;
@@ -172,7 +188,8 @@ export default class GoogleMaps extends Component {
         if (geocodeStatus === 'OK'){
           let marker = new maps.Marker({
             map,
-            position: results[0].geometry.location
+            position: results[0].geometry.location,
+            animation: maps.Animation.DROP
           });
           markers.push(marker);
           console.log('Successfully geocoded', blockaddress, 'at', 'LAT:', results[0].geometry.location.lat(), 'LNG:', results[0].geometry.location.lng());
@@ -219,6 +236,7 @@ export default class GoogleMaps extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     this.state.notGeocoded;
+    this.geocoder;
   }
 
   render() {
