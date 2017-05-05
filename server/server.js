@@ -12,11 +12,9 @@ const parsers = require('./lib/modules/parsers.js');
 
 const PORT = process.env.PORT || 4000;
 const db = require('./models');
-const {geocodedtraffic} = db;
+const {CrimeIncident} = db;
 const cors = require ('cors');
 app.use(cors());
-
-Renderkid = require('renderkid');
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
@@ -38,38 +36,33 @@ app.use('/api/states', states);
 app.post('/user/cache', (req, res) => {
   geocodedtraffic.findOne({
     where: {
-      trafficId: req.body.trafficId
+      objectid: req.body.objectid
     }
   })
   .then(trafficIncident => {
-    console.log('DIS', trafficIncident );
     if(trafficIncident){
       res.send('Traffic incident already exists');
     }else{
-      console.log('DAT BODY: ', req.body);
       geocodedtraffic.create(req.body);
       res.send('Traffic incident does not exist');
     }
   });
 });
 
-app.get('/api/checkHighest', (req, res) => {
-  geocodedtraffic.max('trafficId')
-    .then(max => res.send(max.trafficId));
-});
-
-app.get('/api/checkData', (req, res) => {
-  console.log('MAHALO: ', req.body);
-  geocodedtraffic.findOne({
+// Check data from HPD against DB
+app.post('/api/checkData', (req, res) => {
+  CrimeIncident.findOne({
     where: {
-      trafficId: req.body.trafficId
+      objectid: req.body.objectid
     }
   })
-  .then(trafficIncident => {
-    if(trafficIncident){
-      res.json({isGeocoded : true, trafficIncident});
+  .then(incident => {
+    if(incident){
+      console.log('FOUND');
+      res.json({isGeocoded:true, incident});
     }else{
-      res.json({isGeocoded : false, trafficIncident : req.body});
+      console.log('NOT FOUND');
+      res.json({isGeocoded:false, incident:req.body});
     }
   });
 });
@@ -86,7 +79,6 @@ app.get('/user/cache/:id', (req, res) => {
       res.send('Traffic incident already exists');
       res.json(trafficIncident);
     }else{
-      console.log('DAT BODY: ', req.body);
       geocodedtraffic.create(req.body);
       res.send('Traffic incident does not exist');
     }
