@@ -33,13 +33,13 @@ class App extends Component {
   }
 
 
-  
+
   componentDidUpdate(prevProps, prevState) {
     console.log(this.state);
   }
 
   retrieveNationData = () =>{
-    retrieveData('http://localhost:8080/api/nation/all')
+    retrieveData('https://akahele.io:8080/api/nation/all')
     .then(crimes => {
       console.log(crimes);
         this.setState({
@@ -50,13 +50,13 @@ class App extends Component {
   }
 
   setCurrentView = (area) => {
-    retrieveData(`http://localhost:8080/api/states/${area}/crime`)
+    retrieveData(`https://akahele.io:8080/api/states/${area}/crime`)
         .then(crimes => {
             this.setState({
                 currentView: area,
                 currentData: crimes
             })
-        }) 
+        })
   }
   render() {
     console.log(this.state);
