@@ -18,7 +18,7 @@ ReactDOM.render(
   <div>
   <div className="nav-div">
     
-           <div className="home-nav-button"> <Link to="/">Akahele.io</Link></div>
+           <div className="home-nav-button"> <Link to="/">Akahele</Link></div>
 
            <div className="other-nav-buttons"><Link to="/">Home</Link> 
             <Link to="/nation">| Nation Map</Link>
