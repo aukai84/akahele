@@ -9,8 +9,10 @@ const cors = require ('cors');
 
 app.use(cors());
 
+// check route to send HPD geocoded addresses to PSQL
 app.post('/user/cache', (req, res) => {
   console.log(req.body);
+  // sequelize to POST update
   res.end();
 });
 

@@ -28,8 +28,8 @@ class App extends Component {
         .await((error, us) => {
             this.setState({
                 usTopoJson: us
-            })
-        })
+            });
+        });
   }
 
 
