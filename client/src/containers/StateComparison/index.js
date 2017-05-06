@@ -23,15 +23,15 @@ class StateComparisonContainer extends Component {
 
     }
 
-    componentWillMount() {
-        this.retrieveSuggestions();
-    }
+    // componentWillMount() {
+    //     this.retrieveSuggestions();
+    // }
 
     render(){
         return(
             <div>
-                <LocationOneSearch/>
-                <LocationTwoSearch/>
+                <LocationOneSearch locationType={"states"}/>
+                <LocationTwoSearch locationType={"states"}/>
             </div>
         )
     }
