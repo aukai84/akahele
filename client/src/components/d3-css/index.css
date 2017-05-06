@@ -1,3 +1,12 @@
+.path0-9 { fill:rgb(247,251,255); }
+.path1-9 { fill:rgb(222,235,247); }
+.path2-9 { fill:rgb(198,219,239); }
+.path3-9 { fill:rgb(158,202,225); }
+.path4-9 { fill:rgb(107,174,214); }
+.path5-9 { fill:rgb(66,146,198); }
+.path6-9 { fill:rgb(33,113,181); }
+.path7-9 { fill:rgb(8,81,156); }
+.path8-9 { fill:rgb(8,48,107); }
 
 path d:hover {
   color: orange;
