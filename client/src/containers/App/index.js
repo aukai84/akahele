@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   retrieveNationData = () =>{
-    retrieveData('https://akahele.io:8080/api/nation/all')
+    retrieveData('https://akahele.io/api/nation/all')
     .then(crimes => {
       console.log(crimes);
         this.setState({
@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   setCurrentView = (area) => {
-    retrieveData(`https://akahele.io:8080/api/states/${area}/crime`)
+    retrieveData(`https://akahele.io/api/states/${area}/crime`)
         .then(crimes => {
             this.setState({
                 currentView: area,
