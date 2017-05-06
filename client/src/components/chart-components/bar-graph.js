@@ -44,7 +44,7 @@ class SimpleBarGraph extends Component {
                <CartesianGrid strokeDasharray="3 3"/>
                <Tooltip/>
               <Legend/> 
-               <Bar dataKey="total" fill="#075953"/>
+               <Bar dataKey="total" fill="#1474c9"/>
               </BarChart>
         )
     }

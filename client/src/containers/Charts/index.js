@@ -131,9 +131,9 @@ class ChartsContainer extends Component {
                     <MultiBarGraph multiBarData={this.state.multiBarData} currentView={this.props.currentView}/>
                    
                         <div className="radioBtn">
-                            <input id="line"  type="radio" value="line" name="graph" onChange={this.setGraph}/> <label htmlFor="line">line</label>
-                            <input id="line 2"  type="radio" value="bar" name="graph" onChange={this.setGraph}/> <label htmlFor="line 2">bar</label>
-                            <input id="line 3"  type="radio" value="multiBar" name="graph" onChange={this.setGraph}/><label >multi bar</label>
+                            <input id="line"  type="radio" value="line" name="graph" onChange={this.setGraph}/> <label htmlFor="line">Line</label>
+                            <input id="line 2"  type="radio" value="bar" name="graph" onChange={this.setGraph}/> <label htmlFor="line 2">Bar</label>
+                            <input id="line 3"  type="radio" value="multiBar" name="graph" onChange={this.setGraph}/><label >Multi Bar</label>
 
                         </div>
                 </div>

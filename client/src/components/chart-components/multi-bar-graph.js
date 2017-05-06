@@ -67,8 +67,8 @@ class MultiBarGraph extends Component {
                     <Tooltip/>
                     <Legend verticalAlign="top" wraperStyle={{lineHeight: '40px'}} />
                     <ReferenceLine y={0} stroke="#000" />
-                    <Brush dataKey={this.state.key} height={20} stroke="#075953"/>
-                    <Bar dataKey={this.state.dataKey} name={this.state.crimeName} fill="#075953"/>
+                    <Brush dataKey={this.state.key} height={20} stroke="#1474c9"/>
+                    <Bar dataKey={this.state.dataKey} name={this.state.crimeName} fill="#19548e"/>
                 </BarChart>
             </div>
             )

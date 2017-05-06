@@ -16,7 +16,8 @@ class App extends Component {
       isModalGraphOpen: false,
       currentView: 'Nation',
       currentData: [],
-      nationData: []
+      nationData: [],
+      currentYear: 2015
     }
   }
 
@@ -31,7 +32,7 @@ class App extends Component {
         })
   }
 
- 
+
   
   componentDidUpdate(prevProps, prevState) {
     console.log(this.state);

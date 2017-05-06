@@ -31,7 +31,7 @@ const State = ({data, geoPath, feature, quantize}) => {
 
     if(data){
 
-        color = '#90dbb7';
+        color = 'silver';
 
     }
     return (<path d={geoPath(feature)} style={{fill: color}} title={feature.id} />)
@@ -56,6 +56,7 @@ class StatesMap extends Component {
             .scaleExtent([.5, 10])
             .on('zoom', this.onZoom.bind(this));
     }
+
 
         //udpate d3 objects when props udpate
     componentWillReceiveProps(newProps){
