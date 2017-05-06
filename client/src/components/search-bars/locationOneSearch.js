@@ -34,18 +34,19 @@ class LocationOneSearch extends Component {
 
     onChange = (event, {newValue, }) => {
         this.setState({
-            value: newValue
+            value: newValue,
+            currentYear: 2015
         })
     }
 
     requestLocationOne(){
-        console.log("this is the state ", this.state.value)
     }
 
     onEnter = (event, data) => {
         console.log(event.key)
         if(event.key === 'Enter'){
-            this.requestLocationOne();
+        console.log("this is the state ", this.state.value)
+            this.props.retrieveLocationOne(this.state.value, this.props.currentYear);
         }
     }
 
