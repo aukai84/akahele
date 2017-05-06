@@ -67,13 +67,13 @@ class StatesMap extends Component {
         this.projection.translate([this.props.width/2, this.props.height/2]);
 
         if(this.state.nationData){
-            this.quantize.domain([200, 300]);
+            this.quantize.domain([0, 200]);
         }
     }
 
 
     displayState(feature){
-
+        console.log(feature)
         this.props.setCurrentView(feature.properties.name)
     }
 
