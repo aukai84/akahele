@@ -7,6 +7,7 @@ import ReactImg from '../../../assets/React-icon.png';
 import GulpImg from '../../../assets/gulp-vector-logo.png';
 import PostgresImg from '../../../assets/postgres.png';
 import SassImg from '../../../assets/sass.png';
+import Contact from '../../../assets/communication.png';
 
 
 
@@ -67,7 +68,10 @@ class HomePage extends Component{
 
 					<div className="homepage-about">
 						<div className="about-detail">
-							<div className="about-title"><h1>Contact Us</h1></div>
+							<div className="about-title"><h1>Contact Us</h1>
+								<img src={Contact} className="contactImg" alt="contact" width="75" height="75"/>
+							</div>
+
 
 
 		

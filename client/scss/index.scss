@@ -23,7 +23,7 @@ body {
   background-color:white;
   max-width: 100%;
   color:#1474c9;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   display: flex;
   flex-flow: row-wrap;
   padding-top: 15px;
@@ -346,6 +346,19 @@ select{
 
   }
 
+  .graphImg{
+    margin-right:5px;
+  }
+
+   .stateImg{
+    margin-right:5px;
+  
+  }
+
+   .cityImg{
+    margin-right:5px;
+  }
+
 
 
   .graph-title{
@@ -397,12 +410,14 @@ select{
     height: 400px;
     float:left;
     padding-left: 90px;
+    text-align: center;
   }
   .stateTwo{
     width: 250px;
     height: 400px;
     float:right;
     padding-right: 90px;
+    text-align: center;
   }
 
 
@@ -417,6 +432,7 @@ select{
     height: 400px;
     float:left;
     padding-left: 90px;
+    text-align: center;
   }
 
 
@@ -425,6 +441,7 @@ select{
     height: 400px;
     float:right;
     padding-right: 90px;
+    text-align: center;
   }
 
  
@@ -530,6 +547,10 @@ select{
   // border: 3px solid white;
 }
 
+.contactImg{
+  margin:10px;
+}
+
 
 
 
@@ -577,7 +598,7 @@ ul li{
 
 /* General sidebar styles */
 .bm-menu {
-  background: #042644;
+  background: #5394fc;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
