@@ -48,7 +48,7 @@ class NewSideBar extends React.Component {
           <div className="graphView">
               <a className="sidebar-graph" onClick={() => this.openModalGraph()}>Graphs</a>
               <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
-                    <div className="graphTitle"><h3>Graphs</h3></div>
+                    <div className="graph-title"><h3>Graphs</h3></div>
                     <ChartsContainer currentView={this.props.currentView} currentData={this.props.currentData}/>
                     <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
                 </Modal>
@@ -74,6 +74,15 @@ class NewSideBar extends React.Component {
           <a onClick={() => this.openModalState()}>State Comparison</a>
           <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
 
+           <div className="state-title"><h3>State Comparison</h3></div>
+            <div className="stateOne">
+             <h3>State One</h3>
+            <input type="text" name="search" placeholder="Search.."></input>
+            </div>
+            <div className="stateTwo">
+            <h3>State Two</h3>
+            <input type="text" name="search" placeholder="Search.."></input>
+            </div>
             <p><button className="closeBtn" onClick={() => this.closeModalState()}>Close</button></p>
           </Modal>
         </div>
