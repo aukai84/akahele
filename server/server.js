@@ -10,6 +10,7 @@ const cities = require('./routes/cities');
 const states = require('./routes/states');
 const nation = require('./routes/nation');
 const parsers = require('./lib/modules/parsers.js');
+const fs = require('fs');
 const db = require('./models');
 const {CrimeIncident} = db;
 const {NationCrime} = require('./models');
@@ -47,6 +48,17 @@ app.post('/cache', (req, res) => {
     }
   });
 });
+
+app.get('/parseIntoJson', (req, res) => {
+  CrimeIncident.findAll()
+    .then(crimes => {
+      fs.writeFile('./lib/data/json/HawaiiIncidents.json', JSON.stringify(crimes), err => {
+            if(err){console.log(err)};
+            console.log("done writing cities json");
+        })
+        res.send("hawaii data parsed bitch")
+    })
+})
 
 // Says post, but is actually get
 app.post('/cached', (req, res) => {
