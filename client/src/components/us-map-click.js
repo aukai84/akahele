@@ -31,7 +31,7 @@ const State = ({data, geoPath, feature, quantize}) => {
 
     if(data){
 
-        color = 'silver';
+        color = '#98c8f2';
 
     }
     return (<path d={geoPath(feature)} style={{fill: color}} title={feature.id} />)

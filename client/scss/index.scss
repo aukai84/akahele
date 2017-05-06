@@ -35,7 +35,7 @@ body {
 .home-nav-button{
   float: left;
   a:link{
-    
+
   font-family:'Glegoo', serif !important;
   font-size: 20px;
   font-weight: bold;
@@ -77,10 +77,65 @@ a:hover{
 
 
 .homepage-footer{
-  margin-top: 400px;
-  padding-left:250px;
-  margin-bottom: 50px;
+  width:100%;
+  margin: auto;
+  // margin-top: 400px;
+  padding-left:300px;
+  padding-top: 400px;
+  // margin-bottom: 50px;
   
+
+}
+
+.devleagueImg{
+  margin: 10px;
+}
+
+.GithubImg{
+  margin: 10px;
+
+}
+
+.googleMapsImg{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 8px;
+
+
+}
+
+.d3Img{
+  margin: 10px;
+
+}
+
+.ReactImg{
+  // margin-left: 10px;
+  margin-right:10px;
+  margin-bottom: 15px;
+
+
+}
+
+.GulpImg{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+
+
+}
+
+.PostgresImg{
+  margin: 10px;
+  margin-top: 5px;
+
+}
+
+.SassImg{
+  margin-left: 15px;
+  margin-right:10px;
+  margin-bottom: 25px;
+
 
 }
 
@@ -236,16 +291,7 @@ button{
 
 }
 
-.cityComparison{
-  padding: 10px;
-  color: white;
-  font-size: 15px;
-}
 
-.graphImg{
-  width: 30px;
-  height: 30px;
-}
 
 .graphView{
   padding: 10px;
@@ -260,24 +306,26 @@ button{
   font-size: 17px;
   font-family: 'Roboto', sans-serif; 
 }
-.stateImg{
-  width: 30px;
-  height: 30px;
 
-}
 
 .stateComparison{
   padding: 10px;
   color:white;
   font-size: 15px;
-}
-.streetImg{
-  width: 30px;
-  height: 30px;
-
+  font-family: 'Roboto', sans-serif;
 }
 
+.cityComparison{
+   padding: 10px;
+  color:white;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
 
+}
+
+input{
+  margin-top:10px;
+}
 
 select{
   width: 100px;
@@ -300,13 +348,35 @@ select{
 
 
 
-  .graphTitle{
+  .graph-title{
     height:30px; 
     padding-top: 30px;
     background-color:#19548e;
     color:white;
     font-family:'Glegoo', serif;
     text-align: center;
+
+  }
+
+   .city-title{
+    height:30px; 
+    padding-top: 30px;
+    background-color:#19548e;
+    color:white;
+    font-family:'Glegoo', serif;
+    text-align: center;
+    margin-bottom: 15px;
+
+  }
+
+  .state-title{
+    height:30px; 
+    padding-top: 30px;
+    background-color:#19548e;
+    color:white;
+    font-family:'Glegoo', serif;
+    text-align: center;
+    margin-bottom: 15px;
 
   }
 
@@ -357,13 +427,7 @@ select{
     padding-right: 90px;
   }
 
-  .city-title{
-    padding-left: 380px;
-  }
-
-  .state-title{
-    padding-left: 380px;
-  }
+ 
 
   .main-body{
   	text-align: center;
