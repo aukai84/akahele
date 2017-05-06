@@ -46,7 +46,7 @@ class LocationOneSearch extends Component {
         console.log(event.key)
         if(event.key === 'Enter'){
         console.log("this is the state ", this.state.value)
-            this.props.retrieveLocationOne(this.state.value, this.props.currentYear);
+            this.props.retrieveLocationOne(this.state.value);
         }
     }
 
