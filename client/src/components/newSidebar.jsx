@@ -2,6 +2,9 @@ import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import Modal from './Modal.jsx';
 import ChartsContainer from '../containers/Charts';
+import GraphImg from '../../assets/bar_chart.png';
+import CityImg from '../../assets/city-color.png';
+import StateImg from '../../assets/locationpin.png';
 
 
 
@@ -46,7 +49,7 @@ class NewSideBar extends React.Component {
        <div className="sidebarTitle"><p>Menu</p></div>
 
           <div className="graphView">
-              <a className="sidebar-graph" onClick={() => this.openModalGraph()}>Graphs</a>
+              <a className="sidebar-graph" onClick={() => this.openModalGraph()}><img src={GraphImg} alt="graphImg" className="graphImg" width="30" height="30" />Graphs</a>
               <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
                     <div className="graph-title"><h3>Graphs</h3></div>
                     <ChartsContainer currentView={this.props.currentView} currentData={this.props.currentData}/>
@@ -55,7 +58,7 @@ class NewSideBar extends React.Component {
             </div>
 
         <div className="cityComparison">
-          <a onClick={() => this.openModal()}>City Comparison</a>
+          <a onClick={() => this.openModal()}><img src={CityImg} className="cityImg" alt="cityImg" width="30" height="30" />City Comparison</a>
           <Modal className="cityBlock" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
             <div className="city-title"><h3>City Comparison</h3></div>
             <div className="cityOne">
@@ -71,7 +74,7 @@ class NewSideBar extends React.Component {
         </div>
 
          <div className="stateComparison">
-          <a onClick={() => this.openModalState()}>State Comparison</a>
+          <a onClick={() => this.openModalState()}><img src={StateImg} className="stateImg" alt="stateImg" width="30" height="30" />State Comparison</a>
           <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
 
            <div className="state-title"><h3>State Comparison</h3></div>
