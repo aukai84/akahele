@@ -4,13 +4,11 @@ import { sendToApi } from '../../lib/modules/modules.js';
 
 const RedDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle.png"/>;
 
-// const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
-
- const BlueMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png"/>
-
 // const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
 
-//const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
+// const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
+
+const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
 
 // const mockData = {
 //   "type": "FeatureCollection",
@@ -143,27 +141,29 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
-    // for (let j=0; j <= this.state.isGeocoded.length; j++){
-    //   let incident = JSON.parse(this.state.isGeocoded[j]);
-    //   let marker = new maps.Marker({
-    //     map,
-    //     position: {
-    //       lat: parseFloat(incident.latitude),
-    //       lng: parseFloat(incident.longitude)
-    //     },
-    //     icon: RedDot
-    //   });
-    //   let infoWindow = new maps.InfoWindow({
-    //     content: '<b>ID: </b>' + incident.objectid + '<br>' + '<b>Date & Time: </b>' + incident.date + '<br>' + '<b>Address: </b>' + incident.blockaddress + '<br>' + '<b>Type: </b>' + incident.type
-    //   });
-    //   marker.addListener('click', _ => {
-    //     if (prevInfoWindow){
-    //       prevInfoWindow.close();
-    //     }
-    //     infoWindow.open(map, marker);
-    //     prevInfoWindow = infoWindow;
-    //   });
-    // };
+    for (let j=0; j <= this.state.isGeocoded.length; j++){
+      let incident = this.state.isGeocoded[j];
+      if(incident) {
+        let marker = new maps.Marker({
+          map,
+          position: {
+            lat: parseFloat(incident.latitude),
+            lng: parseFloat(incident.longitude)
+          },
+          icon: 'http://maps.gstatic.com/mapfiles/markers2/measle.png'
+        });
+        let infoWindow = new maps.InfoWindow({
+          content: '<b>ID: </b>' + incident.objectid + '<br>' + '<b>Date & Time: </b>' + incident.date + '<br>' + '<b>Address: </b>' + incident.blockaddress + '<br>' + '<b>Type: </b>' + incident.type
+        });
+        marker.addListener('click', _ => {
+          if (prevInfoWindow){
+            prevInfoWindow.close();
+          }
+          infoWindow.open(map, marker);
+          prevInfoWindow = infoWindow;
+        });
+      }
+    };
     console.log('Incidents not geocoded: ', this.state.notGeocoded.length);
     var markers = [];
     var prevInfoWindow;
@@ -241,6 +241,19 @@ export default class GoogleMaps extends Component {
     this.geocoder;
   }
 
+        // {
+        //   this.state.isGeocoded.map((incident) => {
+        //     let latitude = parseFloat(incident.latitude);
+        //     let longitude = parseFloat(incident.longitude);
+        //     console.log('Incidents in cache: ', this.state.isGeocoded.length);
+        //     return (
+        //       <RedDot
+        //         key={incident.id}
+        //         lat={latitude}
+        //         lng={longitude} />
+        //     );
+        //   })
+        // }
   render() {
     console.log('isGeocoded:', this.state.isGeocoded);
     return (
@@ -249,20 +262,7 @@ export default class GoogleMaps extends Component {
         bootstrapURLKeys={{key: 'AIzaSyCC7M-pvWb75Zecv7358x-Zx9Bum_LPvGI'}}
         defaultCenter={this.state.defaultCenter}
         defaultZoom={this.state.defaultZoom}>
-        {
-          this.state.isGeocoded.map((incident) => {
-            let latitude = parseFloat(incident.latitude);
-            let longitude = parseFloat(incident.longitude);
-            console.log('Incidents in cache: ', this.state.isGeocoded.length);
-            return (
-              <RedDot
-                key={incident.id}
-                lat={latitude}
-                lng={longitude} />
-            );
-          })
-        }
-        <BlueMarker
+        <BlueDot
           lat={this.state.lat}
           lng={this.state.lng} />
       </GoogleMap>

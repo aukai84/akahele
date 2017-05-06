@@ -54,12 +54,12 @@ app.get('/parseIntoJson', (req, res) => {
   CrimeIncident.findAll()
     .then(crimes => {
       fs.writeFile('./lib/data/json/HawaiiIncidents.json', JSON.stringify(crimes), err => {
-            if(err){console.log(err)};
+            if(err){console.log(err);}
             console.log("done writing cities json");
-        })
-        res.send("hawaii data parsed bitch")
-    })
-})
+        });
+        res.send("hawaii data parsed bitch");
+    });
+});
 
 // Says post, but is actually get
 app.post('/cached', (req, res) => {
