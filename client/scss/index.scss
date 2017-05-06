@@ -10,30 +10,81 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 10px;
-  width: 800px;
+  width: 100%;
   height: 800px;
-
+ 
 } 
 
+
+
 .nav-div{
-  float:right;
+  text-align: right;
   padding-right: 15px;
+  background-color:white;
+  max-width: 100%;
+  color:#1474c9;
+  padding-bottom: 20px;
+  display: flex;
+  flex-flow: row-wrap;
+  padding-top: 15px;
+  padding-left: 15px;
+ 
 
 }
 
-a{
-  padding-left: 4px;
+.home-nav-button{
+  float: left;
+  a:link{
+    
+  font-family:'Glegoo', serif !important;
+  font-size: 20px;
+  font-weight: bold;
+  }
+
+}
+
+.other-nav-buttons{
+  width: 95%;
+  float:right;
+  font-family: 'Roboto', sans-serif;
+}
+
+a:link{
+  // padding-left: 4px;
   font-size: 15px;
+  // margin:5px;
+  // background-color:white;
+ color:#1474c9;
+
+}
+
+a:visited{
+  color:#1474c9;
+}
+
+a:link{
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  // border: 1px solid #d2d4d8;
+  // border-radius: 5px;
+  padding: 3px;
+
 }
 
 a:hover{
-  color:green;
+  border-bottom: 3px #046cf4 solid;
+}
+
+
+.homepage-footer{
+  margin-top: 400px;
+  padding-left:250px;
+  margin-bottom: 50px;
+  
 
 }
 
-a:visited {
-    color: pink;  
-}
+
      
 
 /* NATION VIEW */
@@ -41,31 +92,77 @@ a:visited {
 .bigContainer{
   display:flex;
   flex-flow: row-wrap;
-  width:800px;
+  width:100%;
 }
+
 .main-container{
   height:800px;
-  width:800px;
-  padding-left: 200px;
+  width:100%;
+  padding-left: 200px; 
 }
 
 .nation-map{
   padding-left: 130px;
   padding-top: 50px;
   width: 1000px;
+   // background-color:#bfefeb; 
+}
+
+.nation-title{
+  color:#1474c9;
+  font-size:50px;
+  font-family:'Glegoo', serif;
+}
+
+.state-clickon{
+  color:#042644;
+  font-size:30px;
+  font-family:'Glegoo', serif;
+
 }
 
 .bar-chart{
+  @include respond-to('small'){
+    width:100px !important;
+  }
+  font-size:15px;
   padding-top: 25px;
   padding-right: 20px;
   padding-bottom: 10px;
   margin: auto;
 }
 
+.recharts-legend-item-text{
+  font-size:18px;
+}
+
+
+
+.current-bar-graph-view{
+  // display: flex;
+  // flex-flow: row-wrap;
+}
+
+.current-state{
+  padding-left:380px;
+  padding-top:15px;
+}
+
+.current-year{
+  padding-top:15px;
+}
+
+
 .line-chart{
+  font-size:10px;
   padding-top: 25px;
   padding-bottom: 10px;
   margin: auto;
+}
+
+.linechart-state{
+  padding-left:430px;
+  padding-top:10px;
 }
 
 .multi-bar-graph{
@@ -75,24 +172,42 @@ a:visited {
 }
 
 
+
+.multibar-nav{
+  display: flex;
+  flex-flow: row-wrap;
+  padding-left:360px;
+  padding-top:10px;
+
+}
+
+
 .modalStyle{
-      position: absolute;
-      top: 50%;
-      left: 280%;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      color: black;
-      background: #fff;
+    position: absolute;
+    top: 50%;
+    left:180%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    color: black;
+    background: #fff;
+    width:700px;
+    height: 400px;
+  @include respond-to('large'){
+      left: 240%;
       height: 550px;
       width: 1000px;
+    
+  }
 }
 
 
 button{
     border-radius: 5px;
-    border: 2px solid #73AD21;
+    border: 2px solid #1474c9;
     margin-left: 450px;
     background-color: white;
+    margin-top:15px;
+    font-family: 'Roboto', sans-serif; 
 
 }
 
@@ -124,6 +239,7 @@ button{
 .cityComparison{
   padding: 10px;
   color: white;
+  font-size: 15px;
 }
 
 .graphImg{
@@ -134,11 +250,15 @@ button{
 .graphView{
   padding: 10px;
   color: white;
+  font-size: 15px;
+  text-align:left;
 }
 
 .radioBtn{
   padding-top: 15px;
   padding-left: 370px;
+  font-size: 17px;
+  font-family: 'Roboto', sans-serif; 
 }
 .stateImg{
   width: 30px;
@@ -149,6 +269,7 @@ button{
 .stateComparison{
   padding: 10px;
   color:white;
+  font-size: 15px;
 }
 .streetImg{
   width: 30px;
@@ -161,26 +282,33 @@ button{
 select{
   width: 100px;
   margin-left: 40px;
-  border: #149e6d solid 1px;
+  border: #1474c9 solid 1px;
   border-radius: 4px;
   background-color: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
 }
-
 
 
   .sidebarTitle{
     padding-left: 65px;
     color:white;
     font-size: 25px;
+    border-bottom: solid white 3px;
+    padding-bottom: 10px;
+
   }
+
+
 
   .graphTitle{
-    padding-left: 430px;
-    padding-top: 10px;
+    height:30px; 
+    padding-top: 30px;
+    background-color:#19548e;
+    color:white;
+    font-family:'Glegoo', serif;
+    text-align: center;
 
   }
-
-
 
 
   .crimes{
@@ -237,7 +365,6 @@ select{
     padding-left: 380px;
   }
 
-
   .main-body{
   	text-align: center;
   	padding-left: 100px;
@@ -257,18 +384,23 @@ select{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+
 }
 .homepage-title{
   color:white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-family:'Glegoo', serif;
   font-size:80px;
-  padding-top:200px;
-  margin-left:300px;
+  max-width: 800px;
+  margin:auto;
+  text-align: center;
+  padding-top: 300px;
+ 
   @include respond-to('large'){
-    margin-left: 540px;
-    padding-top: 300px;
     font-size: 100px;
+    margin: auto;
+
   }
     
   }
@@ -276,16 +408,17 @@ select{
 .homepage-slogan{
   font-size: 20px;
   color:white;
-  margin-left: 280px;
   padding-top:15px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-family:'Satisfy', cursive;
+  text-align: center;
+  margin:auto;
   @include respond-to('large'){
-    margin-left: 470px;
     font-size: 30px;
     
   }
 }
+
 
 .homepage-info{
   height: 700px;
@@ -298,26 +431,19 @@ select{
 
 }
 .info-detail{
-  padding-top: 90px;
-  padding-left: 20px; 
-  padding-right: 20px;
-  width: 49%;
+  max-width: 800px;
+  margin:auto;
+  font-family: 'Roboto', sans-serif;
 }
 
-.info-picture{
-  padding-top: 80px;
-  /*width: 48%;*/
-}
 
-.securityImg{
-  height:200px;
-  width: 250px;
-  @include respond-to('large'){
-    height: 340px;
-    width: 400px;
-    padding-left: 15px;
-    
-  }
+.info-detail-title{
+  color:#1474c9;
+  font-family:'Glegoo', serif;
+  font-size: 50px;
+  text-align: center;
+  padding-bottom:15px;
+
 }
 
 .homepage-about{
@@ -330,23 +456,14 @@ select{
 }
 
 .about-title{
-  color: white;
-  border: 3px solid white;
-  width: 300px;
-  height: 150px;
+  color:white;
+  max-width: 800px;
+  margin:auto;
   text-align: center;
-  padding-top: 60px;
-  position: relative;
-  font-size: 25px;
-  margin-left:200px;
-  top: 300px;
-
-
-  @include respond-to('large'){
-    top: 400px;
-    margin-left: 600px;
-
-  }
+  font-family:'Glegoo', serif;
+  font-size:30px;
+  padding-top:400px;
+  // border: 3px solid white;
 }
 
 
@@ -358,10 +475,7 @@ ul li{
   font-size: 35px;
 }
 
-a:link{
-  text-decoration: none;
 
-}
 
 
 
@@ -378,6 +492,7 @@ a:link{
   height: 30px;
   left: 36px;
   top: 36px;
+  margin-top: 20px;
 }
 
 /* Color/shape of burger icon bars */
@@ -398,18 +513,24 @@ a:link{
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
+  background: #042644;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
+  color: #b8b7ad !important;
   padding: 0.8em;
+  font-family: 'Roboto', sans-serif;
+
+  a:visited{
+    color: silver !important;
+  }
+
 }
 
 /* Styling of overlay */
 .bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
+  // background: rgba(0, 0, 0, 0.3);
 }

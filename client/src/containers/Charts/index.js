@@ -91,7 +91,7 @@ class ChartsContainer extends Component {
         if(this.state.graphType === 'line'){
             return(
                 <div>
-                    <h2>{this.props.currentView}</h2>
+                    <div className="linechart-state">{this.props.currentView}</div>
                     <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
                     <div className="radioBtn">
                     <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
@@ -104,33 +104,37 @@ class ChartsContainer extends Component {
         } else if(this.state.graphType === 'bar'){
             return(
                 <div>
-                    <h2>{this.props.currentView}</h2>
-                    <h3>{this.state.currentYear}</h3>
+                    <div className="current-bar-graph-view">
+                    <div className="current-state">{this.props.currentView}</div>
+                    <div className="current-year"> 
+                        <select onChange={this.yearChange} value={this.props.crime}>
+                            <option value='2015'>2015</option>
+                            <option value='2014'>2014</option>
+                            <option value='2013'>2013</option>
+                            <option value='2012'>2012</option>
+                        </select>
+                    </div>
+                    </div>
                     <SimpleBarGraph barGraphData={this.state.barGraphData}/>
                     <div className="radioBtn">
                         <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
                         <input type="radio" value="bar" checked='true' name="graph" onChange={this.setGraph}/> Bar
                         <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
                     </div>
-                    <select onChange={this.yearChange} value={this.props.crime}>
-                        <option value='2015'>2015</option>
-                        <option value='2014'>2014</option>
-                        <option value='2013'>2013</option>
-                        <option value='2012'>2012</option>
-                    </select>
+                   
                 </div>
             )
         } else if(this.state.graphType === 'multiBar'){
             return(
-                <div>
-                    <h2>{this.props.currentView}</h2>
+                <div className="multibar-content">
                     <MultiBarGraph multiBarData={this.state.multiBarData} currentView={this.props.currentView}/>
-                    <div className="radioBtn">
-                    <input id="line"  type="radio" value="line" name="graph" onChange={this.setGraph}/> <label htmlFor="line">line</label>
-                    <input id="line 2"  type="radio" value="bar" name="graph" onChange={this.setGraph}/> <label htmlFor="line 2">bar</label>
-                    <input id="line 3"  type="radio" value="multiBar" name="graph" onChange={this.setGraph}/><label >multi bar</label>
+                   
+                        <div className="radioBtn">
+                            <input id="line"  type="radio" value="line" name="graph" onChange={this.setGraph}/> <label htmlFor="line">Line</label>
+                            <input id="line 2"  type="radio" value="bar" name="graph" onChange={this.setGraph}/> <label htmlFor="line 2">Bar</label>
+                            <input id="line 3"  type="radio" value="multiBar" name="graph" onChange={this.setGraph}/><label >Multi Bar</label>
 
-                    </div>
+                        </div>
                 </div>
             )
         }

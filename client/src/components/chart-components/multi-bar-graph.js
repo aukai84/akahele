@@ -42,7 +42,11 @@ class MultiBarGraph extends Component {
 
     render(){
         return(
-            <div>
+            <div className="multibar-main">
+                <div className="multibar-nav">
+                <div className="multibar-state">{this.props.currentView}</div>
+
+                <div className="multibar-dropdown">
                  <select onChange={this.crimeChange}>
                         <option value='murder_and_manslaughter'>murder</option>
                         <option value='rape'>rape</option>
@@ -53,15 +57,18 @@ class MultiBarGraph extends Component {
                         <option value='motor_vehicle_theft'>motor vehicle theft</option>
                         <option value='arson'>arson</option>
                 </select>
-                <BarChart className="multi-bar-graph" width={800} height={400} data={this.props.multiBarData} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                    <XAxis dataKey={this.state.key} />
-                    <YAxis/>
+                </div>
+                </div>
+
+                <BarChart className="multi-bar-graph" width={800} height={300} data={this.props.multiBarData} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                    <XAxis dataKey={this.state.key} fontSize={15} />
+                    <YAxis fontSize={15}/>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip/>
                     <Legend verticalAlign="top" wraperStyle={{lineHeight: '40px'}} />
                     <ReferenceLine y={0} stroke="#000" />
-                    <Brush dataKey={this.state.key} height={30} stroke="#8884d8"/>
-                    <Bar dataKey={this.state.dataKey} name={this.state.crimeName} fill="blue"/>
+                    <Brush dataKey={this.state.key} height={20} stroke="#1474c9"/>
+                    <Bar dataKey={this.state.dataKey} name={this.state.crimeName} fill="#19548e"/>
                 </BarChart>
             </div>
             )

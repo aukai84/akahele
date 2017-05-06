@@ -2,7 +2,7 @@
 // import Modal from './Modal.jsx';
 // import ChartsContainer from '../containers/Charts'
 
-// class Sidebar extends React.Component {
+// class NewSidebar extends React.Component {
 // 	constructor(props){
 // 		super(props);
 // 		this.state = {
@@ -101,7 +101,7 @@
 
 // }
 
-// export default Sidebar;
+// export default NewSidebar;
 
 
 
