@@ -1,90 +1,88 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import GoogleMap from 'google-map-react';
-import MyGreatPlace from './my_great_place.jsx';
 import { sendToApi } from '../../lib/modules/modules.js';
 
-const redDot = require('../../../assets/dot-red.png');
+const RedDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle.png"/>;
 
-const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
+// const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
 
-const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
+// const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
 
 const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
 
-const mockData = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        id: 0,
-        date: '12 April, 2017',
-        name: 'Mark Ota',
-        type: 'Death',
-        cause: 'Diarrhea'
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -157.84521102905273,
-          21.29225337295981
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        id: 1,
-        date: '7 August, 2021',
-        name: 'Aukai Tirrell',
-        type: 'Arrest',
-        cause: 'Drug trafficking',
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -158.18613052368164,
-          21.448595053724944
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        id: 2,
-        date: '7 August, 2021',
-        name: 'Nick Lee',
-        type: 'Death',
-        cause: 'Drug overdose',
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -158.1860339641571,
-          21.44716707427564
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        id: 3,
-        date: '2 February, 2057',
-        name: 'Danika Harada',
-        type: 'Missing person report',
-        cause: 'It was actually just a cat',
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -157.77706146240234,
-          21.42270950855108
-        ]
-      }
-    }
-  ]
-};
+// const mockData = {
+//   "type": "FeatureCollection",
+//   "features": [
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         id: 0,
+//         date: '12 April, 2017',
+//         name: 'Mark Ota',
+//         type: 'Death',
+//         cause: 'Diarrhea'
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -157.84521102905273,
+//           21.29225337295981
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         id: 1,
+//         date: '7 August, 2021',
+//         name: 'Aukai Tirrell',
+//         type: 'Arrest',
+//         cause: 'Drug trafficking',
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -158.18613052368164,
+//           21.448595053724944
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         id: 2,
+//         date: '7 August, 2021',
+//         name: 'Nick Lee',
+//         type: 'Death',
+//         cause: 'Drug overdose',
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -158.1860339641571,
+//           21.44716707427564
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         id: 3,
+//         date: '2 February, 2057',
+//         name: 'Danika Harada',
+//         type: 'Missing person report',
+//         cause: 'It was actually just a cat',
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -157.77706146240234,
+//           21.42270950855108
+//         ]
+//       }
+//     }
+//   ]
+// };
 
 export default class GoogleMaps extends Component {
 
@@ -117,12 +115,14 @@ export default class GoogleMaps extends Component {
     xhr.addEventListener("load", _ => {
       sendToApi('http://localhost:4000/cached')
       .then(objects => {
-        let data = JSON.parse(xhr.responseText);
-        console.log('HPD XHR length: ', data.length);
+        let hpd = JSON.parse(xhr.responseText);
+        console.log('HPD XHR length: ', hpd.length);
         let cache = objects
           .filter(object => object !== null)
-          .map(JSON.stringify);
-        let notGeocoded = data.filter((incident) => !cache.some((object) => object.objectid !== incident.objectid));
+        let notGeocoded = hpd.filter((incident) => !cache.some((object) => object.cmid === incident.cmid));
+        console.log('hpd: ', hpd);
+        console.log('isGeocoded: ', cache);
+        console.log('notGeocoded: ', notGeocoded);
         this.setState({notGeocoded, isGeocoded: cache});
       });
     });
@@ -141,28 +141,28 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
-    for (let j=0; j <= this.state.isGeocoded.length; j++){
-      let incident = JSON.parse(this.state.isGeocoded[j]);
-      let marker = new maps.Marker({
-        map,
-        position: {
-          lat: parseFloat(incident.latitude),
-          lng: parseFloat(incident.longitude)
-        },
-        icon: redDot
-      });
-      let infoWindow = new maps.InfoWindow({
-        content: '<b>ID: </b>' + incident.objectid + '<br>' + '<b>Date & Time: </b>' + incident.date + '<br>' + '<b>Address: </b>' + incident.blockaddress + '<br>' + '<b>Type: </b>' + incident.type
-      });
-      marker.addListener('click', _ => {
-        if (prevInfoWindow){
-          prevInfoWindow.close();
-        }
-        infoWindow.open(map, marker);
-        prevInfoWindow = infoWindow;
-      });
-    };
-    console.log('Incidents remaining: ', this.state.notGeocoded.length);
+    // for (let j=0; j <= this.state.isGeocoded.length; j++){
+    //   let incident = JSON.parse(this.state.isGeocoded[j]);
+    //   let marker = new maps.Marker({
+    //     map,
+    //     position: {
+    //       lat: parseFloat(incident.latitude),
+    //       lng: parseFloat(incident.longitude)
+    //     },
+    //     icon: RedDot
+    //   });
+    //   let infoWindow = new maps.InfoWindow({
+    //     content: '<b>ID: </b>' + incident.objectid + '<br>' + '<b>Date & Time: </b>' + incident.date + '<br>' + '<b>Address: </b>' + incident.blockaddress + '<br>' + '<b>Type: </b>' + incident.type
+    //   });
+    //   marker.addListener('click', _ => {
+    //     if (prevInfoWindow){
+    //       prevInfoWindow.close();
+    //     }
+    //     infoWindow.open(map, marker);
+    //     prevInfoWindow = infoWindow;
+    //   });
+    // };
+    console.log('Incidents not geocoded: ', this.state.notGeocoded.length);
     var markers = [];
     var prevInfoWindow;
     let i = 0;
@@ -240,6 +240,7 @@ export default class GoogleMaps extends Component {
   }
 
   render() {
+    console.log('isGeocoded:', this.state.isGeocoded);
     return (
       <GoogleMap
         onGoogleApiLoaded={this.geocoder}
@@ -250,12 +251,15 @@ export default class GoogleMaps extends Component {
           lat={this.state.lat}
           lng={this.state.lng} />
         {
-          mockData.features.map((mockIncident) => {
+          this.state.isGeocoded.map((incident) => {
+            let latitude = parseFloat(incident.latitude);
+            let longitude = parseFloat(incident.longitude);
+            console.log('Incidents in cache: ', this.state.isGeocoded.length);
             return (
-              <GreenMarker 
-                key={mockIncident.properties.id}
-                lat={mockIncident.geometry.coordinates[1]}
-                lng={mockIncident.geometry.coordinates[0]} />
+              <RedDot
+                key={incident.id}
+                lat={latitude}
+                lng={longitude} />
             );
           })
         }
@@ -263,3 +267,13 @@ export default class GoogleMaps extends Component {
     );
   }
 }
+        // {
+        //   mockData.features.map((mockIncident) => {
+        //     return (
+        //       <GreenMarker 
+        //         key={mockIncident.properties.id}
+        //         lat={mockIncident.geometry.coordinates[1]}
+        //         lng={mockIncident.geometry.coordinates[0]} />
+        //     );
+        //   })
+        // }
