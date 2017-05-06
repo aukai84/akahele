@@ -7,14 +7,32 @@ let usTopoJson = require('./d3-maps/usa/us.json');
 
 let data = require('./d3-maps/states.json');
 
+ console.log('data', data);
+
 var path = d3.geoPath;
 console.log(path)
 
+const choropleth = [
+  'rgb(245,251,255)',
+  'rgb(222,235,247)',
+  'rgb(198,219,239)',
+  'rgb(158,202,225)',
+  'rgb(107,174,214)',
+  'rgb(66,146,198)',
+  'rgb(33,113,181)',
+  'rgb(8,81,156)',
+  'rgb(8,48,107)'
+];
+
+
+
 const State = ({data, geoPath, feature, quantize}) => {
-    let color = 'cornflowerblue';
+    let color = 'silver';
 
     if(data){
+
         color = 'silver';
+
     }
     return (<path d={geoPath(feature)} style={{fill: color}} title={feature.id} />)
 }
@@ -24,10 +42,11 @@ class StatesMap extends Component {
         super(props);
         this.state={
           zoomInitted: false,
-          transform: null
+          transform: null,
+          nationData: props.nationData
         }
         this.projection = d3.geoAlbersUsa()
-            .scale(1100);
+            .scale(1280);
         this.geoPath = d3.geoPath()
             .projection(this.projection);
         this.quantize = d3.scaleQuantize()
@@ -38,9 +57,13 @@ class StatesMap extends Component {
             .on('zoom', this.onZoom.bind(this));
     }
 
+
         //udpate d3 objects when props udpate
     componentWillReceiveProps(newProps){
         this.updateD3(newProps);
+        this.setState({
+          nationData: newProps.nationData
+        })
     }
 
     //updating d3
@@ -48,7 +71,7 @@ class StatesMap extends Component {
         this.projection.translate([this.props.width/2, this.props.height/2]);
 
         if(this.props.crimeTotal){
-            this.quantize.domain([10000, 75000]);
+            this.quantize.range([10000, 75000]);
         }
     }
 
@@ -63,7 +86,6 @@ class StatesMap extends Component {
         const svg = d3.select(this.refs.svg);
 
         svg.call(this.zoom);
-        console.log('this zoom', this.zoom)
 
         this.setState({
           zoomInitted: true
@@ -82,14 +104,16 @@ class StatesMap extends Component {
       console.log('transform')
       if(this.state.transform){
         const { x, y, k } = this.state.transform;
-        return `translate(${x}, ${y}) scale(${k})`
-        console.log({ x, y, k });
+
+        return `translate(${x}, ${y}) scale(${k})`;
       }else{
         return null;
       }
     }
 
+
     render(){
+      console.log('nation data', this.state.nationData);
         if(!this.props.usTopoJson){
             return null;
         } else {
