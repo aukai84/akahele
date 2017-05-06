@@ -12,7 +12,7 @@ const nation = require('./routes/nation');
 const parsers = require('./lib/modules/parsers.js');
 const db = require('./models');
 const {CrimeIncident} = db;
-const {NationCrime} = require('./models'); 
+const {NationCrime} = require('./models');
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
@@ -95,9 +95,4 @@ app.post('/cached', (req, res) => {
     }
   });
 });*/
-
-app.listen(PORT, _ => {
-  console.log('server servering  at server port', `${PORT}`);
-});
-
-module.exports = app;
+ module.exports = app;
