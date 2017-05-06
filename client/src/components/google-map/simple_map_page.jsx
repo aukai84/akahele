@@ -4,11 +4,13 @@ import { sendToApi } from '../../lib/modules/modules.js';
 
 const RedDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle.png"/>;
 
-// const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
-
 // const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
 
-const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
+ const BlueMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png"/>
+
+// const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
+
+//const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
 
 // const mockData = {
 //   "type": "FeatureCollection",
@@ -247,9 +249,6 @@ export default class GoogleMaps extends Component {
         bootstrapURLKeys={{key: 'AIzaSyCC7M-pvWb75Zecv7358x-Zx9Bum_LPvGI'}}
         defaultCenter={this.state.defaultCenter}
         defaultZoom={this.state.defaultZoom}>
-        <BlueDot
-          lat={this.state.lat}
-          lng={this.state.lng} />
         {
           this.state.isGeocoded.map((incident) => {
             let latitude = parseFloat(incident.latitude);
@@ -263,6 +262,9 @@ export default class GoogleMaps extends Component {
             );
           })
         }
+        <BlueMarker
+          lat={this.state.lat}
+          lng={this.state.lng} />
       </GoogleMap>
     );
   }
