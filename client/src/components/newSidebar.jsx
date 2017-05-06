@@ -45,8 +45,7 @@ class NewSideBar extends React.Component {
        <div className="sidebarTitle"><p>Menu</p></div>
 
           <div className="graphView">
-              <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
-              <a onClick={() => this.openModalGraph()}>Graphs</a>
+              <a className="sidebar-graph" onClick={() => this.openModalGraph()}>Graphs</a>
               <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
                     <div className="graphTitle"><h3>Graphs</h3></div>
                     <ChartsContainer currentView={this.props.currentView} currentData={this.props.currentData}/>
@@ -78,16 +77,6 @@ class NewSideBar extends React.Component {
           </Modal>
         </div>
 
-        <div className="crimes">
-        <p>Filter Nation Map By Crime:</p>
-
-        <select onChange={this.crimeChange} value={this.props.crime}>
-              <option value="all">All</option>
-              <option value="murders">Murders</option>
-              <option value="rape">Rape</option>
-              <option value="theft">Theft</option>
-        </select>
-        </div>
       </Menu>
     );
   }

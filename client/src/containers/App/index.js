@@ -16,13 +16,21 @@ class App extends Component {
       isModalGraphOpen: false,
       currentView: 'Nation',
       currentData: [],
+<<<<<<< HEAD
       nationData: []
+=======
+      nationData: [],
+      currentYear: 2015
+>>>>>>> b94fea322f1918cc7876394dedeb78a749cde3a7
     }
   }
 
   componentWillMount() {
     this.retrieveNationData();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b94fea322f1918cc7876394dedeb78a749cde3a7
       d3.queue()
         .defer(d3.json, 'usStates.json')
         .await((error, us) => {
@@ -32,9 +40,20 @@ class App extends Component {
         })
   }
 
+<<<<<<< HEAD
   retrieveNationData(){
+=======
+
+  
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
+  }
+
+  retrieveNationData = () =>{
+>>>>>>> b94fea322f1918cc7876394dedeb78a749cde3a7
     retrieveData('http://localhost:8080/api/nation/all')
     .then(crimes => {
+      console.log(crimes);
         this.setState({
             currentData: crimes,
             nationData: crimes
@@ -49,19 +68,29 @@ class App extends Component {
                 currentView: area,
                 currentData: crimes
             })
-        })
+        }) 
   }
   render() {
+    console.log(this.state);
     return (
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
-                <h2>TESTING REACT-D3-LIBRARY</h2>
 
               <div className="nation-map">
+
+                <div className="nation-title">Click on a state!</div>
+                <div className="state-clickon">{this.state.currentView}</div>
+
+                <svg width='800' height='700'>
                 <h2>{this.state.currentView}</h2>
                 <svg width='1280' height='800'>
+<<<<<<< HEAD
                     <StatesMap nationData={this.state.nationData} setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
+=======
+                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
+                </svg>
+>>>>>>> b94fea322f1918cc7876394dedeb78a749cde3a7
                 </svg>
                 </div>
             <GoogleMaps/>

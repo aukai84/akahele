@@ -17,12 +17,14 @@ ReactDOM.render(
   <Router>
   <div>
   <div className="nav-div">
-      <ul>
-            <li ><Link to="/">Home</Link></li>
-            <li ><Link to="/nation">Map </Link></li>
-            <li ><Link to="/chart">Chart</Link></li>
+    
+           <div className="home-nav-button"> <Link to="/">Akahele.io</Link></div>
 
-        </ul>
+           <div className="other-nav-buttons"><Link to="/">Home</Link> 
+            <Link to="/nation">| Nation Map</Link>
+            <Link to="/chart">| Local View</Link></div>
+
+    
   </div>
   <Route exact path="/" component={ HomePage } />
   <Route path="/nation" component={ App } />
