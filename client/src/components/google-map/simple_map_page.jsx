@@ -132,19 +132,42 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
-    
     for (let j=0; j <= this.state.isGeocoded.length; j++){
       let incident = this.state.isGeocoded[j];
       var prevInfoWindow;
-      if(incident) {
+      if(incident){
+        let iconURL = '';
+        switch (incident.type){
+          case 'BURGLARY':
+            // Green
+            iconURL = 'https://storage.googleapis.com/support-kms-prod/SNP_2752129_en_v0';
+            break;
+          case 'THEFT/LARCENY':
+            // Blue
+            iconURL = 'https://storage.googleapis.com/support-kms-prod/SNP_2752068_en_v0';
+            break;
+          case 'MOTOR VEHICLE THEFT':
+            // Pink
+            iconURL = 'https://storage.googleapis.com/support-kms-prod/SNP_2752264_en_v0';
+            break;
+          case 'VANDALISM':
+            // Yellow
+            iconURL = 'https://storage.googleapis.com/support-kms-prod/SNP_2752063_en_v0';
+            break;  
+          default: 
+            // Red
+            iconURL = 'https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0';
+            break;
+        }
         let marker = new maps.Marker({
           map,
           position: {
             lat: parseFloat(incident.latitude),
             lng: parseFloat(incident.longitude)
           },
-          icon: 'http://maps.gstatic.com/mapfiles/markers2/measle.png'
+          icon: iconURL
         });
+
         let infoWindow = new maps.InfoWindow({
           content: '<b>ID: </b>' + incident.objectid + '<br>' + '<b>Date & Time: </b>' + incident.date + '<br>' + '<b>Address: </b>' + incident.blockaddress + '<br>' + '<b>Type: </b>' + incident.type
         });
@@ -165,7 +188,7 @@ export default class GoogleMaps extends Component {
       let marker = new maps.Marker({
         map,
         position: pos,
-        icon: 'http://maps.gstatic.com/mapfiles/markers2/measle_blue.png'
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
       let infoWindow = new maps.InfoWindow({
         content: "<div style='width:100px; height:100px;'><img style='width:90%; height:90%;' src='https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/1970/s300/logo-for-social-media.jpg'/></div>"
