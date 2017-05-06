@@ -62,7 +62,7 @@ body {
   background-color: white;
   max-width: 100%;
   color: #1474c9;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   display: flex;
   flex-flow: row-wrap;
   padding-top: 15px;
@@ -96,9 +96,42 @@ a:hover {
   border-bottom: 3px #046cf4 solid; }
 
 .homepage-footer {
-  margin-top: 400px;
-  padding-left: 250px;
-  margin-bottom: 50px; }
+  width: 100%;
+  margin: auto;
+  padding-left: 300px;
+  padding-top: 400px; }
+
+.devleagueImg {
+  margin: 10px; }
+
+.GithubImg {
+  margin: 10px; }
+
+.googleMapsImg {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 8px; }
+
+.d3Img {
+  margin: 10px; }
+
+.ReactImg {
+  margin-right: 10px;
+  margin-bottom: 15px; }
+
+.GulpImg {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px; }
+
+.PostgresImg {
+  margin: 10px;
+  margin-top: 5px; }
+
+.SassImg {
+  margin-left: 15px;
+  margin-right: 10px;
+  margin-bottom: 25px; }
 
 /* NATION VIEW */
 .bigContainer {
@@ -219,15 +252,6 @@ button {
   z-index: 9998;
   background: rgba(0, 0, 0, 0.3); }
 
-.cityComparison {
-  padding: 10px;
-  color: white;
-  font-size: 15px; }
-
-.graphImg {
-  width: 30px;
-  height: 30px; }
-
 .graphView {
   padding: 10px;
   color: white;
@@ -240,18 +264,20 @@ button {
   font-size: 17px;
   font-family: 'Roboto', sans-serif; }
 
-.stateImg {
-  width: 30px;
-  height: 30px; }
-
 .stateComparison {
   padding: 10px;
   color: white;
-  font-size: 15px; }
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif; }
 
-.streetImg {
-  width: 30px;
-  height: 30px; }
+.cityComparison {
+  padding: 10px;
+  color: white;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif; }
+
+input {
+  margin-top: 10px; }
 
 select {
   width: 100px;
@@ -268,13 +294,40 @@ select {
   border-bottom: solid white 3px;
   padding-bottom: 10px; }
 
-.graphTitle {
+.graphImg {
+  margin-right: 5px; }
+
+.stateImg {
+  margin-right: 5px; }
+
+.cityImg {
+  margin-right: 5px; }
+
+.graph-title {
   height: 30px;
   padding-top: 30px;
   background-color: #19548e;
   color: white;
   font-family: 'Glegoo', serif;
   text-align: center; }
+
+.city-title {
+  height: 30px;
+  padding-top: 30px;
+  background-color: #19548e;
+  color: white;
+  font-family: 'Glegoo', serif;
+  text-align: center;
+  margin-bottom: 15px; }
+
+.state-title {
+  height: 30px;
+  padding-top: 30px;
+  background-color: #19548e;
+  color: white;
+  font-family: 'Glegoo', serif;
+  text-align: center;
+  margin-bottom: 15px; }
 
 .crimes {
   font-size: 16px;
@@ -287,13 +340,15 @@ select {
   width: 250px;
   height: 400px;
   float: left;
-  padding-left: 90px; }
+  padding-left: 90px;
+  text-align: center; }
 
 .stateTwo {
   width: 250px;
   height: 400px;
   float: right;
-  padding-right: 90px; }
+  padding-right: 90px;
+  text-align: center; }
 
 .CityBlock {
   display: inline-block; }
@@ -302,19 +357,15 @@ select {
   width: 250px;
   height: 400px;
   float: left;
-  padding-left: 90px; }
+  padding-left: 90px;
+  text-align: center; }
 
 .cityTwo {
   width: 250px;
   height: 400px;
   float: right;
-  padding-right: 90px; }
-
-.city-title {
-  padding-left: 380px; }
-
-.state-title {
-  padding-left: 380px; }
+  padding-right: 90px;
+  text-align: center; }
 
 .main-body {
   text-align: center;
@@ -397,6 +448,9 @@ select {
   font-size: 30px;
   padding-top: 400px; }
 
+.contactImg {
+  margin: 10px; }
+
 ul li {
   list-style-type: none;
   display: inline-block;
@@ -427,7 +481,7 @@ ul li {
 
 /* General sidebar styles */
 .bm-menu {
-  background: #042644;
+  background: #5394fc;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em; }
 

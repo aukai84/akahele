@@ -13,18 +13,6 @@ let data = require('./d3-maps/states.json');
 
 var path = d3.geoPath;
 
-const State = ({data, geoPath, feature, quantize}) => {
-    let color = 'cornflowerblue';
-
-    if(data){
-
-        // color = choropleth[quantize(data.murder)];
-        color = 'cornflowerblue';
-
-    }
-    return (<path d={geoPath(feature)} style={{fill: color}} title={feature.properties.name} />)
-}
-
 const choropleth = [
   'rgb(245,251,255)',
   'rgb(222,235,247)',
@@ -37,6 +25,17 @@ const choropleth = [
   'rgb(8,48,107)'
 ];
 
+const State = ({data, geoPath, feature, quantize}) => {
+    let color = '#98c8f2';
+
+    if(data){
+
+        color = '#98c8f2';
+
+    }
+    return (<path d={geoPath(feature)} style={{fill: color}} title={feature.properties.name} />)
+}
+
 class StatesMap extends Component {
     constructor(props){
         super(props);
@@ -46,7 +45,7 @@ class StatesMap extends Component {
           nationData: props.nationData
         }
         this.projection = d3.geoAlbersUsa()
-            .scale(1280);
+            .scale(1100);
         this.geoPath = d3.geoPath()
             .projection(this.projection);
         this.quantize = d3.scaleQuantize()

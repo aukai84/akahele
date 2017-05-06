@@ -29,7 +29,7 @@ class App extends Component {
             this.setState({
                 usTopoJson: us
             })
-        })
+        });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   retrieveNationData = () =>{
-    retrieveData('http://localhost:8080/api/nation/all')
+    retrieveData('https://akahele.io/api/nation/all')
     .then(crimes => {
       console.log(crimes);
         this.setState({
@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   setCurrentView = (area) => {
-    retrieveData(`http://localhost:8080/api/states/${area}/crime`)
+    retrieveData(`https://akahele.io/api/states/${area}/crime`)
         .then(crimes => {
             this.setState({
                 currentView: area,
@@ -62,16 +62,12 @@ class App extends Component {
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
-
               <div className="nation-map">
-
                 <div className="nation-title">Click on a state!</div>
                 <div className="state-clickon">{this.state.currentView}</div>
-
-                <h2>{this.state.currentView}</h2>
-                    <svg className="nation-svg" width='1280' height='800'>
-                        <StatesMap className="nation-container" nationData={this.state.nationData} setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} width={800} height={600}/>
-                    </svg>
+                <svg width='1280' height='800'>
+                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
+                </svg>
                 </div>
             <GoogleMaps/>
             </div>

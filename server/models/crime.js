@@ -16,6 +16,13 @@ module.exports = function(sequelize, DataTypes) {
     city: DataTypes.STRING,
     state: DataTypes.STRING
   }, {
+        indexes: [
+            {
+                unique: false,
+                fields: ['state', 'city']
+            }
+        ]
+  },{
     classMethods: {
       associate: function(models) {
         // associations can be defined here
