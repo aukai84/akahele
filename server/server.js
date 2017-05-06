@@ -8,13 +8,11 @@ const session = require('express-session');
 const crimes = require('./routes/crimes');
 const cities = require('./routes/cities');
 const states = require('./routes/states');
+const nation = require('./routes/nation');
 const parsers = require('./lib/modules/parsers.js');
-
-const PORT = process.env.PORT || 4000;
 const db = require('./models');
 const {CrimeIncident} = db;
-const cors = require ('cors');
-app.use(cors());
+const {NationCrime} = require('./models'); 
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
@@ -31,6 +29,7 @@ app.use(function(req, res, next) {
 app.use('/api/crimes', crimes);
 app.use('/api/cities', cities);
 app.use('/api/states', states);
+app.use('/api/nation', nation);
 
 // check route to send HPD geocoded addresses to PSQL
 app.post('/cache', (req, res) => {

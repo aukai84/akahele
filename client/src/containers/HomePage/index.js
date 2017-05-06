@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+// import Devleague from '../../../assets/devleague_logo.png';
+// import Github from '../../../assets/github.png';
+// import GoogleMaps from '../../../assets/google-maps.png';
+// import d3Img from '../../../assets/d3.png';
+// import ReactImg from '../../../assets/react_hitlfq.png';
+// import GulpImg from '../../../assets/gulp-vector-logo.png';
+// import PostgresImg from '../../../assets/postgresql-logo.png';
+// import SassImg from '../../../assets/sass.png';
 
 
 
@@ -13,12 +21,11 @@ class HomePage extends Component{
 
 					<div className="homepage-first">
 						<div className="homepage-title">Akahele</div>
+						<div className="homepage-slogan">Wherever life may take you, travel there safely</div>
 					</div>
-
 					<div className="homepage-info">
-						<div className="info-picture"><img src="http://lerablog.org/wp-content/uploads/2013/04/travel-safe.jpg" className="securityImg" alt="security"/></div>
 						<div className="info-detail">
-							About Us
+							<div className="info-detail-title">About Us</div>
 								<p>To be, or not to be--that is the question:
 								Whether 'tis nobler in the mind to suffer
 								The slings and arrows of outrageous fortune
@@ -61,6 +68,8 @@ class HomePage extends Component{
 					<div className="homepage-about">
 						<div className="about-detail">
 							<div className="about-title"><h1>Contact Us</h1></div>
+
+							
 
 						</div>
 					</div>

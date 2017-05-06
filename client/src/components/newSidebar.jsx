@@ -41,17 +41,15 @@ class NewSideBar extends React.Component {
     }
 
   render () {
-    console.log('this is the menu', this.props.currentView);
     return (
       <Menu>
        <div className="sidebarTitle"><p>Menu</p></div>
-      
+
           <div className="graphView">
-              <img src={'https://cdn4.iconfinder.com/data/icons/flat-business-icon-set/450/bar_chart-512.png'} className="graphImg" alt="graphs"/>
-              <a onClick={() => this.openModalGraph()}>Graphs</a>
+              <a className="sidebar-graph" onClick={() => this.openModalGraph()}>Graphs</a>
               <Modal isOpen={this.state.isModalGraphOpen} onClose={() => this.closeModalGraph()}>
                     <div className="graphTitle"><h3>Graphs</h3></div>
-                    <ChartsContainer currentView={this.props.currentView}/>
+                    <ChartsContainer currentView={this.props.currentView} currentData={this.props.currentData}/>
                     <p><button onClick={() => this.closeModalGraph()}>Close</button></p>
                 </Modal>
             </div>
@@ -75,30 +73,11 @@ class NewSideBar extends React.Component {
          <div className="stateComparison">
           <a onClick={() => this.openModalState()}>State Comparison</a>
           <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
-           <div className="state-title"><h3>comparing states</h3>
-            <p>not all states are equal</p></div>
-            <div className="stateOne">
-             <h3>State One</h3>
-            <input type="text" name="search" placeholder="Search.."></input>
-            </div>
-            <div className="stateTwo">
-            <h3>State Two</h3>
-            <input type="text" name="search" placeholder="Search.."></input>
-            </div>
+
             <p><button className="closeBtn" onClick={() => this.closeModalState()}>Close</button></p>
           </Modal>
         </div>
 
-        <div className="crimes">
-        <p>Filter Nation Map By Crime:</p>
-
-        <select onChange={this.crimeChange} value={this.props.crime}>
-              <option value="all">All</option>
-              <option value="murders">Murders</option>
-              <option value="rape">Rape</option>
-              <option value="theft">Theft</option>
-        </select>
-        </div>
       </Menu>
     );
   }
