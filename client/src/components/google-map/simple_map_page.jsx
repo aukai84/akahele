@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import GoogleMap from 'google-map-react';
 import { sendToApi } from '../../lib/modules/modules.js';
 
-const RedDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle.png"/>;
+// const RedDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle.png"/>;
 
 // const GreenMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/icon_green.png"/>;
 
 // const RedMarker = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/marker.png"/>;
 
-const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
+// const BlueDot = _ => <img src="http://maps.gstatic.com/mapfiles/markers2/measle_blue.png"/>;
 
 // const mockData = {
 //   "type": "FeatureCollection",
@@ -91,8 +91,6 @@ export default class GoogleMaps extends Component {
     this.state={
       defaultCenter: {lat: 21.5, lng: -158},
       defaultZoom: 10,
-      lat: 0,
-      lng: 0,
       isGeocoded: [],
       notGeocoded: []
     }
@@ -100,14 +98,7 @@ export default class GoogleMaps extends Component {
   }
 
   locator(){
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.setState(
-        {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-      );
-    });
+    
   }
 
   crimeDataRequest(){
@@ -141,8 +132,10 @@ export default class GoogleMaps extends Component {
   }
 
   geocoder ({map, maps}) {
+    
     for (let j=0; j <= this.state.isGeocoded.length; j++){
       let incident = this.state.isGeocoded[j];
+      var prevInfoWindow;
       if(incident) {
         let marker = new maps.Marker({
           map,
@@ -164,9 +157,29 @@ export default class GoogleMaps extends Component {
         });
       }
     };
+    navigator.geolocation.getCurrentPosition((position) => {
+      let pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+      let marker = new maps.Marker({
+        map,
+        position: pos,
+        icon: 'http://maps.gstatic.com/mapfiles/markers2/measle_blue.png'
+      });
+      let infoWindow = new maps.InfoWindow({
+        content: "<div style='width:100px; height:100px;'><img style='width:90%; height:90%;' src='https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/1970/s300/logo-for-social-media.jpg'/></div>"
+      });
+      marker.addListener('click', _ => {
+        if (prevInfoWindow){
+          prevInfoWindow.close();
+        }
+        infoWindow.open(map, marker);
+        prevInfoWindow = infoWindow;
+      });
+    });
     console.log('Incidents not geocoded: ', this.state.notGeocoded.length);
-    var markers = [];
-    var prevInfoWindow;
+    let markers = [];
     let i = 0;
     let timer = setInterval(_ => {
       if (i >= this.state.notGeocoded.length){
@@ -262,13 +275,15 @@ export default class GoogleMaps extends Component {
         bootstrapURLKeys={{key: 'AIzaSyCC7M-pvWb75Zecv7358x-Zx9Bum_LPvGI'}}
         defaultCenter={this.state.defaultCenter}
         defaultZoom={this.state.defaultZoom}>
-        <BlueDot
-          lat={this.state.lat}
-          lng={this.state.lng} />
       </GoogleMap>
     );
   }
 }
+        // <BlueDot
+        //   lat={this.state.lat}
+        //   lng={this.state.lng} />
+
+
         // {
         //   mockData.features.map((mockIncident) => {
         //     return (
