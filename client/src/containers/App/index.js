@@ -64,13 +64,9 @@ class App extends Component {
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
-
               <div className="nation-map">
-
                 <div className="nation-title">Click on a state!</div>
                 <div className="state-clickon">{this.state.currentView}</div>
-
-                <h2>{this.state.currentView}</h2>
                 <svg width='1280' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
                 </svg>
