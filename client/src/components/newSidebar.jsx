@@ -73,6 +73,7 @@ class NewSideBar extends React.Component {
          <div className="stateComparison">
           <a onClick={() => this.openModalState()}>State Comparison</a>
           <Modal className="stateBlock" isOpen={this.state.isModalStateOpen} onClose={() => this.closeModalState()}>
+
            <div className="state-title"><h3>State Comparison</h3></div>
             <div className="stateOne">
              <h3>State One</h3>
