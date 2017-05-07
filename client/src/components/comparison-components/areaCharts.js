@@ -30,7 +30,7 @@ class SyncedAreaCharts extends Component {
         console.log('new state of synced charts ', this.state.dataKey)
         return(
             <div>
-                <h4>A demo of synchronized AreaCharts</h4>
+                <h4>Location One</h4>
                 <AreaChart width={600} height={200} data={this.state.locationOneBar} syncId="anyId"
                       margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                   <XAxis dataKey="year"/>
@@ -39,7 +39,7 @@ class SyncedAreaCharts extends Component {
                   <Tooltip/>
                   <Area type='monotone' dataKey={this.state.dataKey} name={this.state.crimeName} stroke='#8884d8' fill='#8884d8' />
                 </AreaChart>
-                <p>Maybe some other content</p>
+                <h4>Location Two</h4>
                 <AreaChart width={600} height={200} data={this.state.locationTwoBar} syncId="anyId"
                       margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                   <XAxis dataKey="year"/>

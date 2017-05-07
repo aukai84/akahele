@@ -13,6 +13,7 @@ class LocationOneSearch extends Component {
     }
 
     retrieveLocationNames = (locationType) => {
+        console.log(locationType)
         retrieveData(`https://akahele.io/api/${locationType}`)
             .then(locations => {
                 console.log(locations)

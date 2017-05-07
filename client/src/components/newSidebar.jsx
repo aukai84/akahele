@@ -3,6 +3,7 @@ import { slide as Menu } from 'react-burger-menu';
 import Modal from './Modal.jsx';
 import ChartsContainer from '../containers/Charts';
 import StateComparisonContainer from '../containers/StateComparison';
+import CityComparisonContainer from '../containers/CityComparison';
 import GraphImg from '../../assets/bar_chart.png';
 import CityImg from '../../assets/city-color.png';
 import StateImg from '../../assets/locationpin.png';
@@ -60,14 +61,7 @@ class NewSideBar extends React.Component {
           <a onClick={() => this.openModal()}><img src={CityImg} className="cityImg" alt="cityImg" width="30" height="30" />City Comparison</a>
           <Modal className="cityBlock" isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
             <div className="city-title"><h3>City Comparison</h3></div>
-            <div className="cityOne">
-             <h3>City One</h3>
-            <input type="text" name="search" placeholder="Search.."></input>
-            </div>
-            <div className="cityTwo">
-            <h3>City Two</h3>
-            <input type="text" name="search" placeholder="Search.."></input>
-            </div>
+                <CityComparisonContainer/>
             <p><button className="closeBtn" onClick={() => this.closeModal()}>Close</button></p>
           </Modal>
         </div>
