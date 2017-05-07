@@ -43,9 +43,9 @@ class LocationOneSearch extends Component {
     }
 
     onEnter = (event, data) => {
-        console.log(event.key)
+        console.log(this.props)
         if(event.key === 'Enter'){
-            this.requestLocationOne();
+            this.props.retrieveLocationTwo(this.state.value);
         }
     }
 

@@ -321,6 +321,8 @@ select {
   margin-bottom: 15px; }
 
 .state-title {
+    display:flex;
+    flex-flow: column;
   height: 30px;
   padding-top: 30px;
   background-color: #19548e;
