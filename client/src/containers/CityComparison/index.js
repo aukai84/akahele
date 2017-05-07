@@ -39,6 +39,13 @@ class CityComparisonContainer extends Component {
                 })
         }
 
+        crimeChange = (event) => {
+        this.setState({
+            dataKey: event.target.value,
+            crimeName: event.target.value.split('_').join(' ')
+        })
+    }
+
         render(){
             return(
                 <div>
