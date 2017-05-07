@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
+import Autosuggest from 'react-autosuggest';
 import {retrieveData} from '../../lib/modules/modules.js';
 
 class ComparisonContainer extends Component {
@@ -8,28 +9,17 @@ class ComparisonContainer extends Component {
         this.state = {
             lineGraphData: [],
             horizontalBarData: [],
+            suggestionAreas: [],
+            currentYear: ''
         }
     }
 
-    retrieveLineData(area){
-
-        retrieveData(`http://localhost:8080`)
-
-
-    }
-
-    retrieveBarData(area){
-
+    retrieveSuggestions(locationType, location){
+        retrieveData(`http://localhost8080/api/${locationType}/${location}`)
     }
 
     componentWillMount() {
-        this.retrieveLineData(this.props.area);
-        this.retrieveBarData(this.props.area);
-    }
-
-    componentDidMount() {
-        this.retrieveLineData(this.props.area);
-        this.retrieveBarData(this.props.area);
+        this.retrieveSuggestions(this.props.locationType, link)
     }
 
     render(){

@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import Devleague from '../../../assets/devleague.jpg';
+import Github from '../../../assets/github.png';
+import GoogleMaps from '../../../assets/Google_Maps_Icon.png';
+import d3Img from '../../../assets/d3.png';
+import ReactImg from '../../../assets/React-icon.png';
+import GulpImg from '../../../assets/gulp-vector-logo.png';
+import PostgresImg from '../../../assets/postgres.png';
+import SassImg from '../../../assets/sass.png';
+import Contact from '../../../assets/communication.png';
 
 
 
@@ -13,12 +22,11 @@ class HomePage extends Component{
 
 					<div className="homepage-first">
 						<div className="homepage-title">Akahele</div>
+						<div className="homepage-slogan">Wherever life may take you, travel there safely</div>
 					</div>
-
 					<div className="homepage-info">
-						<div className="info-picture"><img src="http://lerablog.org/wp-content/uploads/2013/04/travel-safe.jpg" className="securityImg" alt="security"/></div>
 						<div className="info-detail">
-							About Us
+							<div className="info-detail-title">About Us</div>
 								<p>To be, or not to be--that is the question:
 								Whether 'tis nobler in the mind to suffer
 								The slings and arrows of outrageous fortune
@@ -60,7 +68,24 @@ class HomePage extends Component{
 
 					<div className="homepage-about">
 						<div className="about-detail">
-							<div className="about-title"><h1>Contact Us</h1></div>
+							<div className="about-title"><h1>Contact Us</h1>
+								<img src={Contact} className="contactImg" alt="contact" width="75" height="75"/>
+							</div>
+
+
+
+		
+						</div>
+						<div className="homepage-footer">
+							<a href="http://www.devleague.com/"><img src={Devleague} className="devleagueImg" alt="devleague" width="75" height="70"/></a>
+							<a href="https://github.com/"><img src={Github} className="GithubImg" alt="github" width="75" height="75"/></a>
+							<a href="https://developers.google.com/maps/documentation/javascript/"><img src={GoogleMaps} className="googleMapsImg" alt="google" width="75" height="75"/></a>
+							<a href="https://d3js.org/"><img src={d3Img} className="d3Img" alt="d3Img" width="75" height="75"/></a>
+							<a href="http://gulpjs.com/"><img src={GulpImg} className="GulpImg" alt="GulpImg" width="75" height="75"/></a>
+							<a href="https://www.postgresql.org/"><img src={PostgresImg} className="PostgresImg" alt="PostgresImg" width="75" height="75"/></a>
+							<a href="http://sass-lang.com/guide"><img src={SassImg} className="SassImg" alt="SassImg" width="75" height="50"/></a>
+							<a href="https://facebook.github.io/react/"><img src={ReactImg} className="ReactImg" alt="reactImg" width="90" height="75"/></a>
+
 
 						</div>
 					</div>
