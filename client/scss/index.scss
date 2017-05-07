@@ -50,10 +50,7 @@ body {
 }
 
 a:link{
-  // padding-left: 4px;
   font-size: 15px;
-  // margin:5px;
-  // background-color:white;
  color:#1474c9;
 
 }
@@ -65,8 +62,6 @@ a:visited{
 a:link{
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
-  // border: 1px solid #d2d4d8;
-  // border-radius: 5px;
   padding: 3px;
 
 }
@@ -77,52 +72,47 @@ a:hover{
 
 
 .homepage-footer{
-  width:100%;
-  margin: auto;
-  // margin-top: 400px;
-  padding-left:300px;
-  padding-top: 400px;
-  // margin-bottom: 50px;
-  
-
+  padding-top: 300px;
+ text-align:center;
 }
 
 .devleagueImg{
-  margin: 10px;
+   margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
 }
 
 .GithubImg{
-  margin: 10px;
+  margin-right: 10px;
+  margin-bottom:12px;
 
 }
 
 .googleMapsImg{
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 
 
 }
 
 .d3Img{
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 6px;
+  margin-bottom: 12px;
 
 }
 
 .ReactImg{
-  // margin-left: 10px;
-  margin-right:10px;
-  margin-bottom: 15px;
-
+  margin-right:2px;
+  margin-bottom: 12px;
 
 }
 
 .GulpImg{
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 15px;
-
-
+  margin-bottom: 20px;
 }
 
 .PostgresImg{
@@ -133,8 +123,8 @@ a:hover{
 
 .SassImg{
   margin-left: 15px;
-  margin-right:10px;
-  margin-bottom: 25px;
+  margin-right:2px;
+  margin-bottom: 29px;
 
 
 }
@@ -152,15 +142,13 @@ a:hover{
 
 .main-container{
   height:800px;
-  width:100%;
-  padding-left: 200px; 
+  max-width:100%;
+  margin:auto; 
 }
 
 .nation-map{
-  padding-left: 130px;
   padding-top: 50px;
-  width: 1000px;
-   // background-color:#bfefeb; 
+  width: 100%;
 }
 
 .nation-title{
@@ -192,11 +180,6 @@ a:hover{
 }
 
 
-
-.current-bar-graph-view{
-  // display: flex;
-  // flex-flow: row-wrap;
-}
 
 .current-state{
   padding-left:380px;
@@ -301,10 +284,10 @@ button{
 }
 
 .radioBtn{
-  padding-top: 15px;
+  padding-top: 8px;
   padding-left: 370px;
   font-size: 17px;
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Roboto', sans-serif;
 }
 
 
@@ -352,7 +335,7 @@ select{
 
    .stateImg{
     margin-right:5px;
-  
+
   }
 
    .cityImg{
@@ -465,9 +448,8 @@ select{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-
 }
+
 .homepage-title{
   color:white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -530,21 +512,27 @@ select{
 .homepage-about{
   background-image: url("../../../assets/Mountains.jpg");
   height: 800px;
+  max-width: 100%;
+  margin:auto;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+.about-detail{
+  width: 100%;
+  margin:auto;
+}
+
 .about-title{
   color:white;
-  max-width: 800px;
+  max-width: 100%;
   margin:auto;
   text-align: center;
   font-family:'Glegoo', serif;
   font-size:30px;
   padding-top:400px;
-  // border: 3px solid white;
 }
 
 .contactImg{
