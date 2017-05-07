@@ -6,6 +6,7 @@ import ChartsContainer from '../../containers/Charts';
 import UsMap from '../../components/chart-components/d3-us-map.js';
 import StatesMap from '../../components/us-map-click.js';
 import NewSidebar from '../../components/newSidebar.jsx';
+import GoogleMaps from '../../components/google-map/simple_map_page.jsx';
 
 class App extends Component {
   constructor(props){
@@ -60,13 +61,12 @@ class App extends Component {
             <div className="main-container">
               <div className="nation-map">
                 <div className="nation-title">Click on a state!</div>
-                <div className="state-clickon">{this.state.currentView}</
-
-               
+                <div className="state-clickon">{this.state.currentView}</div>
                 <svg width='1280' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
                 </svg>
-              </div>          
+              </div>
+              <GoogleMaps/>          
             </div>
          </div>
 
