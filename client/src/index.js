@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import HomePage from './containers/HomePage';
 import Chart from './containers/Charts';
+import GoogleMaps from './components/google-map/simple_map_page.jsx';
 
 // import '../scss/index.scss';
 
@@ -28,7 +29,7 @@ ReactDOM.render(
   </div>
   <Route exact path="/" component={ HomePage } />
   <Route path="/nation" component={ App } />
-  <Route path="/chart" component={ Chart } />
+  <Route path="/chart" component={ GoogleMaps } />
   </div>
 
   </Router>,
