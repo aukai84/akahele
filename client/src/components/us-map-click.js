@@ -2,6 +2,8 @@ import * as d3 from 'd3';
 import React, {Component} from 'react';
 import * as topojson from 'topojson';
 import css from './d3-css/index.css';
+import _ from 'lodash';
+import findWhere from 'lodash.findwhere';
 
 let usTopoJson = require('./d3-maps/usa/us.json');
 
@@ -10,7 +12,6 @@ let data = require('./d3-maps/states.json');
  console.log('data', data);
 
 var path = d3.geoPath;
-console.log(path)
 
 const choropleth = [
   'rgb(245,251,255)',
@@ -24,17 +25,15 @@ const choropleth = [
   'rgb(8,48,107)'
 ];
 
-
-
 const State = ({data, geoPath, feature, quantize}) => {
-    let color = 'silver';
+    let color = '#98c8f2';
 
     if(data){
 
         color = '#98c8f2';
 
     }
-    return (<path d={geoPath(feature)} style={{fill: color}} title={feature.id} />)
+    return (<path d={geoPath(feature)} style={{fill: color}} title={feature.properties.name} />)
 }
 
 class StatesMap extends Component {
@@ -62,7 +61,7 @@ class StatesMap extends Component {
     componentWillReceiveProps(newProps){
         this.updateD3(newProps);
         this.setState({
-          nationData: newProps.nationData
+            nationData: newProps.nationData.filter(crime => crime.year === 2015).map(crime => {return {id: crime.id, state: crime.state, murder: crime.murder_and_manslaughter}})
         })
     }
 
@@ -70,14 +69,14 @@ class StatesMap extends Component {
     updateD3(props){
         this.projection.translate([this.props.width/2, this.props.height/2]);
 
-        if(this.props.crimeTotal){
-            this.quantize.range([10000, 75000]);
+        if(this.state.nationData){
+            this.quantize.domain([0, 200]);
         }
     }
 
 
     displayState(feature){
-
+        console.log(feature)
         this.props.setCurrentView(feature.properties.name)
     }
 
@@ -94,7 +93,6 @@ class StatesMap extends Component {
     }
 
     onZoom() {
-      console.log('onZoom')
       this.setState({
         transform: d3.event.transform
       });
@@ -113,7 +111,6 @@ class StatesMap extends Component {
 
 
     render(){
-      console.log('nation data', this.state.nationData);
         if(!this.props.usTopoJson){
             return null;
         } else {
@@ -131,7 +128,7 @@ class StatesMap extends Component {
                     feature={feature}
                     key={feature.id}
                     quantize={this.quantize}
-                    data={(this.props.crimeTotal, {stateId: feature.id})}
+                    data={findWhere(this.state.nationData, {state: feature.properties.name})}
                   /></g>)
                 )
               }

@@ -1,4 +1,4 @@
-'use strict';
+
 let {reduceNationData} = require('../lib/modules/parsers.js');
 let array = require('../lib/data/json/YEAR_2014');
 

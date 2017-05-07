@@ -16,6 +16,8 @@
     "datamaps": "^0.5.8",
     "dsv-loader": "^2.0.0",
     "google-map-react": "^0.24.0",
+    "lodash": "^4.17.4",
+    "lodash.findwhere": "^3.1.0",
     "object-assign": "^4.1.1",
     "prop-types": "^15.5.8",
     "queue": "^4.2.1",
@@ -38,11 +40,12 @@
     "react-side-nav": "0.0.3",
     "react-sidebar": "^2.3.1",
     "react-slider": "^0.7.0",
-    "recharts": "^0.22.1",
+    "recharts": "^0.22.4",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2",
     "require-csv": "0.0.1",
-    "topojson": "^3.0.0"
+    "topojson": "^3.0.0",
+    "underscore-node": "^0.1.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

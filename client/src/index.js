@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
 import HomePage from './containers/HomePage';
-import GoogleMap from './components/google-map/simple_map_page.jsx';
+import Chart from './containers/Charts';
+import GoogleMaps from './components/google-map/simple_map_page.jsx';
 
 
 import {
@@ -27,8 +28,8 @@ ReactDOM.render(
   </div>
   <Route exact path="/" component={ HomePage } />
   <Route path="/nation" component={ App } />
-  <Route path="/local" component={ GoogleMap } />
-  </div>
+<Route path="/local" component={ GoogleMaps } />
+</div>
 
   </Router>,
   document.getElementById('root')

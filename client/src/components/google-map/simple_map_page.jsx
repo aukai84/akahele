@@ -104,7 +104,7 @@ export default class GoogleMaps extends Component {
   crimeDataRequest(){
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", _ => {
-      sendToApi('http://localhost:4000/cached')
+      sendToApi('http://localhost:8080/cached')
       .then(objects => {
         let hpd = JSON.parse(xhr.responseText);
         console.log('HPD XHR length: ', hpd.length);
@@ -126,7 +126,7 @@ export default class GoogleMaps extends Component {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', _ => {
     });
-    xhr.open('POST', 'http://localhost:4000/cache');
+    xhr.open('POST', 'http://localhost:8080/cache');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
   }

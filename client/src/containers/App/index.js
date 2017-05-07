@@ -6,7 +6,6 @@ import ChartsContainer from '../../containers/Charts';
 import UsMap from '../../components/chart-components/d3-us-map.js';
 import StatesMap from '../../components/us-map-click.js';
 import NewSidebar from '../../components/newSidebar.jsx';
-// import GoogleMaps from '../../components/google-map/simple_map_page.jsx';
 
 class App extends Component {
   constructor(props){
@@ -28,15 +27,10 @@ class App extends Component {
         .await((error, us) => {
             this.setState({
                 usTopoJson: us
-            });
+            })
         });
   }
 
-
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
-  }
 
   retrieveNationData = () =>{
     retrieveData('https://akahele.io/api/nation/all')
@@ -72,7 +66,7 @@ class App extends Component {
                 <svg width='1280' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
                 </svg>
-                </div>          
+              </div>          
             </div>
          </div>
 
