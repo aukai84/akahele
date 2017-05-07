@@ -28,18 +28,18 @@ class App extends Component {
         .await((error, us) => {
             this.setState({
                 usTopoJson: us
-            })
-        })
+            });
+        });
   }
 
 
-  
+
   componentDidUpdate(prevProps, prevState) {
     console.log(this.state);
   }
 
   retrieveNationData = () =>{
-    retrieveData('http://localhost:8080/api/nation/all')
+    retrieveData('https://akahele.io/api/nation/all')
     .then(crimes => {
       console.log(crimes);
         this.setState({
@@ -50,13 +50,13 @@ class App extends Component {
   }
 
   setCurrentView = (area) => {
-    retrieveData(`http://localhost:8080/api/states/${area}/crime`)
+    retrieveData(`https://akahele.io/api/states/${area}/crime`)
         .then(crimes => {
             this.setState({
                 currentView: area,
                 currentData: crimes
             })
-        }) 
+        })
   }
   render() {
     console.log(this.state);
@@ -64,20 +64,15 @@ class App extends Component {
          <div className="bigContainer">
          <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
-
               <div className="nation-map">
                 <div className="nation-title">Click on a state!</div>
-                <div className="state-clickon">{this.state.currentView}</div>
+                <div className="state-clickon">{this.state.currentView}</
 
-                <svg width='1000' height='700'>
-
-                <h2>{this.state.currentView}</h2>
-                
+               
+                <svg width='1280' height='800'>
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
                 </svg>
-               
-                </div>
-          
+                </div>          
             </div>
          </div>
 

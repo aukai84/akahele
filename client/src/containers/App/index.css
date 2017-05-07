@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -143,13 +143,16 @@ a:hover {
   width: 100%; }
 
 .main-container {
-  height: 800px;
+  height: 800px
   max-width: 100%;
   margin: auto; }
 
 .nation-map {
+  width: 100%;
+  padding-left: 10%;
   padding-top: 50px;
-  width: 100%; }
+  width: 100%; 
+}
 
 .nation-title {
   color: #1474c9;
