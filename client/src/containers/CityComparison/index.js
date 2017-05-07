@@ -20,7 +20,7 @@ class CityComparisonContainer extends Component {
     }
 
         retrieveLocationOne = (area) => {
-            retrieveData(`http://localhost:8080/api/cities/${area}/crime`)
+            retrieveData(`https://akahele.io/api/cities/${area}/crime`)
                 .then(crimes => {
                     console.log(crimes)
                     this.setState({
@@ -30,7 +30,7 @@ class CityComparisonContainer extends Component {
         }
 
         retrieveLocationTwo = (area) => {
-            retrieveData(`http://localhost:8080/api/cities/${area}/crime`)
+            retrieveData(`https://akahele.io/api/cities/${area}/crime`)
                 .then(crimes => {
                     console.log(crimes)
                     this.setState({

@@ -29,8 +29,8 @@ class ChartsContainer extends Component {
             barGraphData: this.state.currentData
                 .filter(crime => (crime.year === parseInt(year)))
                 .reduce((a, b) => {
-                    return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
-                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year})
+                    return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, robbery: a.robbery + b.robbery, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
+                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, robbery: 0, arson: 0, year})
         })
     }
 
@@ -48,8 +48,8 @@ class ChartsContainer extends Component {
                 this.state.currentData
                     .filter(crime => (crime.year === array[i]))
                     .reduce((a, b) => {
-                        return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: array[i]}
-                    }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: array[i]})
+                        return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, robbery: a.robbery + b.robbery, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: array[i]}
+                    }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, robbery: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: array[i]})
             )
         }
         this.setState({
@@ -69,8 +69,8 @@ class ChartsContainer extends Component {
             barGraphData: this.state.currentData
                 .filter(crime => (crime.year === parseInt(event.target.value)))
                 .reduce((a, b) => {
-                    return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
-                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: event.target.value})
+                    return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, robbery: a.robbery + b.robbery, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
+                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, robbery: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year: event.target.value})
         })
 
     }
@@ -112,6 +112,13 @@ class ChartsContainer extends Component {
                             <option value='2014'>2014</option>
                             <option value='2013'>2013</option>
                             <option value='2012'>2012</option>
+                            <option value='2011'>2011</option>
+                            <option value='2010'>2010</option>
+                            <option value='2009'>2009</option>
+                            <option value='2008'>2008</option>
+                            <option value='2007'>2007</option>
+                            <option value='2006'>2006</option>
+                            <option value='2005'>2005</option>
                         </select>
                     </div>
                     </div>
