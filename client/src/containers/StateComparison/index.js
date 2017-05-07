@@ -25,7 +25,7 @@ class StateComparisonContainer extends Component {
 
     retrieveLocationOne = (area) => {
         let tempArray = []
-        retrieveData(`http://localhost:8080/api/states/${area}/crime/`)
+        retrieveData(`https://akahele.io/api/states/${area}/crime/`)
             .then(crimes => {
                 for(let i = 0; i < yearArray.length; i++){
                     tempArray.push(
@@ -46,7 +46,7 @@ class StateComparisonContainer extends Component {
 
     retrieveLocationTwo = (area) => {
         let tempArray = []
-        retrieveData(`http://localhost:8080/api/states/${area}/crime/`)
+        retrieveData(`https://akahele.io/api/states/${area}/crime/`)
             .then(crimes => {
                 console.log('crimes robbery ', crimes)
                 for(let i = 0; i < yearArray.length; i++){
