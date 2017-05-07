@@ -27,27 +27,27 @@ class SyncedAreaCharts extends Component {
 
 
     render(){
-        console.log('new state of synced charts ', this.state)
+        console.log('new state of synced charts ', this.state.dataKey)
         return(
             <div>
-        <h4>A demo of synchronized AreaCharts</h4>
-        <AreaChart width={600} height={200} data={this.state.locationOneBar} syncId="anyId"
-              margin={{top: 10, right: 30, left: 0, bottom: 0}}>
-          <XAxis dataKey="year"/>
-          <YAxis/>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <Tooltip/>
-          <Area type='monotone' dataKey={this.state.dataKey} name={this.state.crimeName} stroke='#8884d8' fill='#8884d8' />
-        </AreaChart>
-        <p>Maybe some other content</p>
-        <AreaChart width={600} height={200} data={this.state.locationTwoBar} syncId="anyId"
-              margin={{top: 10, right: 30, left: 0, bottom: 0}}>
-          <XAxis dataKey="year"/>
-          <YAxis/>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <Tooltip/>
-          <Area type='monotone' dataKey={this.state.dataKey} name={this.state.crimeName} stroke='#82ca9d' fill='cornflowerblue' />
-        </AreaChart>
+                <h4>A demo of synchronized AreaCharts</h4>
+                <AreaChart width={600} height={200} data={this.state.locationOneBar} syncId="anyId"
+                      margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                  <XAxis dataKey="year"/>
+                  <YAxis/>
+                  <CartesianGrid strokeDasharray="3 3"/>
+                  <Tooltip/>
+                  <Area type='monotone' dataKey={this.state.dataKey} name={this.state.crimeName} stroke='#8884d8' fill='#8884d8' />
+                </AreaChart>
+                <p>Maybe some other content</p>
+                <AreaChart width={600} height={200} data={this.state.locationTwoBar} syncId="anyId"
+                      margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                  <XAxis dataKey="year"/>
+                  <YAxis/>
+                  <CartesianGrid strokeDasharray="3 3"/>
+                  <Tooltip/>
+                  <Area type='monotone' dataKey={this.state.dataKey} name={this.state.crimeName} stroke='#82ca9d' fill='cornflowerblue' />
+                </AreaChart>
       </div>
         )     
     }

@@ -169,6 +169,12 @@ a:hover {
   font-size: 30px;
   font-family: 'Glegoo', serif; }
 
+.comparison-header {
+    display:flex;
+    flex-flow: row;
+    padding: 2rem;
+}
+
 .bar-chart {
   font-size: 15px;
   padding-top: 25px;
