@@ -6,7 +6,6 @@ import ChartsContainer from '../../containers/Charts';
 import UsMap from '../../components/chart-components/d3-us-map.js';
 import StatesMap from '../../components/us-map-click.js';
 import NewSidebar from '../../components/newSidebar.jsx';
-import GoogleMaps from '../../components/google-map/simple_map_page.jsx';
 
 class App extends Component {
   constructor(props){
@@ -34,7 +33,7 @@ class App extends Component {
 
 
   retrieveNationData = () =>{
-    retrieveData('https://akahele.io/api/nation/all')
+    retrieveData('http://localhost:8080/api/nation/all')
     .then(crimes => {
       console.log(crimes);
         this.setState({
@@ -45,7 +44,7 @@ class App extends Component {
   }
 
   setCurrentView = (area) => {
-    retrieveData(`https://akahele.io/api/states/${area}/crime`)
+    retrieveData(`http://localhost:8080/api/states/${area}/crime`)
         .then(crimes => {
             this.setState({
                 currentView: area,
@@ -66,7 +65,6 @@ class App extends Component {
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
                 </svg>
               </div>
-              <GoogleMaps/>          
             </div>
          </div>
 
