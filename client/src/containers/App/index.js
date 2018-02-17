@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import './index.css';
 import {retrieveData} from '../../lib/modules/modules.js';
-import ChartsContainer from '../../containers/Charts';
 import UsMap from '../../components/chart-components/d3-us-map.js';
 import StatesMap from '../../components/statesMap.js';
+import ChartsContainer from '../Charts';
 import SideBar from '../../components/sidebar.js';
 
 class App extends Component {
@@ -53,7 +53,7 @@ class App extends Component {
         })
   }
   render() {
-    console.log(this.state);
+    console.log(this.state.currentData);
     return (
          <div className="bigContainer">
             <SideBar currentView={this.state.currentView} currentData={this.state.currentData}/>
@@ -64,7 +64,8 @@ class App extends Component {
                     <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={1280} height={800}/>
                 </svg>
               </div>
-            </div>
+          </div>
+          <ChartsContainer currentView={this.state.currentView} currentData={this.state.currentData}/>
          </div>
 
 

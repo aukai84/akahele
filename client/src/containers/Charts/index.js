@@ -24,6 +24,12 @@ class ChartsContainer extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            currentData: nextProps.currentData 
+        })
+    }
+
     mapBarData = (year) => {
         this.setState({
             barGraphData: this.state.currentData
@@ -149,6 +155,7 @@ class ChartsContainer extends Component {
 
 
     render(){
+    console.log('graphs state..', this.props.currentData)
         return this.getGraphs();
     }
 
