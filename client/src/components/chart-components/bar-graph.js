@@ -36,10 +36,9 @@ class SimpleBarGraph extends Component {
     }
 
     render(){
-        console.log('props', this.props)
         return (
 
-            <BarChart className="bar-chart" width={960} height={300} data={this.state.barGraphData} margin={{top: 5, right: 5, left: 5, bottom: 5}}>
+            <BarChart className="bar-chart" width={720} height={225} data={this.state.barGraphData} margin={{top: 5, right: 5, left: 5, bottom: 5}}>
                 <XAxis dataKey='name'/>
                <YAxis/>
                <CartesianGrid strokeDasharray="3 3"/>

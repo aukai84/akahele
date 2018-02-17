@@ -31,8 +31,16 @@ class ChartsContainer extends Component {
                 .filter(crime => (crime.year === parseInt(this.state.currentYear)))
                 .reduce((a, b) => {
                     return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, robbery: a.robbery + b.robbery, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
-                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, robbery: 0, arson: 0, year: this.state.currentYear})
-
+                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, robbery: 0, arson: 0, year: this.state.currentYear}),
+            multiBarData: nextProps.currentData
+            .filter(crime => (crime.year === parseInt(this.state.currentYear))),
+            lineGraphData: yearArray.map(year => {
+                nextProps.currentData
+                    .filter(crime => (crime.year === year))
+                    .reduce((a,b) => {
+                        return {murder_and_manslaughter: a.murder_and_manslaughter + b.muder_and_manslaughter, robbery: a.robbery + b.robbery, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year}
+                    }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, robbery: 0, larceny_theft: 0, motor_vehicle_theft: 0, arson: 0, year})
+            })
         })
     }
 
@@ -138,12 +146,54 @@ class ChartsContainer extends Component {
         }
     }
 
-
     render(){
-    console.log('graphs state..', this.state.currentData)
-        return this.getGraphs();
-    }
+        return (
+            <div className="graphs-container">
+                <div className="simple-bar-graph-container">
+                    <div className="current-bar-graph-view">
+                    <div className="current-state">{this.props.currentView}</div>
+                    <div className="current-year"> 
+                        <select onChange={this.yearChange} value={this.props.crime}>
+                            <option value='2015'>2015</option>
+                            <option value='2014'>2014</option>
+                            <option value='2013'>2013</option>
+                            <option value='2012'>2012</option>
+                            <option value='2011'>2011</option>
+                            <option value='2010'>2010</option>
+                            <option value='2009'>2009</option>
+                            <option value='2008'>2008</option>
+                            <option value='2007'>2007</option>
+                            <option value='2006'>2006</option>
+                            <option value='2005'>2005</option>
+                        </select>
+                    </div>
+                    </div>
+                    <SimpleBarGraph barGraphData={this.state.barGraphData}/>
+                </div>
+                <div className="multibar-content">
+                    <MultiBarGraph multiBarData={this.state.multiBarData} currentView={this.props.currentView}/>
+                   
+                        <div className="radioBtn">
+                            <input id="line"  type="radio" value="line" name="graph" onChange={this.setGraph}/> <label htmlFor="line">Line</label>
+                            <input id="line 2"  type="radio" value="bar" name="graph" onChange={this.setGraph}/> <label htmlFor="line 2">Bar</label>
+                            <input id="line 3"  type="radio" value="multiBar" name="graph" onChange={this.setGraph}/><label >Multi Bar</label>
+                        </div>
+                </div>
+                <div>
+                    <div className="linechart-state">{this.props.currentView}</div>
+                    <SimpleLineChart lineGraphData={this.state.lineGraphData}/>
+                    <div className="radioBtn">
+                    <input type="radio" value="line" name="graph" onChange={this.setGraph}/> Line
+                    <input type="radio" value="bar" name="graph" onChange={this.setGraph}/> Bar
+                    <input type="radio" value="multiBar" name="graph" onChange={this.setGraph}/> Multi Bar
+                    </div>
 
+                </div>
+
+ 
+            </div>
+        )
+    }
 }
 
 export default ChartsContainer;

@@ -61,7 +61,7 @@ class App extends Component {
               <div className="nation-map">
                 <div className="state-clickon">{this.state.currentView}</div>
                 <svg className="us-map-svg">
-                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={1280} height={800}/>
+                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={500}/>
                 </svg>
               </div>
           </div>
