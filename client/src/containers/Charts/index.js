@@ -23,6 +23,12 @@ class ChartsContainer extends Component {
             currentYear: 2015
         }
     }
+    
+    componentDidMount(){
+            this.mapBarData(this.state.currentYear);
+            this.mapMultiData(this.state.currentYear);
+            this.mapLineData(yearArray);
+    }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -81,18 +87,7 @@ class ChartsContainer extends Component {
 
     }
 
-    componentDidMount = () => {
-        this.mapBarData(this.state.currentYear);
-        this.mapMultiData(this.state.currentYear);
-        this.mapLineData(yearArray);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            currentData: nextProps
-        })
-    }
-
+    
     getGraphs(){
         if(this.state.graphType === 'line'){
             return(
@@ -155,7 +150,7 @@ class ChartsContainer extends Component {
 
 
     render(){
-    console.log('graphs state..', this.props.currentData)
+    console.log('graphs state..', this.state.currentData)
         return this.getGraphs();
     }
 
