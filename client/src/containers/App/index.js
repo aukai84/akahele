@@ -4,8 +4,8 @@ import './index.css';
 import {retrieveData} from '../../lib/modules/modules.js';
 import ChartsContainer from '../../containers/Charts';
 import UsMap from '../../components/chart-components/d3-us-map.js';
-import StatesMap from '../../components/us-map-click.js';
-import NewSidebar from '../../components/newSidebar.jsx';
+import StatesMap from '../../components/statesMap.js';
+import SideBar from '../../components/sidebar.js';
 
 class App extends Component {
   constructor(props){
@@ -56,13 +56,12 @@ class App extends Component {
     console.log(this.state);
     return (
          <div className="bigContainer">
-         <NewSidebar currentView={this.state.currentView} currentData={this.state.currentData}/>
+            <SideBar currentView={this.state.currentView} currentData={this.state.currentData}/>
             <div className="main-container">
               <div className="nation-map">
-                <div className="nation-title">Click on a state!</div>
                 <div className="state-clickon">{this.state.currentView}</div>
-                <svg width='1280' height='800'>
-                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={800} height={600}/>
+                <svg className="us-map-svg">
+                    <StatesMap setCurrentView={this.setCurrentView} usTopoJson={this.state.usTopoJson} nationData={this.state.nationData} width={1280} height={800}/>
                 </svg>
               </div>
             </div>

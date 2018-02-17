@@ -45,7 +45,7 @@ class StatesMap extends Component {
           nationData: props.nationData
         }
         this.projection = d3.geoAlbersUsa()
-            .scale(1100);
+            .scale(1280);
         this.geoPath = d3.geoPath()
             .projection(this.projection);
         this.quantize = d3.scaleQuantize()
@@ -98,7 +98,7 @@ class StatesMap extends Component {
       });
     }
 
-    get transform(){
+    /*get transform(){
       console.log('transform')
       if(this.state.transform){
         const { x, y, k } = this.state.transform;
@@ -107,7 +107,7 @@ class StatesMap extends Component {
       }else{
         return null;
       }
-    }
+    }*/
 
 
     render(){

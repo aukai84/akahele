@@ -8,7 +8,7 @@ import GraphImg from '../../assets/bar_chart.png';
 import CityImg from '../../assets/city-color.png';
 import StateImg from '../../assets/locationpin.png';
 
-class NewSideBar extends React.Component {
+class SideBar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -80,4 +80,4 @@ class NewSideBar extends React.Component {
   }
 }
 
-export default NewSideBar;
+export default SideBar;
