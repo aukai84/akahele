@@ -6,8 +6,7 @@ const { Crime } = db;
 router.get('/', (req, res) => {
   Crime.findAll()
   .then(function(crimes) {
-    console.log('sent' + crimes)
-    res.send(crimes);
+    res.json(crimes);
   })
 })
 

@@ -6,3 +6,5 @@ server.listen(PORT, () => {
   console.log('listening on port ' + PORT)
   db.sequelize.sync();
 })
+
+

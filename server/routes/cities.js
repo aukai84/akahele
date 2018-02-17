@@ -5,7 +5,10 @@ const { City,Crime } = db;
 
 //find list of all cities?
 router.get('/', (req, res) => {
-    //not sure what to do for /cities
+    City.findAll()
+        .then(cities => {
+            res.json(cities);
+        })
 })
 
 // find crimes by city all
