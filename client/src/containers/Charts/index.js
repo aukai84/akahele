@@ -24,25 +24,15 @@ class ChartsContainer extends Component {
         }
     }
     
-    componentDidMount(){
-            this.mapBarData(this.state.currentYear);
-            this.mapMultiData(this.state.currentYear);
-            this.mapLineData(yearArray);
-    }
-
     componentWillReceiveProps(nextProps) {
         this.setState({
-            currentData: nextProps.currentData 
-        })
-    }
-
-    mapBarData = (year) => {
-        this.setState({
-            barGraphData: this.state.currentData
-                .filter(crime => (crime.year === parseInt(year)))
+            currentData: nextProps.currentData,
+            barGraphData: nextProps.currentData
+                .filter(crime => (crime.year === parseInt(this.state.currentYear)))
                 .reduce((a, b) => {
                     return {murder_and_manslaughter: a.murder_and_manslaughter + b.murder_and_manslaughter, robbery: a.robbery + b.robbery, rape: a.rape + b.rape, aggravated_assault: a.aggravated_assault + b.aggravated_assault, burglary: a.burglary + b.burglary, larceny_theft: a.larceny_theft + b.larceny_theft, motor_vehicle_theft: a.motor_vehicle_theft + b.motor_vehicle_theft, arson: a.arson + b.arson, year: this.state.currentYear }
-                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, robbery: 0, arson: 0, year})
+                }, {murder_and_manslaughter: 0, rape: 0, aggravated_assault: 0, burglary: 0, larceny_theft: 0, motor_vehicle_theft: 0, robbery: 0, arson: 0, year: this.state.currentYear})
+
         })
     }
 
